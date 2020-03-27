@@ -157,6 +157,327 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-命令执行绕过空格" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/27/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E7%BB%95%E8%BF%87%E7%A9%BA%E6%A0%BC/">命令执行绕过空格</a>
+    </h1>
+  
+
+        
+        <a href="/2020/03/27/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E7%BB%95%E8%BF%87%E7%A9%BA%E6%A0%BC/" class="archive-article-date">
+  	<time datetime="2020-03-27T02:42:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在一些漏洞利用场景，或者因为waf等原因，导致无法使用空格时，可以试试如下命令：<br>
+        
+          <a class="article-more-a" href="/2020/03/27/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E7%BB%95%E8%BF%87%E7%A9%BA%E6%A0%BC/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">漏洞</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/03/27/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E7%BB%95%E8%BF%87%E7%A9%BA%E6%A0%BC/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-PHP反序列化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/23/PHP%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">PHP反序列化</a>
+    </h1>
+  
+
+        
+        <a href="/2020/03/23/PHP%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" class="archive-article-date">
+  	<time datetime="2020-03-23T02:46:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p> 考研用了一年，好久没写博客了，安全也很久没搞了，最近重新学了一遍以前自己的笔记，今天学到PHP序列化和反序列化，之前对这个概念就模模糊糊的，今天正好弄清楚。</p>
+<p>&lt;! – more –&gt;</p>
+<h3 id="0x00：PHP序列化"><a href="#0x00：PHP序列化" class="headerlink" title="0x00：PHP序列化"></a>0x00：PHP序列化</h3><h4 id="序列化函数：serialize"><a href="#序列化函数：serialize" class="headerlink" title="序列化函数：serialize()"></a>序列化函数：serialize()</h4><p>所有php里面的值都可以使用函数serialize()来返回一个包含字节流的字符串来表示。序列化一个对象将会保存对象的所有变量，但是不会保存对象的方法，只会保存类的名字。</p>
+<p><strong>变量所储存的数据是内存数据，在程序执行结束时，内存数据便会立即销毁；而文件、数据库是“持久存储”，因此PHP序列化就是将内存的数据保存到文件中的过程。</strong></p>
+<ol>
+<li>$s = serialize($变量); //该函数将变量数据进行序列化转换为字符串</li>
+<li>file_put_contents(‘./目标文本文件’, $s); //将$s保存到指定文件</li>
+</ol>
+<h4 id="For-example"><a href="#For-example" class="headerlink" title="For example"></a>For example</h4><pre><code>&lt;?php
+class User
+{
+    // 创建类数据
+
+    public $age = 0;
+    public $name = &apos;&apos;;
+
+    // 输出数据
+
+    public function PrintData()
+    {
+        echo &apos;User &apos; . $this-&gt;name . &apos; is &apos; .$this-&gt;age . &apos; years old.&apos;;
+        echo &quot;\n&quot;;
+    }
+}
+
+// 创建一个对象
+
+$usr = new User();
+
+// 设置数据
+
+$usr-&gt;age = 20;
+$usr-&gt;name = &apos;lemon&apos;;
+
+// 输出数据
+
+$usr-&gt;PrintData();
+
+// 输出序列化之后的数据
+
+echo serialize($usr);
+echo &quot;\n&quot;;
+?&gt;
+</code></pre><p>输出序列化后的结果</p>
+<ol>
+<li>User lemon is 20 years old. </li>
+<li>O:4:”User”:2:{s:3:”age”;i:20;s:4:”name”;s:5:”lemon”;}</li>
+</ol>
+<p>可以看到序列化一个对象后会保存对象的所有变量，并且发现序列化后的结果都有一个字符，这些字符都是一下字母的缩写。</p>
+<ul>
+<li>a array                 </li>
+<li>b boolean  </li>
+<li>d double               </li>
+<li>i integer</li>
+<li>o common object </li>
+<li>r reference</li>
+<li>s string </li>
+<li>C custom object</li>
+<li>O class</li>
+<li>N null</li>
+<li>R pointer reference </li>
+<li>U unicode string</li>
+</ul>
+<p>了解了缩写字母的含义，就可以解读序列化后的含义</p>
+<ol>
+<li>O:4:”User”:2:{s:3:”age”;i:20;s:4:”name”;s:5:”lemon”;}</li>
+<li>对象类型:长度:”类名”:类中变量的个数:{类型:长度:”值”;类型:长度:”值”;……}</li>
+</ol>
+<p>通过这个例子，应该能理解序列化函数serialize()的功能</p>
+<h3 id="0x01：PHP反序列化"><a href="#0x01：PHP反序列化" class="headerlink" title="0x01：PHP反序列化"></a>0x01：PHP反序列化</h3><p>函数：unserialize()</p>
+<blockquote>
+<p>unserialize()对单一的已序列化的变量进行操作，将其转回PHP的值。在解序列化一个对象前，这个对象的类必须在解序列化之前定义。</p>
+</blockquote>
+<p>简单理解起来就是<strong>将序列化过存储到文件中的数据，恢复到程序代码的变量表示形式的过程</strong>，恢复到变量序列化之前的结果。</p>
+<pre><code>$s = file_get_contents(‘./目标文本文件’); //取得文本文件的内容（之前序列化过的字符串）
+$变量 = unserialize($s); //将该文本内容，反序列化到指定的变量中
+</code></pre><h4 id="For-example-1"><a href="#For-example-1" class="headerlink" title="For example"></a>For example</h4><pre><code>&lt;?php
+    // 某类
+    class User
+    {
+        // Class data
+        public $age = 0;
+        public $name = &apos;&apos;;
+
+        // Print data
+
+        public function PrintData()
+        {
+            echo &apos;User &apos; . $this-&gt;name . &apos; is &apos; . $this-&gt;age . &apos; years old.&apos;;
+            echo &quot;\n&quot;;
+        }
+    }
+    // 重建对象
+    $usr = unserialize(&apos;O:4:&quot;User&quot;:2:{s:3:&quot;age&quot;;i:20;s:4:&quot;name&quot;;s:5:&quot;lemon&quot;;}&apos;);
+
+    // 调出PrintData输出数据
+    $usr-&gt;PrintData();
+?&gt;
+</code></pre><p>输出结果：</p>
+<blockquote>
+<p>User lemon is 20 years old.</p>
+</blockquote>
+<p><strong>注意：在解序列化一个对象前，这个对象的类必须在解序列化之前定义。否则会报错</strong></p>
+<p>在先知上看大师傅举得例子对序列化和反序列化的介绍，也很好理解。</p>
+<pre><code>&lt;?php
+class A{
+    var $test = &quot;demo&quot;;
+}
+
+$a = new A(); //生成a对象
+$b = serialize($a); //序列化a对象为b
+$c = unserialize($b); //反序列化b对象为c
+
+print_r($b); //输出序列化之后的值
+echo &quot;\n&quot;;
+print_r($c-&gt;test); //输出对象c中test的值：demo
+
+?&gt;
+</code></pre><h3 id="0x02：PHP反序列化漏洞"><a href="#0x02：PHP反序列化漏洞" class="headerlink" title="0x02：PHP反序列化漏洞"></a>0x02：PHP反序列化漏洞</h3><p>在学习漏洞前，先来了解一下PHP魔法函数，对接下来的学习会很有帮助</p>
+<blockquote>
+<p>PHP将所有以__(两个下划线)开头的类方法保留为魔术方法</p>
+</blockquote>
+<ol>
+<li>__construct   当一个对象创建时被调用，</li>
+<li>__destruct   当一个对象销毁时被调用，</li>
+<li>__toString   当一个对象被当作一个字符串被调用。</li>
+<li>__wakeup()   使用unserialize时触发</li>
+<li>__sleep()    使用serialize时触发</li>
+<li>__destruct()    对象被销毁时触发</li>
+<li>__call()    在对象上下文中调用不可访问的方法时触发</li>
+<li>__callStatic()    在静态上下文中调用不可访问的方法时触发</li>
+<li>__get()    用于从不可访问的属性读取数据</li>
+<li>__set()    用于将数据写入不可访问的属性</li>
+<li>__isset()    在不可访问的属性上调用isset()或empty()触发</li>
+<li>__unset()     在不可访问的属性上使用unset()时触发</li>
+<li>__toString()    把类当作字符串使用时触发,返回值需要为字符串</li>
+<li>__invoke()   当脚本尝试将对象调用为函数时触发</li>
+</ol>
+<p>这里只列出了一部分的魔法函数，具体可见<br><a href="https://www.php.net/manual/zh/language.oop5.magic.php" target="_blank" rel="noopener">https://www.php.net/manual/zh/language.oop5.magic.php</a></p>
+<p>下面通过一个例子来简单了解一下魔法函数被自动调用的过程</p>
+<pre><code>&lt;?php
+class test{
+ public $varr1=&quot;abc&quot;;
+ public $varr2=&quot;123&quot;;
+ public function echoP(){
+  echo $this-&gt;varr1.&quot;&lt;br&gt;&quot;;
+ }
+ public function __construct(){
+  echo &quot;__construct&lt;br&gt;&quot;;
+ }
+ public function __destruct(){
+  echo &quot;__destruct&lt;br&gt;&quot;;
+ }
+ public function __toString(){
+  return &quot;__toString&lt;br&gt;&quot;;
+ }
+ public function __sleep(){
+  echo &quot;__sleep&lt;br&gt;&quot;;
+  return array(&apos;varr1&apos;,&apos;varr2&apos;);
+ }
+ public function __wakeup(){
+  echo &quot;__wakeup&lt;br&gt;&quot;;
+ }
+}
+
+$obj = new test();  //实例化对象，调用__construct()方法，输出__construct
+$obj-&gt;echoP();   //调用echoP()方法，输出&quot;abc&quot;
+echo $obj;//obj对象被当做字符串输出，调用__toString()方法，输出__toString
+$s =serialize($obj);  //obj对象被序列化，调用__sleep()方法，输出__sleep
+echo unserialize($s);  //$s首先会被反序列化，会调用__wake()方法，被反序列化出来的对象又被当做字符串，就会调用_toString()方法。
+// 脚本结束又会调用__destruct()方法，输出__destruct
+?&gt;
+</code></pre><h2 id="未完待续！！"><a href="#未完待续！！" class="headerlink" title="未完待续！！"></a>未完待续！！</h2>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/03/23/PHP%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-PHP特性总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -750,149 +1071,6 @@
 
 
   
-    <article id="post-i春秋CTF" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/">i春秋CTF</a>
-    </h1>
-  
-
-        
-        <a href="/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/" class="archive-article-date">
-  	<time datetime="2018-09-06T10:48:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="WEB"><a href="#WEB" class="headerlink" title="WEB"></a>WEB</h2><h3 id="1-broken"><a href="#1-broken" class="headerlink" title="1. broken"></a>1. broken</h3><p>题目链接：<a href="http://106.75.72.168:1111/" target="_blank" rel="noopener" title="broken">http://106.75.72.168:1111/</a></p>
-<p>进入链接看到一串代码，目测是jsfuck。</p>
-        
-          <a class="article-more-a" href="/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CTF</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/09/06/i%E6%98%A5%E7%A7%8BCTF/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-渗透测试神器burpsuite" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/06/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E7%A5%9E%E5%99%A8burpsuite/">渗透测试神器burpsuite</a>
-    </h1>
-  
-
-        
-        <a href="/2018/09/06/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E7%A5%9E%E5%99%A8burpsuite/" class="archive-article-date">
-  	<time datetime="2018-09-06T09:13:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-06</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>burpsuite用了两年了，问了一下身边的同学有的还不知道各个模块有哪些功能，这里就详细的给大家介绍一下各个模块的功能。</p>
-<p>burpsuite可以说是渗透测试中的神兵利器，我当初入坑的第一节就是学的burpsuite，在渗透测试中可以说是必不可少的一部分，这里会从各个模块来介绍burpsuite的几大功能。有什么错误也希望走过路过的大佬们指出，由于是说基本用法所以比较基础，各种大佬大神可以绕过啦哈哈。</p>
-        
-          <a class="article-more-a" href="/2018/09/06/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E7%A5%9E%E5%99%A8burpsuite/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/09/06/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E7%A5%9E%E5%99%A8burpsuite/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -907,7 +1085,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2019 glance
+    		&copy; 2020 glance
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
@@ -1011,6 +1189,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">攻防</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">PHP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">漏洞</a>
               </li>
             
             <div class="clearfix"></div>
