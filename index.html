@@ -157,6 +157,88 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-常见web危险端口介绍" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/31/%E5%B8%B8%E8%A7%81web%E5%8D%B1%E9%99%A9%E7%AB%AF%E5%8F%A3%E4%BB%8B%E7%BB%8D/">常见web危险端口介绍</a>
+    </h1>
+  
+
+        
+        <a href="/2020/03/31/%E5%B8%B8%E8%A7%81web%E5%8D%B1%E9%99%A9%E7%AB%AF%E5%8F%A3%E4%BB%8B%E7%BB%8D/" class="archive-article-date">
+  	<time datetime="2020-03-31T08:43:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-31</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="端口及对应的服务和漏洞"><a href="#端口及对应的服务和漏洞" class="headerlink" title="端口及对应的服务和漏洞"></a>端口及对应的服务和漏洞</h2><ul>
+<li>20：FTP服务的数据传输端口</li>
+<li>21：FTP服务的连接端口，可能存在  弱口令暴力破解</li>
+<li>22：SSH服务端口，可能存在 弱口令暴力破解</li>
+<li>23：Telnet端口，可能存在 弱口令暴力破解</li>
+<li>25：SMTP简单邮件传输协议端口，和 POP3 的110端口对应</li>
+<li>43：whois服务端口
+        
+          <a class="article-more-a" href="/2020/03/31/%E5%B8%B8%E8%A7%81web%E5%8D%B1%E9%99%A9%E7%AB%AF%E5%8F%A3%E4%BB%8B%E7%BB%8D/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">渗透</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/03/31/%E5%B8%B8%E8%A7%81web%E5%8D%B1%E9%99%A9%E7%AB%AF%E5%8F%A3%E4%BB%8B%E7%BB%8D/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-命令执行绕过空格" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1005,72 +1087,6 @@ echo unserialize($s);  //$s首先会被反序列化，会调用__wake()方法，
 
 
   
-    <article id="post-神器Githack" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/10/%E7%A5%9E%E5%99%A8Githack/">神器Githack</a>
-    </h1>
-  
-
-        
-        <a href="/2018/09/10/%E7%A5%9E%E5%99%A8Githack/" class="archive-article-date">
-  	<time datetime="2018-09-10T13:30:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>GitHack是一个.git泄露利用测试脚本，通过泄露的文件，还原重建工程源代码，是用python2写的。</p>
-<h3 id="漏洞原因：当前大量开发人员使用git进行版本控制，对站点自动部署。如果配置不当，可能会将-git文件夹直接部署到线上环境。这就引起了git泄露漏洞。"><a href="#漏洞原因：当前大量开发人员使用git进行版本控制，对站点自动部署。如果配置不当，可能会将-git文件夹直接部署到线上环境。这就引起了git泄露漏洞。" class="headerlink" title="漏洞原因：当前大量开发人员使用git进行版本控制，对站点自动部署。如果配置不当，可能会将.git文件夹直接部署到线上环境。这就引起了git泄露漏洞。"></a>漏洞原因：当前大量开发人员使用git进行版本控制，对站点自动部署。如果配置不当，可能会将.git文件夹直接部署到线上环境。这就引起了git泄露漏洞。</h3><p>Git信息泄露的危害很大，渗透测试人员、攻击者，可直接从源码获取敏感配置信息（如：邮箱，数据库），也可以进一步审计代码，挖掘文件上传、SQL注入等安全漏洞。</p>
-        
-          <a class="article-more-a" href="/2018/09/10/%E7%A5%9E%E5%99%A8Githack/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/09/10/%E7%A5%9E%E5%99%A8Githack/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1197,6 +1213,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">漏洞</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">渗透</a>
               </li>
             
             <div class="clearfix"></div>

@@ -6,15 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: PHP | 一次就好</title>
+  <title>常见web危险端口介绍 | 一次就好</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="人生若只如初见">
-<meta property="og:type" content="website">
-<meta property="og:title" content="一次就好">
-<meta property="og:url" content="http://yoursite.com/tags/PHP/index.html">
+  <meta name="description" content="端口及对应的服务和漏洞 20：FTP服务的数据传输端口 21：FTP服务的连接端口，可能存在  弱口令暴力破解 22：SSH服务端口，可能存在 弱口令暴力破解 23：Telnet端口，可能存在 弱口令暴力破解 25：SMTP简单邮件传输协议端口，和 POP3 的110端口对应 43：whois服务端口">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常见web危险端口介绍">
+<meta property="og:url" content="http://yoursite.com/2020/03/31/%E5%B8%B8%E8%A7%81web%E5%8D%B1%E9%99%A9%E7%AB%AF%E5%8F%A3%E4%BB%8B%E7%BB%8D/index.html">
 <meta property="og:site_name" content="一次就好">
-<meta property="og:description" content="人生若只如初见">
+<meta property="og:description" content="端口及对应的服务和漏洞 20：FTP服务的数据传输端口 21：FTP服务的连接端口，可能存在  弱口令暴力破解 22：SSH服务端口，可能存在 弱口令暴力破解 23：Telnet端口，可能存在 弱口令暴力破解 25：SMTP简单邮件传输协议端口，和 POP3 的110端口对应 43：whois服务端口">
+<meta property="article:published_time" content="2020-03-31T08:43:53.000Z">
+<meta property="article:modified_time" content="2020-03-31T08:57:27.848Z">
 <meta property="article:author" content="glance">
+<meta property="article:tag" content="渗透">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="一次就好" type="application/atom+xml">
@@ -155,60 +158,249 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-常见web危险端口介绍" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/03/23/PHP%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" class="archive-article-date">
-  	<time datetime="2020-03-23T02:46:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-23</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/23/PHP%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">PHP反序列化</a>
+    <h1 class="article-title" itemprop="name">
+      常见web危险端口介绍
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2020/03/31/%E5%B8%B8%E8%A7%81web%E5%8D%B1%E9%99%A9%E7%AB%AF%E5%8F%A3%E4%BB%8B%E7%BB%8D/" class="archive-article-date">
+  	<time datetime="2020-03-31T08:43:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-31</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="端口及对应的服务和漏洞"><a href="#端口及对应的服务和漏洞" class="headerlink" title="端口及对应的服务和漏洞"></a>端口及对应的服务和漏洞</h2><ul>
+<li>20：FTP服务的数据传输端口</li>
+<li>21：FTP服务的连接端口，可能存在  弱口令暴力破解</li>
+<li>22：SSH服务端口，可能存在 弱口令暴力破解</li>
+<li>23：Telnet端口，可能存在 弱口令暴力破解</li>
+<li>25：SMTP简单邮件传输协议端口，和 POP3 的110端口对应</li>
+<li>43：whois服务端口<a id="more"></a></li>
+<li>53：DNS服务端口(TCP/UDP 53)</li>
+<li>67/68：DHCP服务端口</li>
+<li>69：TFTP端口，可能存在弱口令</li>
+<li>80：HTTP端口，常见web漏洞</li>
+<li>88：Kerberos协议端口</li>
+<li>110：POP3邮件服务端口，和SMTP的25端口对应</li>
+<li>135：RPC服务</li>
+<li>137/138： NMB服务</li>
+<li>139：SMB/CIFS服务</li>
+<li>143：IMAP协议端口</li>
+<li>161/162: Snmp服务，public弱口令</li>
+<li>389：LDAP目录访问协议，有可能存在注入、弱口令</li>
+<li>443：HTTPS端口，心脏滴血等与SSL有关的漏洞</li>
+<li>445：SMB服务端口，可能存在永恒之蓝漏洞MS17-010</li>
+<li>512/513/514：Linux Rexec服务端口，可能存在爆破</li>
+<li>873：Rsync ，可能存在Rsync未授权访问漏洞，传送门：rsync 未授权访问漏洞</li>
+<li>1080：socket端口，可能存在爆破</li>
+<li>1099：RMI，可能存在 RMI反序列化漏洞</li>
+<li>1352：Lotus domino邮件服务端口，可能存在弱口令、信息泄露</li>
+<li>1433：SQL Server对外提供服务端口</li>
+<li>1434：用于向请求者返回SQL Server使用了哪个TCP/IP端口</li>
+<li>1521：oracle数据库端口</li>
+<li>2049：NFS服务端口，可能存在NFS配置不当</li>
+<li>2181：ZooKeeper监听端口，可能存在 ZooKeeper未授权访问漏洞</li>
+<li>2375：Docker端口，可能存在 Docker未授权访问漏洞</li>
+<li>2601:   Zebra ，默认密码zebr</li>
+<li>3128:   squid ，匿名访问（可能内网漫游)</li>
+<li>3268：LDAP目录访问协议，有可能存在注入、弱口令</li>
+<li>3306：MySQL数据库端口，可能存在 弱口令暴力破解</li>
+<li>3389：Windows远程桌面服务，可能存在 弱口令漏洞 或者 - CVE-2019-0708 远程桌面漏洞复现</li>
+<li>3690：SVN服务，可能存在SVN泄漏，未授权访问漏洞</li>
+<li>4440：Rundeck，弱口令admin</li>
+<li>4560：log4j SocketServer监听的端口，可能存在 log4j&lt;=1.2.17反序列化漏洞（CVE-2019-17571）</li>
+<li>4750：BMC，可能存在 BMC服务器自动化RSCD代理远程代码执行(CVE-2016-1542)</li>
+<li>4848：GlassFish控制台端口，可能存在弱口令admin/adminadmin</li>
+<li>5000：SysBase/DB2数据库端口，可能存在爆破、注入漏洞</li>
+<li>5432：PostGreSQL数据库的端口</li>
+<li>5632：PyAnywhere服务端口，可能存在代码执行漏洞</li>
+<li>5900/5901：VNC监听端口，可能存在 VNC未授权访问漏洞</li>
+<li>5984：CouchDB端口，可能存在 CouchDB未授权访问漏洞</li>
+<li>6379：Redis数据库端口，可能存在Redis未授权访问漏洞，传送门：Redis未授权访问漏洞</li>
+<li>7001/7002：Weblogic，可能存在Weblogic反序列化漏洞，传送门：Weblogic反序列化漏洞</li>
+<li>7180：Cloudera manager端口</li>
+<li>8069：Zabbix服务端口，可能存在Zabbix弱口令导致的Getshell漏洞</li>
+<li>8080：Tomcat、JBoss，可能存在Tomcat管理页面弱口令Getshell，JBoss未授权访问漏洞，传送门：Tomcat管理弱口令页面Getshell</li>
+<li>8080-8090：可能存在web服务</li>
+<li>8089：Jetty、Jenkins服务端口，可能存在反序列化，控制台弱口令等漏洞</li>
+<li>8161：Apache ActiveMQ后台管理系统端口，默认口令密码为：admin:admin ，可能存在CVE-2016-3088漏洞，传送门：Apache ActiveMQ任意文件写入漏洞（CVE-2016-3088）</li>
+<li>9000：fastcgi端口，可能存在远程命令执行漏洞</li>
+<li>9001：Supervisord，可能存在Supervisord远程命令执行漏洞(CVE-2017-11610)，传送门：Supervisord远程命令执行漏洞(CVE-2017-11610)</li>
+<li>9043/9090：WebSphere，可能存在WebSphere反序列化漏洞</li>
+<li>9200/9300：Elasticsearch监听端口，可能存在 Elasticsearch未授权访问漏洞</li>
+<li>10000：Webmin-Web控制面板，可能存在弱口令</li>
+<li>10001/10002：JmxRemoteLifecycleListener监听的，可能存在Tomcat反序列化漏洞，传送门：Tomcat反序列化漏洞(CVE-2016-8735)</li>
+<li>11211：Memcached监听端口，可能存在 Memcached未授权访问漏洞</li>
+<li>27017/27018：MongoDB数据库端口，可能存在 MongoDB未授权访问漏洞</li>
+<li>50000：SAP Management Console服务端口，可能存在 运程命令执行漏洞。</li>
+<li>50070：Hadoop服务端口，可能存在 Hadoop未授权访问漏洞</li>
+<li>61616：Apache ActiveMQ服务端口，可能存在 Apache ActiveMQ任意文件写入漏洞（CVE-2016-3088）复现</li>
+<li>60020：hbase.regionserver.port，HRegionServer的RPC端口</li>
+<li>60030：hbase.regionserver.info.port，HRegionServer的http端口</li>
+</ul>
+<h2 id="端口相关的命令（Windows）"><a href="#端口相关的命令（Windows）" class="headerlink" title="端口相关的命令（Windows）"></a>端口相关的命令（Windows）</h2><ul>
+<li>netstat -a  显示一个所有的有效连接信息列表，包括已建立的连接（ESTABLISHED ），也包括监听连接请求（LISTENING ）的那些连接，<br>断开连接（CLOSE_WAIT ）或者处于联机等待状态的（TIME_WAIT ）等</li>
+<li>netstat -n  以数字形式显示地址和端口号,显示所有已建立的有效连接</li>
+<li>netstat -ano  列出所有端口的情况</li>
+<li>netstat -ano|findstr “80”  查看被占用端口80对应的应用的PID</li>
+<li>tasklist|findstr “80”  查看80端口被哪个进程或程序占用</li>
+<li>结束该进程或程序：taskkill /f /t /im  XX.exe  结束该进程或程序</li>
+</ul>
+<h2 id="Nmap中常见的服务"><a href="#Nmap中常见的服务" class="headerlink" title="Nmap中常见的服务"></a>Nmap中常见的服务</h2><ol>
+<li>msmq?：默认对应的是1801端口，是MSMQ Microsoft Message Queuing（微软消息队列）的简称，是windows系统提供的一个功能，开启了该功能，则默认1801端口打开。该服务暂未发现漏洞。 </li>
+<li>msrpc：Microsoft Remote Procedure Call（微软远程过程调用）是 Windows 操作系统使用的一个协议。该服务开启时对应端口2103、2105、2107开启。RPC 提供一种内部进程通讯机制，允许在一台电脑上运行的程序无缝的执行远程系统中的代码。</li>
+<li>tcpwrapped：端口状态后经常标记tcpwrapped。tcpwrapped表示服务器运行 tcp_wrappers服务。该服务对应端口10050。tcp_wrappers是一种应用级防火墙。它可以根据预设，对SSH、Telnet、FTP服务的请求进行拦截，判断是否符合预设要求。如果符合，就会转发给对应的服务进程；否则，会中断连接请求。这说明tcp三次握手已经完成，但是并没有和目标主机建立连接。这表明，虽然目标主机的某项服务是可提供的，但你不在允许访问主机的名单列表中。当大量的端口服务都为tcpwrapped时，这说明可能是有负载均衡或者防火墙阻断了你的连接请求。</li>
+<li>Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)：这是SQL Server中的SQL Reporting Service 服务使用的Microsoft HTTPAPI。该服务对应端口5985。</li>
+</ol>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">渗透</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/03/31/%E5%B8%B8%E8%A7%81web%E5%8D%B1%E9%99%A9%E7%AB%AF%E5%8F%A3%E4%BB%8B%E7%BB%8D/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2020/03/27/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E7%BB%95%E8%BF%87%E7%A9%BA%E6%A0%BC/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">命令执行绕过空格</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -231,9 +423,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
