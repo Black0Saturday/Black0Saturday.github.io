@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-03-31T08:57:27.848Z</updated>
+  <updated>2020-04-01T05:40:33.610Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>常见密码字典</title>
+    <link href="http://yoursite.com/2020/04/01/%E5%B8%B8%E8%A7%81%E5%AF%86%E7%A0%81%E5%AD%97%E5%85%B8/"/>
+    <id>http://yoursite.com/2020/04/01/常见密码字典/</id>
+    <published>2020-04-01T05:35:11.934Z</published>
+    <updated>2020-04-01T05:40:33.610Z</updated>
+    
+    <content type="html"><![CDATA[<hr><p>title: 常见密码字典<br>date: 2020-04-01 13:35:11</p><h2 id="tags-字典"><a href="#tags-字典" class="headerlink" title="tags: 字典"></a>tags: 字典</h2><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>收集一些常见密码字典</p><h3 id="密码"><a href="#密码" class="headerlink" title="密码"></a>密码</h3><ul><li><a href="https://pan.baidu.com/share/link?shareid=193969&amp;uk=1965926143" target="_blank" rel="noopener">https://pan.baidu.com/share/link?shareid=193969&amp;uk=1965926143</a></li><li><a href="https://pan.baidu.com/share/link?shareid=193972&amp;uk=1965926143" target="_blank" rel="noopener">https://pan.baidu.com/share/link?shareid=193972&amp;uk=1965926143</a></li><li><a href="https://github.com/rootphantomer/Blasting_dictionary" target="_blank" rel="noopener">https://github.com/rootphantomer/Blasting_dictionary</a></li><li><a href="https://github.com/TheKingOfDuck/fuzzDicts" target="_blank" rel="noopener">https://github.com/TheKingOfDuck/fuzzDicts</a></li><li><a href="https://github.com/dustyfresh/dictionaries/blob/master/top_100.txt" target="_blank" rel="noopener">https://github.com/dustyfresh/dictionaries/blob/master/top_100.txt</a></li><li><a href="https://github.com/dustyfresh/dictionaries/blob/master/top_1000.txt" target="_blank" rel="noopener">https://github.com/dustyfresh/dictionaries/blob/master/top_1000.txt</a></li><li><a href="https://github.com/dustyfresh/dictionaries/blob/master/top_500.txt" target="_blank" rel="noopener">https://github.com/dustyfresh/dictionaries/blob/master/top_500.txt</a></li><li><a href="https://github.com/noootown/PasswordDictionary" target="_blank" rel="noopener">https://github.com/noootown/PasswordDictionary</a></li><li><a href="https://github.com/hxer/dictTree" target="_blank" rel="noopener">https://github.com/hxer/dictTree</a><h3 id="Fuzz"><a href="#Fuzz" class="headerlink" title="Fuzz"></a>Fuzz</h3></li><li><a href="https://github.com/dustyfresh/dictionaries/blob/master/web-fuzz-dict.txt" target="_blank" rel="noopener">https://github.com/dustyfresh/dictionaries/blob/master/web-fuzz-dict.txt</a></li></ul><h3 id="User-Agent"><a href="#User-Agent" class="headerlink" title="User-Agent"></a>User-Agent</h3><ul><li><a href="https://github.com/dustyfresh/dictionaries/blob/master/user-agents.txt" target="_blank" rel="noopener">https://github.com/dustyfresh/dictionaries/blob/master/user-agents.txt</a></li></ul><h3 id="File-Locations"><a href="#File-Locations" class="headerlink" title="File-Locations"></a>File-Locations</h3><ul><li><a href="https://github.com/dustyfresh/dictionaries/blob/master/file-locations.txt" target="_blank" rel="noopener">https://github.com/dustyfresh/dictionaries/blob/master/file-locations.txt</a></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;hr&gt;
+&lt;p&gt;title: 常见密码字典&lt;br&gt;date: 2020-04-01 13:35:11&lt;/p&gt;
+&lt;h2 id=&quot;tags-字典&quot;&gt;&lt;a href=&quot;#tags-字典&quot; class=&quot;headerlink&quot; title=&quot;tags: 字典&quot;&gt;&lt;/a&gt;tags: 字典&lt;
+      
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>常见web危险端口介绍</title>
