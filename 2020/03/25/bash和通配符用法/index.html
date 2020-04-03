@@ -8,12 +8,12 @@
   <link rel="dns-prefetch" href="http://black0saturday.github.io">
   <title>bash和通配符用法 | 一次就好</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="特殊的通配符用法Bash 标准通配符（也称为通配符模式）被各种命令行实用程序用于处理多个文件。并不是每个人都知道 bash 语法可以使用问号 ?、正斜杠 &#x2F;、数字和字母来执行系统命令。你甚至可以枚举文件并使用相同数量的字符获取其内容。举几个例子：可以使用以下语法来取代 ls 命令：&#x2F;???&#x2F;?s用这种语法，你可以基本做到你想做的任何事情。假设存在漏洞的目标位于WAF的后面，并且此 WAF 有一条规">
+  <meta name="description" content="特殊的通配符用法Bash 标准通配符（也称为通配符模式）被各种命令行实用程序用于处理多个文件。并不是每个人都知道 bash 语法可以使用问号 ?、正斜杠 &#x2F;、数字和字母来执行系统命令。你甚至可以枚举文件并使用相同数量的字符获取其内容。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="bash和通配符用法">
 <meta property="og:url" content="http://black0saturday.github.io/2020/03/25/bash%E5%92%8C%E9%80%9A%E9%85%8D%E7%AC%A6%E7%94%A8%E6%B3%95/index.html">
 <meta property="og:site_name" content="一次就好">
-<meta property="og:description" content="特殊的通配符用法Bash 标准通配符（也称为通配符模式）被各种命令行实用程序用于处理多个文件。并不是每个人都知道 bash 语法可以使用问号 ?、正斜杠 &#x2F;、数字和字母来执行系统命令。你甚至可以枚举文件并使用相同数量的字符获取其内容。举几个例子：可以使用以下语法来取代 ls 命令：&#x2F;???&#x2F;?s用这种语法，你可以基本做到你想做的任何事情。假设存在漏洞的目标位于WAF的后面，并且此 WAF 有一条规">
+<meta property="og:description" content="特殊的通配符用法Bash 标准通配符（也称为通配符模式）被各种命令行实用程序用于处理多个文件。并不是每个人都知道 bash 语法可以使用问号 ?、正斜杠 &#x2F;、数字和字母来执行系统命令。你甚至可以枚举文件并使用相同数量的字符获取其内容。">
 <meta property="og:image" content="http://black0saturday.github.io/2020/03/25/bash%E5%92%8C%E9%80%9A%E9%85%8D%E7%AC%A6%E7%94%A8%E6%B3%95/1.png">
 <meta property="og:image" content="http://black0saturday.github.io/2020/03/25/bash%E5%92%8C%E9%80%9A%E9%85%8D%E7%AC%A6%E7%94%A8%E6%B3%95/2.png">
 <meta property="og:image" content="http://black0saturday.github.io/2020/03/25/bash%E5%92%8C%E9%80%9A%E9%85%8D%E7%AC%A6%E7%94%A8%E6%B3%95/3.gif">
@@ -21,7 +21,7 @@
 <meta property="og:image" content="http://black0saturday.github.io/2020/03/25/bash%E5%92%8C%E9%80%9A%E9%85%8D%E7%AC%A6%E7%94%A8%E6%B3%95/5.webp">
 <meta property="og:image" content="http://black0saturday.github.io/2020/03/25/bash%E5%92%8C%E9%80%9A%E9%85%8D%E7%AC%A6%E7%94%A8%E6%B3%95/6.webp">
 <meta property="article:published_time" content="2020-03-25T09:14:24.000Z">
-<meta property="article:modified_time" content="2020-04-02T09:58:24.418Z">
+<meta property="article:modified_time" content="2020-04-03T03:09:02.159Z">
 <meta property="article:author" content="布布f">
 <meta property="article:tag" content="随笔">
 <meta name="twitter:card" content="summary">
@@ -197,7 +197,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="特殊的通配符用法"><a href="#特殊的通配符用法" class="headerlink" title="特殊的通配符用法"></a>特殊的通配符用法</h3><p>Bash 标准通配符（也称为通配符模式）被各种命令行实用程序用于处理多个文件。并不是每个人都知道 bash 语法可以使用问号 <code>?</code>、正斜杠 <code>/</code>、数字和字母来执行系统命令。你甚至可以枚举文件并使用相同数量的字符获取其内容。举几个例子：<br>可以使用以下语法来取代 ls 命令：<code>/???/?s</code><br><img src="/2020/03/25/bash%E5%92%8C%E9%80%9A%E9%85%8D%E7%AC%A6%E7%94%A8%E6%B3%95/1.png" alt><br>用这种语法，你可以基本做到你想做的任何事情。假设存在漏洞的目标位于WAF的后面，并且此 WAF 有一条规则，该规则可阻止包含 <code>/etc/passwd</code> 或 <code>/bin/ls</code> 在 GET 参数的值内或 POST 正文中的所有请求。</p>
+        <h3 id="特殊的通配符用法"><a href="#特殊的通配符用法" class="headerlink" title="特殊的通配符用法"></a>特殊的通配符用法</h3><p>Bash 标准通配符（也称为通配符模式）被各种命令行实用程序用于处理多个文件。并不是每个人都知道 bash 语法可以使用问号 <code>?</code>、正斜杠 <code>/</code>、数字和字母来执行系统命令。你甚至可以枚举文件并使用相同数量的字符获取其内容。<br><a id="more"></a><br>举几个例子：<br>可以使用以下语法来取代 ls 命令：<code>/???/?s</code><br><img src="/2020/03/25/bash%E5%92%8C%E9%80%9A%E9%85%8D%E7%AC%A6%E7%94%A8%E6%B3%95/1.png" alt><br>用这种语法，你可以基本做到你想做的任何事情。假设存在漏洞的目标位于WAF的后面，并且此 WAF 有一条规则，该规则可阻止包含 <code>/etc/passwd</code> 或 <code>/bin/ls</code> 在 GET 参数的值内或 POST 正文中的所有请求。</p>
 <p>如果你试图发出这样的请求，<code>/?cmd=cat+/etc/passwd</code> 它将被目标 WAF 阻止，你的 IP 将被永久禁止，并被标记为 <strong>yet another f*</strong>in’ redteamer**。但你有通配符这个秘密武器。</p>
 <p>如果目标 WAF 不阻止查询字符串里的 <code>?</code> 和 <code>/</code>，你就可以很容易地让你的请求（url 编码）变成这样：<code>/?cmd=%2f???%2f??t%20%2f???%2fp??s??</code><br><img src="/2020/03/25/bash%E5%92%8C%E9%80%9A%E9%85%8D%E7%AC%A6%E7%94%A8%E6%B3%95/2.png" alt><br>上图所示，有 3 个错误：<code>/bin/cat *: Is a directory</code>。发生这种情况是因为 <code>/???/?t</code> 可以被全局进程解释成 <code>/bin/cat</code>，也可以解释成 <code>/dev/net</code> 或 <code>/etc/apt</code> 等。</p>
 <p>问号通配符可以代表任何字符。因此，如果你知道一个文件名的一部分，那么你可以使用这个通配符。例如，<code>ls *.???</code> 将列出当前目录中所有长度为 3 个字符的文件扩展名。因此，你将会看到具有诸如 .gif，.jpg，.txt 之类扩展名的文件。</p>
