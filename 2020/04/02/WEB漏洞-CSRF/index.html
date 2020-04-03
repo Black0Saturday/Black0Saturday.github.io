@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="http://black0saturday.github.io">
   <title>WEB漏洞-CSRF | 一次就好</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前言CSRF曾在2007年、2010年、2013年三次入围OWASP TOP10。因为越来越多的框架提供了secure by default的设定和一些形式的保护，这也就是说CSRF不再是一个问题。这也就是2017版的CSRF不再出现在OWASP TOP10的原因。 研究人员发现，可以利用CSRF来传播大量的payload到终端用户。攻击者常用的CSRF传播的payload是：  Persiste">
+  <meta name="description" content="前言CSRF曾在2007年、2010年、2013年三次入围OWASP TOP10。因为越来越多的框架提供了secure by default的设定和一些形式的保护，这也就是说CSRF不再是一个问题。这也就是2017版的CSRF不再出现在OWASP TOP10的原因。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="WEB漏洞-CSRF">
 <meta property="og:url" content="http://black0saturday.github.io/2020/04/02/WEB%E6%BC%8F%E6%B4%9E-CSRF/index.html">
 <meta property="og:site_name" content="一次就好">
-<meta property="og:description" content="前言CSRF曾在2007年、2010年、2013年三次入围OWASP TOP10。因为越来越多的框架提供了secure by default的设定和一些形式的保护，这也就是说CSRF不再是一个问题。这也就是2017版的CSRF不再出现在OWASP TOP10的原因。 研究人员发现，可以利用CSRF来传播大量的payload到终端用户。攻击者常用的CSRF传播的payload是：  Persiste">
+<meta property="og:description" content="前言CSRF曾在2007年、2010年、2013年三次入围OWASP TOP10。因为越来越多的框架提供了secure by default的设定和一些形式的保护，这也就是说CSRF不再是一个问题。这也就是2017版的CSRF不再出现在OWASP TOP10的原因。">
 <meta property="og:image" content="http://black0saturday.github.io/2020/04/02/WEB%E6%BC%8F%E6%B4%9E-CSRF/1.png">
 <meta property="og:image" content="http://black0saturday.github.io/2020/04/02/WEB%E6%BC%8F%E6%B4%9E-CSRF/2.png">
 <meta property="og:image" content="http://black0saturday.github.io/2020/04/02/WEB%E6%BC%8F%E6%B4%9E-CSRF/3.png">
 <meta property="article:published_time" content="2020-04-02T06:52:08.000Z">
-<meta property="article:modified_time" content="2020-04-02T08:58:22.099Z">
+<meta property="article:modified_time" content="2020-04-03T03:07:43.313Z">
 <meta property="article:author" content="布布f">
 <meta property="article:tag" content="CSRF">
 <meta name="twitter:card" content="summary">
@@ -194,7 +194,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>CSRF曾在2007年、2010年、2013年三次入围OWASP TOP10。因为越来越多的框架提供了secure by default的设定和一些形式的保护，这也就是说CSRF不再是一个问题。这也就是2017版的CSRF不再出现在OWASP TOP10的原因。</p>
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>CSRF曾在2007年、2010年、2013年三次入围OWASP TOP10。因为越来越多的框架提供了secure by default的设定和一些形式的保护，这也就是说CSRF不再是一个问题。这也就是2017版的CSRF不再出现在OWASP TOP10的原因。<br><a id="more"></a></p>
 <p>研究人员发现，可以利用CSRF来传播大量的payload到终端用户。攻击者常用的CSRF传播的payload是：</p>
 <ul>
 <li>Persistent Cross Site Scripting (XSS)</li>
