@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://black0saturday.github.io/"/>
-  <updated>2020-04-07T07:41:05.163Z</updated>
+  <updated>2020-04-07T07:45:16.800Z</updated>
   <id>http://black0saturday.github.io/</id>
   
   <author>
@@ -21,48 +21,23 @@
     <link href="http://black0saturday.github.io/2020/04/07/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%9F%BA%E7%A1%80/"/>
     <id>http://black0saturday.github.io/2020/04/07/区块链基础/</id>
     <published>2020-04-07T06:31:42.000Z</published>
-    <updated>2020-04-07T07:41:05.163Z</updated>
+    <updated>2020-04-07T07:45:16.800Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>介绍几本入门区块链的书：</p><ul><li>《Mastering Bitcoin》</li><li>《Mastering Ethereum》</li><li>《Mastering Monero》</li></ul><h2 id="0x01-先放一张区块链攻击的思维导图"><a href="#0x01-先放一张区块链攻击的思维导图" class="headerlink" title="0x01 先放一张区块链攻击的思维导图"></a>0x01 先放一张区块链攻击的思维导图</h2><p><img src="/2020/04/07/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%9F%BA%E7%A1%80/1.jpg" alt></p><p>这张图其实包含两部分：</p><ol><li>攻击与区块链相关的地方</li><li>利用区块链进行攻击</li></ol><h2 id="0x02-主要内容"><a href="#0x02-主要内容" class="headerlink" title="0x02 主要内容"></a>0x02 主要内容</h2><ol><li>盗币</li><li>恶意挖矿</li><li>勒索</li><li>暗网</li><li>C2中转</li><li>洗钱</li><li>资金盘</li><li>菠菜</li></ol><h2 id="0x03-攻击方式"><a href="#0x03-攻击方式" class="headerlink" title="0x03 攻击方式"></a>0x03 攻击方式</h2><h3 id="1-算力攻击"><a href="#1-算力攻击" class="headerlink" title="1. 算力攻击"></a>1. 算力攻击</h3><p>算力攻击里的 51% 攻击，这个攻击方法很有意思，简单来说就是你如果拥有超过一半以上的算力，你就可以决定一个区块链的走向（最长链原则），你可以导致如“双花攻击”（一笔钱花了两次）。而且有意思的是：这种算力攻击不是什么 DDoS 非法的，他是这个世界合法的…</p><p><strong>这个网站，可以预估针对各种区块链发起 51% 的攻击成本：<a href="https://www.crypto51.app/" target="_blank" rel="noopener" title="51%攻击">https://www.crypto51.app/</a></strong></p><h3 id="2-恶意挖矿"><a href="#2-恶意挖矿" class="headerlink" title="2. 恶意挖矿"></a>2. 恶意挖矿</h3><p>可能大家，绝大多数都遇到到“蠕虫挖矿”，一些服务器，比如 Redis 未授权访问被植入挖矿木马。但绝大多数应该是没遇到过矿场里的恶意挖矿。</p><p>我们在偏远山区布局了矿场业务，曾经买入一批知名的矿机，其中有几台在供应链环节（运输过程）固件被刷入挖矿病毒，当接入矿场局域网时，几分钟，整个矿场全感染了。这些病毒/蠕虫做的事主要是劫持挖矿算力达到间接盗币。</p><h2 id="0x03-区块链安全攻防出发点"><a href="#0x03-区块链安全攻防出发点" class="headerlink" title="0x03 区块链安全攻防出发点"></a>0x03 区块链安全攻防出发点</h2><p><img src="/2020/04/07/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%9F%BA%E7%A1%80/1.webp" alt><br>区块链安全攻防主要分两大块内容：链上攻防和链下攻防。</p><h3 id="1-链下攻防"><a href="#1-链下攻防" class="headerlink" title="1. 链下攻防"></a>1. 链下攻防</h3><p>从图上可以看出链下攻防就是经典的传统网络安全攻防：常见的web漏洞等等。链下攻防有一个不一样的地方在于图的右边：节点安全。这块不同的区块链就有不同的节点，就可能有不同的安全问题。</p><p>攻击细节：</p><ol><li>全球扫描 8545 端口（HTTP JSON RPC API）、8546 端口（WebSocket JSON RPC API）等开放的以太坊节点，发送 eth_getBlockByNumber、eth_accounts、eth_getBalance 遍历区块高度、钱包地址及余额</li><li>不断重复调用 eth_sendTransaction 尝试将余额转账到攻击者的钱包</li><li>当正好碰上节点用户对自己的钱包执行 unlockAccount 时，在 duration 期间内无需再次输入密码为交易签名，此时攻击者的 eth_sendTransaction 调用将被正确执行，余额就进入攻击者的钱包里了<h3 id="2-链上攻防"><a href="#2-链上攻防" class="headerlink" title="2. 链上攻防"></a>2. 链上攻防</h3>关于链上的安全，切入点大体是：</li></ol><ul><li>静态代码检查</li><li>P2P 安全</li><li>RPC 安全</li><li>加密签名安全</li><li>账户与交易模型安全</li><li>系统合约安全</li><li>共识安全</li><li>代码合规</li></ul><h2 id="0x04-数字货币交易所安全攻防出发点"><a href="#0x04-数字货币交易所安全攻防出发点" class="headerlink" title="0x04 数字货币交易所安全攻防出发点"></a>0x04 数字货币交易所安全攻防出发点</h2><p><img src="/2020/04/07/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%9F%BA%E7%A1%80/2.webp" alt></p><p>图里的冷、温、热：其实是按照钱包的触网程度+流动程度+金额程度来划分的</p><p>冷：触网程度低（或零）、流动程度小、金额程度大<br>热：触网程度高、流动程度高、金额程度小；<br>温：介于冷、热之间。</p><p>相比之下，冷钱包会更安全，热钱包会更危险。</p>]]></content>
+    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>介绍几本入门区块链的书：</p><ul><li>《Mastering Bitcoin》</li><li>《Mastering Ethereum》</li><li>《Mastering Monero》</li></ul><a id="more"></a><h2 id="0x01-先放一张区块链攻击的思维导图"><a href="#0x01-先放一张区块链攻击的思维导图" class="headerlink" title="0x01 先放一张区块链攻击的思维导图"></a>0x01 先放一张区块链攻击的思维导图</h2><p><img src="/2020/04/07/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%9F%BA%E7%A1%80/1.jpg" alt></p><p>这张图其实包含两部分：</p><ol><li>攻击与区块链相关的地方</li><li>利用区块链进行攻击</li></ol><h2 id="0x02-主要内容"><a href="#0x02-主要内容" class="headerlink" title="0x02 主要内容"></a>0x02 主要内容</h2><ol><li>盗币</li><li>恶意挖矿</li><li>勒索</li><li>暗网</li><li>C2中转</li><li>洗钱</li><li>资金盘</li><li>菠菜</li></ol><h2 id="0x03-攻击方式"><a href="#0x03-攻击方式" class="headerlink" title="0x03 攻击方式"></a>0x03 攻击方式</h2><h3 id="1-算力攻击"><a href="#1-算力攻击" class="headerlink" title="1. 算力攻击"></a>1. 算力攻击</h3><p>算力攻击里的 51% 攻击，这个攻击方法很有意思，简单来说就是你如果拥有超过一半以上的算力，你就可以决定一个区块链的走向（最长链原则），你可以导致如“双花攻击”（一笔钱花了两次）。而且有意思的是：这种算力攻击不是什么 DDoS 非法的，他是这个世界合法的…</p><p><strong>这个网站，可以预估针对各种区块链发起 51% 的攻击成本：<a href="https://www.crypto51.app/" target="_blank" rel="noopener" title="51%攻击">https://www.crypto51.app/</a></strong></p><h3 id="2-恶意挖矿"><a href="#2-恶意挖矿" class="headerlink" title="2. 恶意挖矿"></a>2. 恶意挖矿</h3><p>可能大家，绝大多数都遇到到“蠕虫挖矿”，一些服务器，比如 Redis 未授权访问被植入挖矿木马。但绝大多数应该是没遇到过矿场里的恶意挖矿。</p><p>我们在偏远山区布局了矿场业务，曾经买入一批知名的矿机，其中有几台在供应链环节（运输过程）固件被刷入挖矿病毒，当接入矿场局域网时，几分钟，整个矿场全感染了。这些病毒/蠕虫做的事主要是劫持挖矿算力达到间接盗币。</p><h2 id="0x03-区块链安全攻防出发点"><a href="#0x03-区块链安全攻防出发点" class="headerlink" title="0x03 区块链安全攻防出发点"></a>0x03 区块链安全攻防出发点</h2><p><img src="/2020/04/07/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%9F%BA%E7%A1%80/1.webp" alt><br>区块链安全攻防主要分两大块内容：链上攻防和链下攻防。</p><h3 id="1-链下攻防"><a href="#1-链下攻防" class="headerlink" title="1. 链下攻防"></a>1. 链下攻防</h3><p>从图上可以看出链下攻防就是经典的传统网络安全攻防：常见的web漏洞等等。链下攻防有一个不一样的地方在于图的右边：节点安全。这块不同的区块链就有不同的节点，就可能有不同的安全问题。</p><p>攻击细节：</p><ol><li>全球扫描 8545 端口（HTTP JSON RPC API）、8546 端口（WebSocket JSON RPC API）等开放的以太坊节点，发送 eth_getBlockByNumber、eth_accounts、eth_getBalance 遍历区块高度、钱包地址及余额</li><li>不断重复调用 eth_sendTransaction 尝试将余额转账到攻击者的钱包</li><li>当正好碰上节点用户对自己的钱包执行 unlockAccount 时，在 duration 期间内无需再次输入密码为交易签名，此时攻击者的 eth_sendTransaction 调用将被正确执行，余额就进入攻击者的钱包里了<h3 id="2-链上攻防"><a href="#2-链上攻防" class="headerlink" title="2. 链上攻防"></a>2. 链上攻防</h3>关于链上的安全，切入点大体是：</li></ol><ul><li>静态代码检查</li><li>P2P 安全</li><li>RPC 安全</li><li>加密签名安全</li><li>账户与交易模型安全</li><li>系统合约安全</li><li>共识安全</li><li>代码合规</li></ul><h2 id="0x04-数字货币交易所安全攻防出发点"><a href="#0x04-数字货币交易所安全攻防出发点" class="headerlink" title="0x04 数字货币交易所安全攻防出发点"></a>0x04 数字货币交易所安全攻防出发点</h2><p><img src="/2020/04/07/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%9F%BA%E7%A1%80/2.webp" alt></p><p>图里的冷、温、热：其实是按照钱包的触网程度+流动程度+金额程度来划分的</p><p>冷：触网程度低（或零）、流动程度小、金额程度大<br>热：触网程度高、流动程度高、金额程度小；<br>温：介于冷、热之间。</p><p>相比之下，冷钱包会更安全，热钱包会更危险。</p>]]></content>
     
     <summary type="html">
     
-      
-      
-        &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h2&gt;&lt;p&gt;介绍几本入门区块链的书：&lt;/p&gt;
+      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h2&gt;&lt;p&gt;介绍几本入门区块链的书：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;《Mastering Bitcoin》&lt;/li&gt;
-      
+&lt;li&gt;《Mastering Ethereum》&lt;/li&gt;
+&lt;li&gt;《Mastering Monero》&lt;/li&gt;
+&lt;/ul&gt;
     
     </summary>
     
     
       <category term="随笔" scheme="http://black0saturday.github.io/tags/%E9%9A%8F%E7%AC%94/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>区块链基础</title>
-    <link href="http://black0saturday.github.io/2020/04/07/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%BD%9C%E6%81%B6/"/>
-    <id>http://black0saturday.github.io/2020/04/07/区块链作恶/</id>
-    <published>2020-04-07T06:31:42.000Z</published>
-    <updated>2020-04-07T07:02:32.680Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>介绍几本入门区块链的书：</p><ul><li>《Mastering Bitcoin》</li><li>《Mastering Ethereum》</li><li>《Mastering Monero》</li></ul><p><img src="/2020/04/07/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%BD%9C%E6%81%B6/1.jpg" alt></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h2&gt;&lt;p&gt;介绍几本入门区块链的书：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;《Mastering Bitcoin》&lt;/li&gt;
-      
-    
-    </summary>
-    
-    
-      <category term="区块链" scheme="http://black0saturday.github.io/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
     
   </entry>
   
@@ -435,6 +410,27 @@
     
     
       <category term="CTF" scheme="http://black0saturday.github.io/tags/CTF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>渗透测试神器burpsuite</title>
+    <link href="http://black0saturday.github.io/2018/09/06/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E7%A5%9E%E5%99%A8burpsuite/"/>
+    <id>http://black0saturday.github.io/2018/09/06/渗透测试神器burpsuite/</id>
+    <published>2018-09-06T09:13:55.000Z</published>
+    <updated>2020-04-01T09:03:39.296Z</updated>
+    
+    <content type="html"><![CDATA[<p>burpsuite用了两年了，问了一下身边的同学有的还不知道各个模块有哪些功能，这里就详细的给大家介绍一下各个模块的功能。</p><p>burpsuite可以说是渗透测试中的神兵利器，我当初入坑的第一节就是学的burpsuite，在渗透测试中可以说是必不可少的一部分，这里会从各个模块来介绍burpsuite的几大功能。有什么错误也希望走过路过的大佬们指出，由于是说基本用法所以比较基础，各种大佬大神可以绕过啦哈哈。</p><a id="more"></a><h3 id="1-target"><a href="#1-target" class="headerlink" title="1. target"></a>1. target</h3><p>Burp的Target组件主要由站点地图、目标域组成，他们帮助渗透测试人员更好地了解目标应用的整体状况、当前的工作涉及哪些目标域、分析可能存在的攻击面等信息，Target会显示出访问过的、以及页面中有的链接URL。黑色的说明是有真正发生过通信过程的，灰色的只是爬网爬出的，没有真实访问。<br>下面我们就分别来看看Burp Target的两个组成部分。</p><p>SiteMap会在目标中以树形和表形式显示，并且还可以查看完整的请求和响应。可以看到该页面下的地址，目录，文件和参数化请求的URL，还可以扩大有趣的分支看到进一步的细节。如果选择树的一个或多个部分，在所有子分支所选择的项目都显示在表视图。<br><img src="/2018/09/06/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E7%A5%9E%E5%99%A8burpsuite/1.png" alt></p><p>这样看起来site map是不是很乱，可以右击add to scope，然后点击Filter勾选Show only in-scope items<br><img src="/2018/09/06/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E7%A5%9E%E5%99%A8burpsuite/2.png" alt><br><img src="/2018/09/06/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E7%A5%9E%E5%99%A8burpsuite/3.jpg" alt></p><p>此时你再回头看Site map就只有百度一个地址了，这里filter可以过滤一些参数，show all显示全部，hide隐藏所有，如果勾选了表示不过滤。<br><img src="/2018/09/06/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E7%A5%9E%E5%99%A8burpsuite/5.png" alt></p><h3 id="2-Proxy"><a href="#2-Proxy" class="headerlink" title="2. Proxy"></a>2. Proxy</h3><p>这个可能我们用的就比较多了，一般在渗透网站的时候会用它来截取流量包，可以看到客户端发送到服务器的各种信息，也可以直接在里面修改我们的请求头。当然用的时候需要在浏览器上开一个代理，代理的IP地址和端口号需要和Burpsuite里面的保持一致</p><p>其中的功能</p><pre><code>Intercept – 用于显示和修改Http请求和相应    forward：当你编辑之后，发送信息到服务器或浏览器    Drop：当你不想发送这次信息可以点击drop放弃这个信息    interceptionis on/off: 这个按钮用来打开和关闭所有拦截    Action：说明一个菜单可用的动作行为操作可以有哪些操作功能HTTP history – 记录设置代理后浏览器访问的页面数据包，详细记录数据包的host、method、url、status、extension等等,当我们选中某个请求时，可以看他的请求包信息，同样也可查看他的响应包信息options – 该选项主要用于设置代理监听、请求和响应，拦截反应等等。    license server:用于设置代理的IP地址和端口号，需要和浏览器设置的保持一致    Intercept Client Requests – 配置拦截规则，设置拦截数据包的匹配规则。规则可以是域名、IP、协议、HTTP方法、URL等等    Intercept Server Responses – 配置拦截规则，设置拦截的匹配规则，基于服务器端的返回情况进行匹配</code></pre><h3 id="3-Spider"><a href="#3-Spider" class="headerlink" title="3. Spider"></a>3. Spider</h3><p>BurpSuite的spider功能是用来抓取Web应用程序的链接和内容等。通过跟踪HTML和JavaScript以及提交的表单中的超链接来映射目标应用程序，它还使用了一些其他的线索，如目录列表，资源类型的注释，以及robots.txt 文件。结果会在站点地图中以树和表的形式显示出来，提供了一个清楚并非常详细的目标应用程序视图。<br>我的理解是Spider把与我们输入的网页相关的网页都找出来了。那如何使用呢？<br>比如拿<em><a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a></em>为例子，右键点击，选择send to spider。<br>然后我们回到target标签，我们看到关于<a href="http://www.baidu.com的一些目录和页面被我们扫描出来了。" target="_blank" rel="noopener">www.baidu.com的一些目录和页面被我们扫描出来了。</a><br><img src="/2018/09/06/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E7%A5%9E%E5%99%A8burpsuite/4.png" alt></p><h3 id="4-Scanner"><a href="#4-Scanner" class="headerlink" title="4. Scanner"></a>4. Scanner</h3><p>Burp Scanner 是一个进行自动发现 web 应用程序的安全漏洞的工具。它是为渗透测试人员设计的，并且它和你现有的手动执行进行的 web 应用程序半自动渗透测试的技术方法很相似。我们可以使用Burp Scanner代替我们手工去对系统进行普通漏洞类型的渗透测试，从而能使得我们把更多的精力放在那些必须要人工去验证的漏洞上。</p><p>使用的大多数的 web 扫描器都是单独运行的，比如你提供了一个开始的地址并开始扫描，然后注视着进度条的更新直到扫描结束，最后产生一个报告。Burp Scanner 和这完全不同，在攻击一个应用程序时它和你执行的操作紧紧的结合在一起。让你细微控制着每一个扫描的请求，并直接反馈回结果。</p><p>用法：<br>在Target右键可以选择对站点主动扫描还是被动扫描</p><p><img src="/2018/09/06/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E7%A5%9E%E5%99%A8burpsuite/1.jpg" alt></p><p>然后开始设置扫描规则</p><p><img src="/2018/09/06/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E7%A5%9E%E5%99%A8burpsuite/2.jpg" alt></p><p>Scanner主页面，不希望继续扫描的url可以在Scan queue对目标右键Cancel取消。</p><p><img src="/2018/09/06/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E7%A5%9E%E5%99%A8burpsuite/3.jpg" alt></p><p>然后扫描结果如下：</p><p><img src="/2018/09/06/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E7%A5%9E%E5%99%A8burpsuite/4.png" alt></p><h3 id="5-Intruder"><a href="#5-Intruder" class="headerlink" title="5. Intruder"></a>5. Intruder</h3><p>暴力破解模块，这个模块用的也是比较多的，暴力破解大家应该都知道，假如我要登陆一个网站，知道用户名却不知道密码，而这个网站也没有设置验证码，这时候就可以利用暴力破解从字典里一个一个试，把密码试出来。<br>首先利用proxy抓包，然后右键点击，选择send to intruder</p><p><img src="/2018/09/06/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E7%A5%9E%E5%99%A8burpsuite/8.png" alt></p><p>然后我们打开intruder模块，这个模块下总共有4个选项</p><p>Target</p><p><img src="/2018/09/06/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E7%A5%9E%E5%99%A8burpsuite/9.png" alt></p><p>target可以设置攻击目标的信息，设置Host,端口，是否使用https</p><p>Positions</p><p>Positions里面就是我们发送的包的内容</p><p><img src="/2018/09/06/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E7%A5%9E%E5%99%A8burpsuite/5.jpg" alt></p><p>定义的变量就是我们要暴力破解的内容</p><p>然后添加进去我们暴力破解需要用的字典，burpsuite里面有自带的字典，当然你也可以自己导入字典，这个在Payloads里面。</p><p><img src="/2018/09/06/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E7%A5%9E%E5%99%A8burpsuite/11.png" alt></p><p>然后可以在options里面选择线程之类的设置</p><p>设置好了之后左上角有个Intruder选项，选项下有个start attack</p><p><img src="/2018/09/06/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E7%A5%9E%E5%99%A8burpsuite/6.jpg" alt></p><p>开始破解之后可以看到burpsuite对网站访问的记录，请求头和响应头都可以看到，基本上返回登陆失败的字节大小都是一样的，而登陆成功的字节是不一样的，所以我们可以看一下每次访问的字节大小，如果和别的不一样，有可能就是登陆成功了，我们就可以看一看它的请求头里的密码。</p><h3 id="6-Repeater"><a href="#6-Repeater" class="headerlink" title="6. Repeater"></a>6. Repeater</h3><p>顾名思义，Repeater就是重复的意思，当我们需要修改包的信息但是不太清楚需要改成什么，这时候我们可能要一次一次的尝试，而每次尝试都需要重新抓一下包的话显然太麻烦。这时候我们就有了Repeater模块，左边是提交的信息，右边是回应的信息，当我们每次在左边修改了包的信息后，就可以点击GO按钮，这时burpsuite就会对网站发起请求，当我们需要再次修改就可以直接在左边修改然后点击GO。</p><p><img src="/2018/09/06/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E7%A5%9E%E5%99%A8burpsuite/12.png" alt></p><h3 id="7-Decoder"><a href="#7-Decoder" class="headerlink" title="7. Decoder"></a>7. Decoder</h3><p>Decoder模块是用来对数据进行加密解密的，当我们抓包遇到了一串密文，可以选中这串秘闻，然后直接右键选择send to decoder</p><p><img src="/2018/09/06/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E7%A5%9E%E5%99%A8burpsuite/20.png" alt></p><p>然后进入decoder模块，在里面可以看到各种编码方式，可以对数据进行加密解密。</p><p><img src="/2018/09/06/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E7%A5%9E%E5%99%A8burpsuite/21.png" alt></p><p>感谢大家的阅读，本来想全部写完的，但是写到后边发现有点多还是分为上下篇吧。上篇的内容就先写到这里，有什么不对的地方欢迎各位指教，之后会写出下篇。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;burpsuite用了两年了，问了一下身边的同学有的还不知道各个模块有哪些功能，这里就详细的给大家介绍一下各个模块的功能。&lt;/p&gt;
+&lt;p&gt;burpsuite可以说是渗透测试中的神兵利器，我当初入坑的第一节就是学的burpsuite，在渗透测试中可以说是必不可少的一部分，这里会从各个模块来介绍burpsuite的几大功能。有什么错误也希望走过路过的大佬们指出，由于是说基本用法所以比较基础，各种大佬大神可以绕过啦哈哈。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="工具" scheme="http://black0saturday.github.io/tags/%E5%B7%A5%E5%85%B7/"/>
     
   </entry>
   

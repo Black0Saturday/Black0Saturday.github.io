@@ -195,49 +195,9 @@
 <li>《Mastering Ethereum》</li>
 <li>《Mastering Monero》</li>
 </ul>
-<h2 id="0x01-先放一张区块链攻击的思维导图"><a href="#0x01-先放一张区块链攻击的思维导图" class="headerlink" title="0x01 先放一张区块链攻击的思维导图"></a>0x01 先放一张区块链攻击的思维导图</h2><p><img src="/2020/04/07/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%9F%BA%E7%A1%80/1.jpg" alt></p>
-<p>这张图其实包含两部分：</p>
-<ol>
-<li>攻击与区块链相关的地方</li>
-<li>利用区块链进行攻击</li>
-</ol>
-<h2 id="0x02-主要内容"><a href="#0x02-主要内容" class="headerlink" title="0x02 主要内容"></a>0x02 主要内容</h2><ol>
-<li>盗币</li>
-<li>恶意挖矿</li>
-<li>勒索</li>
-<li>暗网</li>
-<li>C2中转</li>
-<li>洗钱</li>
-<li>资金盘</li>
-<li>菠菜</li>
-</ol>
-<h2 id="0x03-攻击方式"><a href="#0x03-攻击方式" class="headerlink" title="0x03 攻击方式"></a>0x03 攻击方式</h2><h3 id="1-算力攻击"><a href="#1-算力攻击" class="headerlink" title="1. 算力攻击"></a>1. 算力攻击</h3><p>算力攻击里的 51% 攻击，这个攻击方法很有意思，简单来说就是你如果拥有超过一半以上的算力，你就可以决定一个区块链的走向（最长链原则），你可以导致如“双花攻击”（一笔钱花了两次）。而且有意思的是：这种算力攻击不是什么 DDoS 非法的，他是这个世界合法的…</p>
-<p><strong>这个网站，可以预估针对各种区块链发起 51% 的攻击成本：<a href="https://www.crypto51.app/" target="_blank" rel="noopener" title="51%攻击">https://www.crypto51.app/</a></strong></p>
-<h3 id="2-恶意挖矿"><a href="#2-恶意挖矿" class="headerlink" title="2. 恶意挖矿"></a>2. 恶意挖矿</h3><p>可能大家，绝大多数都遇到到“蠕虫挖矿”，一些服务器，比如 Redis 未授权访问被植入挖矿木马。但绝大多数应该是没遇到过矿场里的恶意挖矿。</p>
-<p>我们在偏远山区布局了矿场业务，曾经买入一批知名的矿机，其中有几台在供应链环节（运输过程）固件被刷入挖矿病毒，当接入矿场局域网时，几分钟，整个矿场全感染了。这些病毒/蠕虫做的事主要是劫持挖矿算力达到间接盗币。</p>
-<h2 id="0x03-区块链安全攻防出发点"><a href="#0x03-区块链安全攻防出发点" class="headerlink" title="0x03 区块链安全攻防出发点"></a>0x03 区块链安全攻防出发点</h2><p><img src="/2020/04/07/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%9F%BA%E7%A1%80/1.webp" alt><br>区块链安全攻防主要分两大块内容：链上攻防和链下攻防。</p>
-<h3 id="1-链下攻防"><a href="#1-链下攻防" class="headerlink" title="1. 链下攻防"></a>1. 链下攻防</h3><p>从图上可以看出链下攻防就是经典的传统网络安全攻防：常见的web漏洞等等。链下攻防有一个不一样的地方在于图的右边：节点安全。这块不同的区块链就有不同的节点，就可能有不同的安全问题。</p>
-<p>攻击细节：</p>
-<ol>
-<li>全球扫描 8545 端口（HTTP JSON RPC API）、8546 端口（WebSocket JSON RPC API）等开放的以太坊节点，发送 eth_getBlockByNumber、eth_accounts、eth_getBalance 遍历区块高度、钱包地址及余额</li>
-<li>不断重复调用 eth_sendTransaction 尝试将余额转账到攻击者的钱包</li>
-<li>当正好碰上节点用户对自己的钱包执行 unlockAccount 时，在 duration 期间内无需再次输入密码为交易签名，此时攻击者的 eth_sendTransaction 调用将被正确执行，余额就进入攻击者的钱包里了<h3 id="2-链上攻防"><a href="#2-链上攻防" class="headerlink" title="2. 链上攻防"></a>2. 链上攻防</h3>关于链上的安全，切入点大体是：</li>
-</ol>
-<ul>
-<li>静态代码检查</li>
-<li>P2P 安全</li>
-<li>RPC 安全</li>
-<li>加密签名安全</li>
-<li>账户与交易模型安全</li>
-<li>系统合约安全</li>
-<li>共识安全</li>
-<li>代码合规</li>
-</ul>
-<h2 id="0x04-数字货币交易所安全攻防出发点"><a href="#0x04-数字货币交易所安全攻防出发点" class="headerlink" title="0x04 数字货币交易所安全攻防出发点"></a>0x04 数字货币交易所安全攻防出发点</h2><p><img src="/2020/04/07/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%9F%BA%E7%A1%80/2.webp" alt></p>
-<p>图里的冷、温、热：其实是按照钱包的触网程度+流动程度+金额程度来划分的</p>
-<p>冷：触网程度低（或零）、流动程度小、金额程度大<br>热：触网程度高、流动程度高、金额程度小；<br>温：介于冷、热之间。</p>
-<p>相比之下，冷钱包会更安全，热钱包会更危险。</p>
-
+        
+          <a class="article-more-a" href="/2020/04/07/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%9F%BA%E7%A1%80/#more">more >></a>
+        
       
 
 		
@@ -265,90 +225,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/04/07/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%9F%BA%E7%A1%80/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-区块链作恶" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/07/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%BD%9C%E6%81%B6/">区块链基础</a>
-    </h1>
-  
-
-        
-        <a href="/2020/04/07/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%BD%9C%E6%81%B6/" class="archive-article-date">
-  	<time datetime="2020-04-07T06:31:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>介绍几本入门区块链的书：</p>
-<ul>
-<li>《Mastering Bitcoin》</li>
-<li>《Mastering Ethereum》</li>
-<li>《Mastering Monero》</li>
-</ul>
-<p><img src="/2020/04/07/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%BD%9C%E6%81%B6/1.jpg" alt></p>
-
-      
-
-		
-		
-		  <div hidden="hidden"></div>
-		
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">区块链</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/04/07/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%BD%9C%E6%81%B6/">展开全文 >></a>
         </p>
       
 
@@ -1022,6 +898,86 @@
 
 
   
+    <article id="post-制作图片马" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/20/%E5%88%B6%E4%BD%9C%E5%9B%BE%E7%89%87%E9%A9%AC/">制作图片马</a>
+    </h1>
+  
+
+        
+        <a href="/2019/11/20/%E5%88%B6%E4%BD%9C%E5%9B%BE%E7%89%87%E9%A9%AC/" class="archive-article-date">
+  	<time datetime="2019-11-20T08:43:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>打CTF遇到需要图片马的题，现学一下如何制作图片马。<br></p>
+        
+          <a class="article-more-a" href="/2019/11/20/%E5%88%B6%E4%BD%9C%E5%9B%BE%E7%89%87%E9%A9%AC/#more">more >></a>
+        
+      
+
+		
+		
+		  <div hidden="hidden"></div>
+		
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">渗透</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/11/20/%E5%88%B6%E4%BD%9C%E5%9B%BE%E7%89%87%E9%A9%AC/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
@@ -1156,10 +1112,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">XSS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">区块链</a>
               </li>
             
             <div class="clearfix"></div>
