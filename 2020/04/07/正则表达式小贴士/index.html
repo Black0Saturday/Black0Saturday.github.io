@@ -6,22 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://black0saturday.github.io">
-  <title>HTML中优先闭合的标签 | 一次就好</title>
+  <title>正则表达式小贴士 | 一次就好</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前言学习HTML时发现有个有趣的现象，就是有的标签会优先闭合。">
+  <meta name="description" content="前言正则表达式是一个非常强大的处理字符工具，但有时可读性很差、晦涩难懂。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="HTML中优先闭合的标签">
-<meta property="og:url" content="http://black0saturday.github.io/2020/04/03/HTML%E4%B8%AD%E4%BC%98%E5%85%88%E9%97%AD%E5%90%88%E7%9A%84%E6%A0%87%E7%AD%BE/index.html">
+<meta property="og:title" content="正则表达式小贴士">
+<meta property="og:url" content="http://black0saturday.github.io/2020/04/07/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%B0%8F%E8%B4%B4%E5%A3%AB/index.html">
 <meta property="og:site_name" content="一次就好">
-<meta property="og:description" content="前言学习HTML时发现有个有趣的现象，就是有的标签会优先闭合。">
-<meta property="og:image" content="http://black0saturday.github.io/2020/04/03/HTML%E4%B8%AD%E4%BC%98%E5%85%88%E9%97%AD%E5%90%88%E7%9A%84%E6%A0%87%E7%AD%BE/1.webp">
-<meta property="og:image" content="http://black0saturday.github.io/2020/04/03/HTML%E4%B8%AD%E4%BC%98%E5%85%88%E9%97%AD%E5%90%88%E7%9A%84%E6%A0%87%E7%AD%BE/1.png">
-<meta property="article:published_time" content="2020-04-03T03:28:31.000Z">
-<meta property="article:modified_time" content="2020-04-03T03:48:08.394Z">
+<meta property="og:description" content="前言正则表达式是一个非常强大的处理字符工具，但有时可读性很差、晦涩难懂。">
+<meta property="og:image" content="http://black0saturday.github.io/2020/04/07/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%B0%8F%E8%B4%B4%E5%A3%AB/1.webp">
+<meta property="article:published_time" content="2020-04-07T06:06:18.000Z">
+<meta property="article:modified_time" content="2020-04-07T07:44:09.327Z">
 <meta property="article:author" content="布布f">
-<meta property="article:tag" content="XSS">
+<meta property="article:tag" content="随笔">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://black0saturday.github.io/2020/04/03/HTML%E4%B8%AD%E4%BC%98%E5%85%88%E9%97%AD%E5%90%88%E7%9A%84%E6%A0%87%E7%AD%BE/1.webp">
+<meta name="twitter:image" content="http://black0saturday.github.io/2020/04/07/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%B0%8F%E8%B4%B4%E5%A3%AB/1.webp">
   
     <link rel="alternative" href="/atom.xml" title="一次就好" type="application/atom+xml">
   
@@ -173,58 +172,87 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-HTML中优先闭合的标签" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-正则表达式小贴士" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      HTML中优先闭合的标签
+      正则表达式小贴士
     </h1>
   
 
         
-        <a href="/2020/04/03/HTML%E4%B8%AD%E4%BC%98%E5%85%88%E9%97%AD%E5%90%88%E7%9A%84%E6%A0%87%E7%AD%BE/" class="archive-article-date">
-  	<time datetime="2020-04-03T03:28:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-03</time>
+        <a href="/2020/04/07/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%B0%8F%E8%B4%B4%E5%A3%AB/" class="archive-article-date">
+  	<time datetime="2020-04-07T06:06:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-07</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>学习HTML时发现有个有趣的现象，就是有的标签会优先闭合。<br><a id="more"></a><br>先看一段 HTML：</p>
-<pre><code>&lt;html&gt;
-    &lt;head&gt;&lt;title&gt;noframes&lt;/title&gt;&lt;/head&gt;
-    &lt;body&gt;
-        &lt;noframes&gt;
-            &lt;img src=&quot;//x.xx/?x=&lt;/noframes&gt;&lt;script&gt;alert(1)&lt;/script&gt;&quot; width=0 height=0/&gt;
-        &lt;/noframes&gt;
-    &lt;/body&gt;
-&lt;/html&gt;
-</code></pre><p>HTML正常读大概就是展示一张图片。<br>那么用浏览器打开看看。</p>
-<p><img src="/2020/04/03/HTML%E4%B8%AD%E4%BC%98%E5%85%88%E9%97%AD%E5%90%88%E7%9A%84%E6%A0%87%E7%AD%BE/1.webp" alt></p>
-<p>并没有按照想象中的展示图片而是弹了个窗。</p>
-<p>看看浏览器处理的源码<br><img src="/2020/04/03/HTML%E4%B8%AD%E4%BC%98%E5%85%88%E9%97%AD%E5%90%88%E7%9A%84%E6%A0%87%E7%AD%BE/1.png" alt></p>
-<p>原来，<strong>img</strong> 标签 <strong>src</strong> 属性里的 <strong>\&lt;/noframes></strong>，跳过了 <strong>\&lt;img></strong> 标签和 <strong>src</strong> 属性，把外层的 <strong>\&lt;noframes></strong> 给闭合了，导致 <strong>src</strong> 后半部分的 <strong>script</strong> 标签被解析成了 HTML，从而触发了弹框。</p>
-<p>这可奇怪了。<strong>\&lt;/noframes></strong> 明明在双引号里面，怎么就跨越了 <strong>src</strong> 属性跨越了 <strong>\&lt;img></strong> 标签，漂洋过海地把外层的 <strong>noframes</strong> 标签给闭合了？有一种可能就是，它的闭合优先级，高于双引号的完整性优先级，高于嵌套在内层的标签的闭合优先级。</p>
-<p>研究发现，还有一些标签是闭合优先级高于双引号完整性优先级的特殊标签。</p>
-<ul>
-<li>\&lt;!–</li>
-<li>\&lt;iframe></li>
-<li>\&lt;noframes></li>
-<li>\&lt;noscript></li>
-<li>\&lt;script></li>
-<li>\&lt;style></li>
-<li>\&lt;textarea></li>
-<li>\&lt;title></li>
-<li>\&lt;xmp></li>
-</ul>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>正则表达式是一个非常强大的处理字符工具，但有时可读性很差、晦涩难懂。</p>
 <hr>
-<h2 id="攻击场景"><a href="#攻击场景" class="headerlink" title="攻击场景"></a>攻击场景</h2><p>这个特性出现的原因，可能是源于浏览器对 DOM 树的特殊处理。而在某些 XSS 攻击的场景下，这一特性可能导致意想不到的结果。</p>
-<p>特别是，像邮箱或论坛等支持富文本的应用，出于防御 XSS 的考虑，一定会对用户的输入进行语法分析和检查。但是，如果语法分析的结果和浏览器的识别结果不一致的话，就会形成 XSS 的攻击点。</p>
-<p>比如文章开头的那段 noframes 语句，如果防 XSS 引擎将 src 里的内容统一理解为 img 的 src 属性，就可能形成 XSS 攻击的入口点。</p>
+<a id="more"></a>
+<p>本来是一个问题，引入正则表达式之后就成了两个问题。其实并不是任何场景都需要正则表达式。在简单场景，能用字符串自己提供的方法解决问题就没必要用正则表达式，比如字符替换</p>
+<pre><code>&gt;&gt;&gt; import re
+&gt;&gt;&gt; text = &apos;java is most popular language&apos;
 
+&gt;&gt;&gt; re.sub(r&apos;java&apos;, &apos;python&apos;, text)
+&apos;python is most popular language&apos;
+
+# good
+&gt;&gt;&gt; text.replace(&quot;java&quot;, &quot;python&quot;)
+&apos;python is most popular language&apos;
+</code></pre><p>判断字符串是否以某字符开头</p>
+<pre><code>&gt;&gt;&gt; re.match(r&quot;^java&quot;, text)
+&lt;_sre.SRE_Match object at 0x000000000471D578&gt;
+&gt;&gt;&gt; text.startwith(&quot;java&quot;)
+
+# good
+&gt;&gt;&gt; text.startswith(&quot;java&quot;)
+True
+</code></pre><h3 id="0x01-re-match-与-re-search"><a href="#0x01-re-match-与-re-search" class="headerlink" title="0x01 re.match() 与 re.search()"></a>0x01 re.match() 与 re.search()</h3><p>re.match 从字符串的起始位置匹配，如果没匹配成功就不再往后匹配，返回 None。而 search 虽然也是从起始位置开始匹配，但是如果在起始位置没有匹配，就继续往后匹配，直到匹配为止，如果匹配到字符串末尾都没有匹配则返回 None</p>
+<pre><code>&gt;&gt;&gt; text = &quot;java is most popular langauge&quot;
+&gt;&gt;&gt; re.match(&quot;most&quot;, text) # 没匹配
+
+# bad
+&gt;&gt;&gt; re.match(&quot;.*most&quot;, text) 
+&lt;_sre.SRE_Match object at 0x0000000004CCD578&gt;
+
+# good
+&gt;&gt;&gt; re.search(&quot;most&quot;, text)
+&lt;_sre.SRE_Match object at 0x000000000471D578&gt;
+</code></pre><h3 id="0x02-不分组的括号"><a href="#0x02-不分组的括号" class="headerlink" title="0x02 不分组的括号"></a>0x02 不分组的括号</h3><p>我们知道正则表达式中括号可以用于分组提取，有时我们并不希望括号用于分组该怎么办，答案是使用 (?:)，看一个例子，用正则表达式提取URL中的各个组成部分<br><img src="/2020/04/07/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%B0%8F%E8%B4%B4%E5%A3%AB/1.webp" alt></p>
+<pre><code>rex = r&apos;^(http[s]?)://([^/\s]+)([/\w\-\.]+[^#?\s]*)?(?:\?([^#]*))?(?:#(.*))?$&apos;
+print(re.match(rex, url).groups())
+&gt;&gt;&gt; (&apos;http&apos;,
+     &apos;www.example.com&apos;, 
+     &apos;/path/to/myfile.html&apos;, 
+     &apos;key1=value1&amp;key2=value2&apos;, 
+     &apos;SomewhereInTheDocument&apos;)
+</code></pre><p>上面虽然写了7对括号，但其实只有5个分组。下面是不使用 ?:，出现了 7 组数据</p>
+<pre><code>rex = r&apos;^(http[s]?)://([^/\s]+)([/\w\-\.]+[^#?\s]*)?(\?([^#]*))?(#(.*))?$&apos;
+print(re.match(rex, url).groups())
+&gt;&gt;&gt;(&apos;http&apos;, 
+    &apos;www.example.com&apos;, 
+    &apos;/path/to/myfile.html&apos;, 
+    &apos;?key1=value1&amp;key2=value2&apos;, 
+    &apos;key1=value1&amp;key2=value2&apos;, 
+    &apos;#SomewhereInTheDocument&apos;, 
+    &apos;SomewhereInTheDocument&apos;)
+</code></pre><h3 id="0x03-贪婪匹配"><a href="#0x03-贪婪匹配" class="headerlink" title="0x03 贪婪匹配"></a>0x03 贪婪匹配</h3><p>正则表达式默认是贪婪匹配的，也就是说它会在满足匹配条件的情况下尽可能多的匹配字符，例如这里有一段话：<br>    html = “””<div><p>Today a quick article on a nic</p><p>Read more …</p></div>“””<br>里面有两对</p><p>标签，如果你只想匹配第一对，使用</p>
+<pre><code>&gt;&gt;&gt; re.search(&quot;&lt;p&gt;.*&lt;/p&gt;&quot;, html)
+&gt;&gt;&gt; m = re.search(&quot;&lt;p&gt;.*&lt;/p&gt;&quot;, html)
+&gt;&gt;&gt; m.group()
+&apos;&lt;p&gt;Today a quick article on a nic&lt;/p&gt;&lt;p&gt;Read more ...&lt;/p&gt;&apos;
+&gt;&gt;&gt;
+</code></pre><p><code>&lt;p&gt;.*&lt;/p&gt;</code> 会从第一个<code>&lt;p&gt;</code>开始，匹配到最后一个<code>&lt;/p&gt;</code>，如果要想尽可能少匹配则可以在元字符后面加 <code>?</code></p>
+<pre><code>&gt;&gt;&gt; m = re.search(&quot;&lt;p&gt;.*?&lt;/p&gt;&quot;, html)
+&gt;&gt;&gt; m.group()
+&apos;&lt;p&gt;Today a quick article on a nic&lt;/p&gt;&apos;
+</code></pre>
       
 
 		
@@ -237,7 +265,7 @@
 				
 				<br>
 				<strong>本文链接：</strong>
-				http://black0saturday.github.io/2020/04/03/HTML%E4%B8%AD%E4%BC%98%E5%85%88%E9%97%AD%E5%90%88%E7%9A%84%E6%A0%87%E7%AD%BE/
+				http://black0saturday.github.io/2020/04/07/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%B0%8F%E8%B4%B4%E5%A3%AB/
 				<br>
 				<strong>版权声明：</strong>
 				本作品采用
@@ -296,7 +324,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">XSS</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
         		</li>
       		
 		</ul>
@@ -352,7 +380,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://black0saturday.github.io/2020/04/03/HTML%E4%B8%AD%E4%BC%98%E5%85%88%E9%97%AD%E5%90%88%E7%9A%84%E6%A0%87%E7%AD%BE/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://black0saturday.github.io/2020/04/07/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%B0%8F%E8%B4%B4%E5%A3%AB/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -366,18 +394,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/04/03/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%B0%8F%E8%B4%B4%E5%A3%AB/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/04/07/%E5%8C%BA%E5%9D%97%E9%93%BE%E4%BD%9C%E6%81%B6/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          正则表达式小贴士
+          区块链基础
         
       </div>
     </a>
   
   
-    <a href="/2020/04/02/WEB%E6%BC%8F%E6%B4%9E-CSRF/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">WEB漏洞-CSRF</div>
+    <a href="/2020/04/04/HTML%E4%B8%AD%E4%BC%98%E5%85%88%E9%97%AD%E5%90%88%E7%9A%84%E6%A0%87%E7%AD%BE/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">HTML中优先闭合的标签</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -404,7 +432,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#攻击场景"><span class="toc-number"></span> <span class="toc-text">攻击场景</span></a>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#0x01-re-match-与-re-search"><span class="toc-number">1.1.</span> <span class="toc-text">0x01 re.match() 与 re.search()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x02-不分组的括号"><span class="toc-number">1.2.</span> <span class="toc-text">0x02 不分组的括号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x03-贪婪匹配"><span class="toc-number">1.3.</span> <span class="toc-text">0x03 贪婪匹配</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
