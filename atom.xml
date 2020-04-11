@@ -205,16 +205,13 @@
     <link href="http://black0saturday.github.io/2018/11/30/str-replace%E5%87%BD%E6%95%B0%E5%AF%BC%E8%87%B4%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/"/>
     <id>http://black0saturday.github.io/2018/11/30/str-replace函数导致文件包含漏洞/</id>
     <published>2018-11-30T09:22:04.000Z</published>
-    <updated>2020-04-10T09:28:10.866Z</updated>
+    <updated>2020-04-11T01:37:48.538Z</updated>
     
-    <content type="html"><![CDATA[<p>遇到一个代码审计的题，源码如下：<br><img src="/2018/11/30/str-replace%E5%87%BD%E6%95%B0%E5%AF%BC%E8%87%B4%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/1.png" alt></p><p>代码审计发现考察的是str_replace函数过滤不当造成的任意文件包含漏洞。</p><p>仔细观察18行的代码：<br>    return str_replace(‘../‘, ‘’, $language);</p><p>程序仅仅只是将 ../ 字符替换成空，这并不能阻止攻击者进行攻击。<br>例如攻击者使用payload：<code>....//</code> 或者 <code>..././</code> ，在经过程序的 <code>str_replace</code> 函数处理后，都会变成 <code>../</code> ，所以上图程序中的 <code>str_replace</code> 函数过滤是有问题的。</p>]]></content>
+    <content type="html"><![CDATA[<p>遇到一个代码审计的题，源码如下：<br><a id="more"></a><br><img src="/2018/11/30/str-replace%E5%87%BD%E6%95%B0%E5%AF%BC%E8%87%B4%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/1.png" alt></p><p>代码审计发现考察的是str_replace函数过滤不当造成的任意文件包含漏洞。</p><p>仔细观察18行的代码：<br>    return str_replace(‘../‘, ‘’, $language);</p><p>程序仅仅只是将 ../ 字符替换成空，这并不能阻止攻击者进行攻击。<br>例如攻击者使用payload：<code>....//</code> 或者 <code>..././</code> ，在经过程序的 <code>str_replace</code> 函数处理后，都会变成 <code>../</code> ，所以上图程序中的 <code>str_replace</code> 函数过滤是有问题的。</p>]]></content>
     
     <summary type="html">
     
-      
-      
-        &lt;p&gt;遇到一个代码审计的题，源码如下：&lt;br&gt;&lt;img src=&quot;/2018/11/30/str-replace%E5%87%BD%E6%95%B0%E5%AF%BC%E8%87%B4%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6
-      
+      &lt;p&gt;遇到一个代码审计的题，源码如下：&lt;br&gt;&lt;/p&gt;
     
     </summary>
     
