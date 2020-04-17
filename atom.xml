@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://black0saturday.github.io/"/>
-  <updated>2020-04-16T14:48:38.488Z</updated>
+  <updated>2020-04-17T00:37:44.063Z</updated>
   <id>http://black0saturday.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://black0saturday.github.io/2020/04/16/kali2020-amd64-virtualbox/"/>
     <id>http://black0saturday.github.io/2020/04/16/kali2020-amd64-virtualbox/</id>
     <published>2020-04-16T07:45:07.000Z</published>
-    <updated>2020-04-16T14:48:38.488Z</updated>
+    <updated>2020-04-17T00:37:44.063Z</updated>
     
-    <content type="html"><![CDATA[<p>Kali2020用Virtual Box安装好的OVA文件（把文件导入Virtual Box可直接使用）<br><a id="more"></a></p><p>内容包括：</p><pre><code>1. 中科大源，并且已更新过2. 中文输入法3. 时区已设为上海，同步标准时间链接：https://pan.baidu.com/s/1vTxkA-9kv_nCTPTNwYN8Xw 提取码：z9uq</code></pre>]]></content>
+    <content type="html"><![CDATA[<p>Kali2020用Virtual Box安装好的OVA文件（把文件导入Virtual Box可直接使用）<br><a id="more"></a></p><p>内容包括：</p><ol><li>中科大源，并且已更新过</li><li>中文输入法</li><li>时区已设为上海，同步标准时间</li></ol><pre><code>链接：https://pan.baidu.com/s/1vTxkA-9kv_nCTPTNwYN8Xw 提取码：z9uq</code></pre>]]></content>
     
     <summary type="html">
     
