@@ -6,19 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://black0saturday.github.io">
-  <title>PHP反序列化 | 一次就好</title>
+  <title>Python中的编码问题 | 一次就好</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前言 考研用了一年，好久没写博客了，安全也很久没搞了，最近重新学了一遍以前自己的笔记，今天学到PHP序列化和反序列化，之前对这个概念就模模糊糊的，今天正好弄清楚。">
+  <meta name="description" content="前言Python 中编码问题，一直让很多 Python 开发者头疼，今天就把 Python 上会遇到的一些编码问题都讲清楚了。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PHP反序列化">
-<meta property="og:url" content="http://black0saturday.github.io/2020/03/23/PHP%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/index.html">
+<meta property="og:title" content="Python中的编码问题">
+<meta property="og:url" content="http://black0saturday.github.io/2020/04/24/Python%E4%B8%AD%E7%9A%84%E7%BC%96%E7%A0%81%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="一次就好">
-<meta property="og:description" content="前言 考研用了一年，好久没写博客了，安全也很久没搞了，最近重新学了一遍以前自己的笔记，今天学到PHP序列化和反序列化，之前对这个概念就模模糊糊的，今天正好弄清楚。">
-<meta property="article:published_time" content="2020-03-23T02:46:46.000Z">
-<meta property="article:modified_time" content="2020-04-02T06:49:41.552Z">
+<meta property="og:description" content="前言Python 中编码问题，一直让很多 Python 开发者头疼，今天就把 Python 上会遇到的一些编码问题都讲清楚了。">
+<meta property="og:image" content="http://black0saturday.github.io/2020/04/24/Python%E4%B8%AD%E7%9A%84%E7%BC%96%E7%A0%81%E9%97%AE%E9%A2%98/1.webp">
+<meta property="og:image" content="http://black0saturday.github.io/2020/04/24/Python%E4%B8%AD%E7%9A%84%E7%BC%96%E7%A0%81%E9%97%AE%E9%A2%98/2.webp">
+<meta property="article:published_time" content="2020-04-24T08:18:58.000Z">
+<meta property="article:modified_time" content="2020-04-24T08:41:54.579Z">
 <meta property="article:author" content="布布f">
-<meta property="article:tag" content="PHP">
+<meta property="article:tag" content="Python">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://black0saturday.github.io/2020/04/24/Python%E4%B8%AD%E7%9A%84%E7%BC%96%E7%A0%81%E9%97%AE%E9%A2%98/1.webp">
   
     <link rel="alternative" href="/atom.xml" title="一次就好" type="application/atom+xml">
   
@@ -170,199 +173,173 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-PHP反序列化" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Python中的编码问题" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      PHP反序列化
+      Python中的编码问题
     </h1>
   
 
         
-        <a href="/2020/03/23/PHP%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" class="archive-article-date">
-  	<time datetime="2020-03-23T02:46:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-23</time>
+        <a href="/2020/04/24/Python%E4%B8%AD%E7%9A%84%E7%BC%96%E7%A0%81%E9%97%AE%E9%A2%98/" class="archive-article-date">
+  	<time datetime="2020-04-24T08:18:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-24</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p> 考研用了一年，好久没写博客了，安全也很久没搞了，最近重新学了一遍以前自己的笔记，今天学到PHP序列化和反序列化，之前对这个概念就模模糊糊的，今天正好弄清楚。</p>
-<a id="more"></a>
-<h3 id="0x00：PHP序列化"><a href="#0x00：PHP序列化" class="headerlink" title="0x00：PHP序列化"></a>0x00：PHP序列化</h3><h4 id="序列化函数：serialize"><a href="#序列化函数：serialize" class="headerlink" title="序列化函数：serialize()"></a>序列化函数：serialize()</h4><p>所有php里面的值都可以使用函数serialize()来返回一个包含字节流的字符串来表示。序列化一个对象将会保存对象的所有变量，但是不会保存对象的方法，只会保存类的名字。</p>
-<p><strong>变量所储存的数据是内存数据，在程序执行结束时，内存数据便会立即销毁；而文件、数据库是“持久存储”，因此PHP序列化就是将内存的数据保存到文件中的过程。</strong></p>
-<ol>
-<li>$s = serialize($变量); //该函数将变量数据进行序列化转换为字符串</li>
-<li>file_put_contents(‘./目标文本文件’, $s); //将$s保存到指定文件</li>
-</ol>
-<h4 id="For-example"><a href="#For-example" class="headerlink" title="For example"></a>For example</h4><pre><code>&lt;?php
-class User
-{
-    // 创建类数据
-
-    public $age = 0;
-    public $name = &apos;&apos;;
-
-    // 输出数据
-
-    public function PrintData()
-    {
-        echo &apos;User &apos; . $this-&gt;name . &apos; is &apos; .$this-&gt;age . &apos; years old.&apos;;
-        echo &quot;\n&quot;;
-    }
-}
-
-// 创建一个对象
-
-$usr = new User();
-
-// 设置数据
-
-$usr-&gt;age = 20;
-$usr-&gt;name = &apos;lemon&apos;;
-
-// 输出数据
-
-$usr-&gt;PrintData();
-
-// 输出序列化之后的数据
-
-echo serialize($usr);
-echo &quot;\n&quot;;
-?&gt;
-</code></pre><p>输出序列化后的结果</p>
-<ol>
-<li>User lemon is 20 years old. </li>
-<li>O:4:”User”:2:{s:3:”age”;i:20;s:4:”name”;s:5:”lemon”;}</li>
-</ol>
-<p>可以看到序列化一个对象后会保存对象的所有变量，并且发现序列化后的结果都有一个字符，这些字符都是一下字母的缩写。</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Python 中编码问题，一直让很多 Python 开发者头疼，今天就把 Python 上会遇到的一些编码问题都讲清楚了。<br><a id="more"></a></p>
+<h3 id="1-Python3中str与bytes"><a href="#1-Python3中str与bytes" class="headerlink" title="1. Python3中str与bytes"></a>1. Python3中str与bytes</h3><p>在 Python3中，字符串有两种类型 ，str 和 bytes。</p>
+<p>今天就来说一说这二者的区别：</p>
 <ul>
-<li>a array                 </li>
-<li>b boolean  </li>
-<li>d double               </li>
-<li>i integer</li>
-<li>o common object </li>
-<li>r reference</li>
-<li>s string </li>
-<li>C custom object</li>
-<li>O class</li>
-<li>N null</li>
-<li>R pointer reference </li>
-<li>U unicode string</li>
+<li><p>unicode string（str 类型）：以 Unicode code points 形式存储，人类认识的形式</p>
+</li>
+<li><p>byte string（bytes 类型）：以 byte 形式存储，机器认识的形式</p>
+</li>
 </ul>
-<p>了解了缩写字母的含义，就可以解读序列化后的含义</p>
-<ol>
-<li>O:4:”User”:2:{s:3:”age”;i:20;s:4:”name”;s:5:”lemon”;}</li>
-<li>对象类型:长度:”类名”:类中变量的个数:{类型:长度:”值”;类型:长度:”值”;……}</li>
-</ol>
-<p>通过这个例子，应该能理解序列化函数serialize()的功能</p>
-<h3 id="0x01：PHP反序列化"><a href="#0x01：PHP反序列化" class="headerlink" title="0x01：PHP反序列化"></a>0x01：PHP反序列化</h3><p>函数：unserialize()</p>
-<blockquote>
-<p>unserialize()对单一的已序列化的变量进行操作，将其转回PHP的值。在解序列化一个对象前，这个对象的类必须在解序列化之前定义。</p>
-</blockquote>
-<p>简单理解起来就是<strong>将序列化过存储到文件中的数据，恢复到程序代码的变量表示形式的过程</strong>，恢复到变量序列化之前的结果。</p>
-<pre><code>$s = file_get_contents(‘./目标文本文件’); //取得文本文件的内容（之前序列化过的字符串）
-$变量 = unserialize($s); //将该文本内容，反序列化到指定的变量中
-</code></pre><h4 id="For-example-1"><a href="#For-example-1" class="headerlink" title="For example"></a>For example</h4><pre><code>&lt;?php
-    // 某类
-    class User
-    {
-        // Class data
-        public $age = 0;
-        public $name = &apos;&apos;;
+<p>在 Python 3 中你定义的所有字符串，都是 unicode string类型，使用 type 和 isinstance 可以判别</p>
+<pre><code># python3
 
-        // Print data
+&gt;&gt;&gt; str_obj = &quot;你好&quot;
+&gt;&gt;&gt; 
+&gt;&gt;&gt; type(str_obj)
+&lt;class &apos;str&apos;&gt;
+&gt;&gt;&gt; 
+&gt;&gt;&gt; isinstance(&quot;你好&quot;, str)
+True
+&gt;&gt;&gt; 
+&gt;&gt;&gt; isinstance(&quot;你好&quot;, bytes)
+False
+&gt;&gt;&gt; 
+</code></pre><p>而 bytes 是一个二进制序列对象，你只要你在定义字符串时前面加一个 b，就表示你要定义一个 bytes 类型的字符串对象。</p>
+<pre><code># python3
+&gt;&gt;&gt; byte_obj = b&quot;Hello World!&quot;
+&gt;&gt;&gt; type(byte_obj)
+&lt;class &apos;bytes&apos;&gt;
+&gt;&gt;&gt; 
+&gt;&gt;&gt; isinstance(byte_obj, str)
+False
+&gt;&gt;&gt; 
+&gt;&gt;&gt; isinstance(byte_obj, bytes)
+True
+&gt;&gt;&gt;
+</code></pre><p>但是在定义中文字符串时，你就不能直接在前面加 b 了，而应该使用 encode 转一下。</p>
+<pre><code>&gt;&gt;&gt; byte_obj=b&quot;你好&quot;
+  File &quot;&lt;stdin&gt;&quot;, line 1
+SyntaxError: bytes can only contain ASCII literal characters.
+&gt;&gt;&gt; 
+&gt;&gt;&gt; str_obj=&quot;你好&quot;
+&gt;&gt;&gt; 
+&gt;&gt;&gt; str_obj.encode(&quot;utf-8&quot;)
+b&apos;\xe4\xbd\xa0\xe5\xa5\xbd&apos;
+&gt;&gt;&gt; 
+</code></pre><h2 id="2-Python2中str与unicode"><a href="#2-Python2中str与unicode" class="headerlink" title="2. Python2中str与unicode"></a>2. Python2中str与unicode</h2><p>而在 Python2 中，字符串的类型又与 Python3 不一样，需要仔细区分。</p>
+<p>在 Python2  里，字符串也只有两种类型，unicode 和 str 。</p>
+<p>只有 unicode object 和 非unicode object（其实应该叫 str object） 的区别：</p>
+<ul>
+<li><p>unicode string（unicode类型）：以 Unicode code points 形式存储，人类认识的形式</p>
+</li>
+<li><p>byte string（str 类型）：以 byte 形式存储，机器认识的形式</p>
+</li>
+</ul>
+<p>当我们直接使用双引号或单引号包含字符的方式来定义字符串时，就是 str 字符串对象，比如这样</p>
+<pre><code># python2
 
-        public function PrintData()
-        {
-            echo &apos;User &apos; . $this-&gt;name . &apos; is &apos; . $this-&gt;age . &apos; years old.&apos;;
-            echo &quot;\n&quot;;
-        }
-    }
-    // 重建对象
-    $usr = unserialize(&apos;O:4:&quot;User&quot;:2:{s:3:&quot;age&quot;;i:20;s:4:&quot;name&quot;;s:5:&quot;lemon&quot;;}&apos;);
+&gt;&gt;&gt; str_obj=&quot;你好&quot;
+&gt;&gt;&gt;
+&gt;&gt;&gt; type(str_obj)
+&lt;type &apos;str&apos;&gt;
+&gt;&gt;&gt;
+&gt;&gt;&gt; isinstance(str_obj, bytes)
+True
+&gt;&gt;&gt; isinstance(str_obj, str)
+True
+&gt;&gt;&gt;
+</code></pre><p>而当我们在双引号或单引号前面加个 u，就表明我们定义的是 unicode 字符串对象，比如这样</p>
+<pre><code># python2
 
-    // 调出PrintData输出数据
-    $usr-&gt;PrintData();
-?&gt;
-</code></pre><p>输出结果：</p>
-<blockquote>
-<p>User lemon is 20 years old.</p>
-</blockquote>
-<p><strong>注意：在解序列化一个对象前，这个对象的类必须在解序列化之前定义。否则会报错</strong></p>
-<p>在先知上看大师傅举得例子对序列化和反序列化的介绍，也很好理解。</p>
-<pre><code>&lt;?php
-class A{
-    var $test = &quot;demo&quot;;
-}
+&gt;&gt;&gt; str_obj=&quot;你好&quot;
+&gt;&gt;&gt;
+&gt;&gt;&gt; type(str_obj)
+&lt;type &apos;str&apos;&gt;
+&gt;&gt;&gt;
+&gt;&gt;&gt; isinstance(str_obj, bytes)
+True
+&gt;&gt;&gt; isinstance(str_obj, str)
+True
+&gt;&gt;&gt;
+</code></pre><p>而当我们在双引号或单引号前面加个 u，就表明我们定义的是 unicode 字符串对象，比如这样</p>
+<pre><code># python2
 
-$a = new A(); //生成a对象
-$b = serialize($a); //序列化a对象为b
-$c = unserialize($b); //反序列化b对象为c
+&gt;&gt;&gt; unicode_obj = u&quot;你好&quot;
+&gt;&gt;&gt;
+&gt;&gt;&gt; type(unicode_obj)
+&lt;type &apos;unicode&apos;&gt;
+&gt;&gt;&gt;
+&gt;&gt;&gt; isinstance(unicode_obj, bytes)
+False
+&gt;&gt;&gt; isinstance(unicode_obj, str)
+False
+&gt;&gt;&gt;
+</code></pre><h2 id="3-如何检测对象的编码"><a href="#3-如何检测对象的编码" class="headerlink" title="3. 如何检测对象的编码"></a>3. 如何检测对象的编码</h2><p>所有的字符，在 unicode 字符集中都有对应的编码值（英文叫做：code point）</p>
+<p>而把这些编码值按照一定的规则保存成二进制字节码，就是我们说的编码方式，常见的有：UTF-8，GB2312 等。</p>
+<p>也就是说，当我们要将内存中的字符串持久化到硬盘中的时候，都要指定编码方法，而反过来，读取的时候，也要指定正确的编码方法（这个过程叫解码），不然会出现乱码。</p>
+<p>那问题就来了，当我们知道了其对应的编码方法，我们就可以正常解码，但并不是所有时候我们都能知道应该用什么编码方式去解码？</p>
+<p>这时候就要介绍到一个 python 的库 –  <code>chardet</code> ，使用它之前 需要先安装</p>
+<pre><code>python3 -m pip install chardet
+</code></pre><p>chardet 有一个 detect 方法，可以 预测其其编码格式</p>
+<pre><code>&gt;&gt;&gt; import chardet
+&gt;&gt;&gt; chardet.detect(&apos;微信公众号：Python编程时光&apos;.encode(&apos;gbk&apos;))
+{&apos;encoding&apos;: &apos;GB2312&apos;, &apos;confidence&apos;: 0.99, &apos;language&apos;: &apos;Chinese&apos;}
+</code></pre><p>为什么说是预测呢，通过上面的输出来看，你会看到有一个 confidence 字段，其表示预测的可信度，或者说成功率。</p>
+<p>但是使用它时，若你的字符数较少，就有可能 “误诊”，比如只有 中文 两个字，就像下面这样，我们是 使用 gbk 编码的，使用 chardet 却识别成 KOI8-R 编码。</p>
+<pre><code>&gt;&gt;&gt; str_obj = &quot;中文&quot;
+&gt;&gt;&gt; byte_obj = bytes(a, encoding=&apos;gbk&apos;)  # 先得到一个 gbk 编码的 bytes
+&gt;&gt;&gt;
+&gt;&gt;&gt; chardet.detect(byte_obj)
+{&apos;encoding&apos;: &apos;KOI8-R&apos;, &apos;confidence&apos;: 0.682639754276994, &apos;language&apos;: &apos;Russian&apos;}
+&gt;&gt;&gt; 
+&gt;&gt;&gt; str_obj2 = str(byte_obj, encoding=&apos;KOI8-R&apos;)
+&gt;&gt;&gt; str_obj2
+&apos;жпнд&apos;
+</code></pre><p>所以为了编码诊断的准确，要尽量使用足够多的字符。</p>
+<p>chardet 支持多国的语言，从官方文档中可以看到支持如下这些语言(<a href="https://chardet.readthedocs.io/en/latest/supported-encodings.html" target="_blank" rel="noopener">https://chardet.readthedocs.io/en/latest/supported-encodings.html</a>)<br><img src="/2020/04/24/Python%E4%B8%AD%E7%9A%84%E7%BC%96%E7%A0%81%E9%97%AE%E9%A2%98/1.webp" alt></p>
+<h2 id="4-编码与解码的区别"><a href="#4-编码与解码的区别" class="headerlink" title="4. 编码与解码的区别"></a>4. 编码与解码的区别</h2><p>编码和解码，其实就是 str 与 bytes 的相互转化的过程（Python 2 已经远去，这里以及后面都只用 Python 3 举例）</p>
+<ul>
+<li>编码：encode 方法，把字符串对象转化为二进制字节序列</li>
+<li>解码：decode 方法，把二进制字节序列转化为字符串对象</li>
+</ul>
+<p><img src="/2020/04/24/Python%E4%B8%AD%E7%9A%84%E7%BC%96%E7%A0%81%E9%97%AE%E9%A2%98/2.webp" alt></p>
+<p>那么假如我们真知道了其编码格式，如何来转成 unicode 呢？</p>
+<p>有两种方法</p>
+<h3 id="1-直接使用decode"><a href="#1-直接使用decode" class="headerlink" title="1) 直接使用decode"></a>1) 直接使用decode</h3><pre><code>&gt;&gt;&gt; byte_obj.decode(&apos;gbk&apos;)
+&apos;中文&apos;
+&gt;&gt;&gt; 
+</code></pre><h3 id="2-使用str转换"><a href="#2-使用str转换" class="headerlink" title="2) 使用str转换"></a>2) 使用str转换</h3><pre><code>&gt;&gt;&gt; str_obj = str(byte_obj, encoding=&apos;gbk&apos;)
+&gt;&gt;&gt; str_obj
+&apos;中文&apos;
+&gt;&gt;&gt; 
+</code></pre><h2 id="5-如何设置文件编码"><a href="#5-如何设置文件编码" class="headerlink" title="5. 如何设置文件编码"></a>5. 如何设置文件编码</h2><p>在 Python 2 中，默认使用的是 ASCII 编码来读取的，因此，我们在使用 Python 2 的时候，如果你的 python 文件里有中文，运行是会报错的。</p>
+<pre><code>SyntaxError: Non-ASCII character &apos;\xe4&apos; in file demo.py
+原因就是 ASCII 编码表太小，无法解释中文。
+</code></pre><p>而在 Python 3 中，默认使用的是 uft-8 来读取，所以省了不少的事。</p>
+<p>对于这个问题，通常解决方法有两种：</p>
+<h3 id="1-python2-中，可以使用在头部指定"><a href="#1-python2-中，可以使用在头部指定" class="headerlink" title="1) python2 中，可以使用在头部指定"></a>1) python2 中，可以使用在头部指定</h3><p>可以这样写，虽然很好看</p>
+<pre><code># -*- coding: utf-8 -*- 
+</code></pre><p>但这样写太麻烦了，我通常使用下面两种写法</p>
+<pre><code># coding:utf-8
+# coding=utf-8 
+</code></pre><h3 id="2"><a href="#2" class="headerlink" title="2)"></a>2)</h3><pre><code>import sys 
 
-print_r($b); //输出序列化之后的值
-echo &quot;\n&quot;;
-print_r($c-&gt;test); //输出对象c中test的值：demo
+reload(sys) 
+sys.setdefaultencoding(&apos;utf-8&apos;) 
+</code></pre><p>这里在调用sys.setdefaultencoding(‘utf-8’) 设置默认的解码方式之前，执行了reload(sys)，这是必须的，因为python在加载完sys之后，会删除 sys.setdefaultencoding 这个方法，我们需要重新载入sys，才能调用 sys.setdefaultencoding 这个方法。</p>
 
-?&gt;
-</code></pre><h3 id="0x02：PHP反序列化漏洞"><a href="#0x02：PHP反序列化漏洞" class="headerlink" title="0x02：PHP反序列化漏洞"></a>0x02：PHP反序列化漏洞</h3><p>在学习漏洞前，先来了解一下PHP魔法函数，对接下来的学习会很有帮助</p>
-<blockquote>
-<p>PHP将所有以__(两个下划线)开头的类方法保留为魔术方法</p>
-</blockquote>
-<ol>
-<li>__construct   当一个对象创建时被调用，</li>
-<li>__destruct   当一个对象销毁时被调用，</li>
-<li>__toString   当一个对象被当作一个字符串被调用。</li>
-<li>__wakeup()   使用unserialize时触发</li>
-<li>__sleep()    使用serialize时触发</li>
-<li>__destruct()    对象被销毁时触发</li>
-<li>__call()    在对象上下文中调用不可访问的方法时触发</li>
-<li>__callStatic()    在静态上下文中调用不可访问的方法时触发</li>
-<li>__get()    用于从不可访问的属性读取数据</li>
-<li>__set()    用于将数据写入不可访问的属性</li>
-<li>__isset()    在不可访问的属性上调用isset()或empty()触发</li>
-<li>__unset()     在不可访问的属性上使用unset()时触发</li>
-<li>__toString()    把类当作字符串使用时触发,返回值需要为字符串</li>
-<li>__invoke()   当脚本尝试将对象调用为函数时触发</li>
-</ol>
-<p>这里只列出了一部分的魔法函数，具体可见<br><a href="https://www.php.net/manual/zh/language.oop5.magic.php" target="_blank" rel="noopener">https://www.php.net/manual/zh/language.oop5.magic.php</a></p>
-<p>下面通过一个例子来简单了解一下魔法函数被自动调用的过程</p>
-<pre><code>&lt;?php
-class test{
- public $varr1=&quot;abc&quot;;
- public $varr2=&quot;123&quot;;
- public function echoP(){
-  echo $this-&gt;varr1.&quot;&lt;br&gt;&quot;;
- }
- public function __construct(){
-  echo &quot;__construct&lt;br&gt;&quot;;
- }
- public function __destruct(){
-  echo &quot;__destruct&lt;br&gt;&quot;;
- }
- public function __toString(){
-  return &quot;__toString&lt;br&gt;&quot;;
- }
- public function __sleep(){
-  echo &quot;__sleep&lt;br&gt;&quot;;
-  return array(&apos;varr1&apos;,&apos;varr2&apos;);
- }
- public function __wakeup(){
-  echo &quot;__wakeup&lt;br&gt;&quot;;
- }
-}
-
-$obj = new test();  //实例化对象，调用__construct()方法，输出__construct
-$obj-&gt;echoP();   //调用echoP()方法，输出&quot;abc&quot;
-echo $obj;//obj对象被当做字符串输出，调用__toString()方法，输出__toString
-$s =serialize($obj);  //obj对象被序列化，调用__sleep()方法，输出__sleep
-echo unserialize($s);  //$s首先会被反序列化，会调用__wake()方法，被反序列化出来的对象又被当做字符串，就会调用_toString()方法。
-// 脚本结束又会调用__destruct()方法，输出__destruct
-?&gt;
-</code></pre><h2 id="未完待续！！"><a href="#未完待续！！" class="headerlink" title="未完待续！！"></a>未完待续！！</h2>
       
 
 		
@@ -375,7 +352,7 @@ echo unserialize($s);  //$s首先会被反序列化，会调用__wake()方法，
 				
 				<br>
 				<strong>本文链接：</strong>
-				http://black0saturday.github.io/2020/03/23/PHP%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/
+				http://black0saturday.github.io/2020/04/24/Python%E4%B8%AD%E7%9A%84%E7%BC%96%E7%A0%81%E9%97%AE%E9%A2%98/
 				<br>
 				<strong>版权声明：</strong>
 				本作品采用
@@ -434,7 +411,7 @@ echo unserialize($s);  //$s首先会被反序列化，会调用__wake()方法，
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
         		</li>
       		
 		</ul>
@@ -490,7 +467,7 @@ echo unserialize($s);  //$s首先会被反序列化，会调用__wake()方法，
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://black0saturday.github.io/2020/03/23/PHP%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://black0saturday.github.io/2020/04/24/Python%E4%B8%AD%E7%9A%84%E7%BC%96%E7%A0%81%E9%97%AE%E9%A2%98/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -504,18 +481,9 @@ echo unserialize($s);  //$s首先会被反序列化，会调用__wake()方法，
   
 <nav id="article-nav">
   
-    <a href="/2020/03/25/bash%E5%92%8C%E9%80%9A%E9%85%8D%E7%AC%A6%E7%94%A8%E6%B3%95/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          bash和通配符用法
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/12/06/kali%E4%B8%AD%E7%9A%84%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86%E5%B7%A5%E5%85%B7/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">kali中的信息收集工具</div>
+    <a href="/2020/04/22/%E8%AF%A6%E8%A7%A3Mysql%E7%9A%84%E9%94%81%E6%9C%BA%E5%88%B6/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">详解Mysql的锁机制</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -542,7 +510,7 @@ echo unserialize($s);  //$s首先会被反序列化，会调用__wake()方法，
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#0x00：PHP序列化"><span class="toc-number">1.1.</span> <span class="toc-text">0x00：PHP序列化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#序列化函数：serialize"><span class="toc-number">1.1.1.</span> <span class="toc-text">序列化函数：serialize()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#For-example"><span class="toc-number">1.1.2.</span> <span class="toc-text">For example</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x01：PHP反序列化"><span class="toc-number">1.2.</span> <span class="toc-text">0x01：PHP反序列化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#For-example-1"><span class="toc-number">1.2.1.</span> <span class="toc-text">For example</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#0x02：PHP反序列化漏洞"><span class="toc-number">1.3.</span> <span class="toc-text">0x02：PHP反序列化漏洞</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#未完待续！！"><span class="toc-number">2.</span> <span class="toc-text">未完待续！！</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Python3中str与bytes"><span class="toc-number">1.1.</span> <span class="toc-text">1. Python3中str与bytes</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Python2中str与unicode"><span class="toc-number">2.</span> <span class="toc-text">2. Python2中str与unicode</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-如何检测对象的编码"><span class="toc-number">3.</span> <span class="toc-text">3. 如何检测对象的编码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-编码与解码的区别"><span class="toc-number">4.</span> <span class="toc-text">4. 编码与解码的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-直接使用decode"><span class="toc-number">4.1.</span> <span class="toc-text">1) 直接使用decode</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-使用str转换"><span class="toc-number">4.2.</span> <span class="toc-text">2) 使用str转换</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-如何设置文件编码"><span class="toc-number">5.</span> <span class="toc-text">5. 如何设置文件编码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-python2-中，可以使用在头部指定"><span class="toc-number">5.1.</span> <span class="toc-text">1) python2 中，可以使用在头部指定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2"><span class="toc-number">5.2.</span> <span class="toc-text">2)</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
